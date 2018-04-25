@@ -1,0 +1,45 @@
+/*
+ * jamesdeperio/PocketLib is licensed under the
+ *
+ * Apache License 2.0
+ * A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
+ */
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.jamesdeperio'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    ext.android_support_version='27.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$android_support_version"
+    implementation "com.android.support:design:$android_support_version"
+    implementation "com.android.support:recyclerview-v7:$android_support_version"
+    implementation 'com.squareup.retrofit2:retrofit:2.4.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
+    compile 'me.yokeyword:swipebackfragment:0.4.0'
+    implementation 'jp.wasabeef:recyclerview-animators:2.2.6'
+}
