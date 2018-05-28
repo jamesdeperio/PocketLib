@@ -21,42 +21,47 @@ import java.util.concurrent.TimeUnit
  */
 abstract class RetrofitService(private val context: Context) : RetrofitContract {
     private var retrofit: Retrofit? = null
-
+    override fun releaseMode(cache: Cache?) {
+        val okHttpClient = OkHttpClient.Builder()
+                .cache(cache)
+                .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
+                .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
+                .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
+                .build()
+        retrofit = Retrofit.Builder()
+                .baseUrl(initBaseURL())
+                .client(okHttpClient)
+                .addConverterFactory(initConverterFactory())
+                .addCallAdapterFactory(initRxAdapterFactory())
+                .build()
+    }
+    override fun debugMode(cache: Cache?) {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        val okHttpClient = OkHttpClient.Builder()
+                .cache(cache)
+                .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
+                .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
+                .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
+                .addInterceptor(logging)
+                .build()
+        retrofit = Retrofit.Builder()
+                .baseUrl(initBaseURL())
+                .client(okHttpClient)
+                .addConverterFactory(initConverterFactory())
+                .addCallAdapterFactory(initRxAdapterFactory())
+                .build()
+    }
     override fun create(service: Class<*>): Any {
         if (retrofit == null) {
             if (initCacheSize() != 0) {
                 val cacheSize = initCacheSize() * 1024 * 1024
                 val cache = Cache(context.cacheDir, cacheSize.toLong())
-                val logging = HttpLoggingInterceptor()
-                logging.level = HttpLoggingInterceptor.Level.BODY
-                val okHttpClient = OkHttpClient.Builder()
-                        .cache(cache)
-                        .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
-                        .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
-                        .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
-                        .addInterceptor(logging)
-                        .build()
-                retrofit = Retrofit.Builder()
-                        .baseUrl(initBaseURL())
-                        .client(okHttpClient)
-                        .addConverterFactory(initConverterFactory())
-                        .addCallAdapterFactory(initRxAdapterFactory())
-                        .build()
+                if (isDebugMode()) debugMode(cache)
+                else releaseMode(cache)
             } else {
-                val logging = HttpLoggingInterceptor()
-                logging.level = HttpLoggingInterceptor.Level.BODY
-                val okHttpClient = OkHttpClient.Builder()
-                        .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
-                        .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
-                        .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
-                        .addInterceptor(logging)
-                        .build()
-                retrofit = Retrofit.Builder()
-                        .baseUrl(initBaseURL())
-                        .client(okHttpClient)
-                        .addConverterFactory(initConverterFactory())
-                        .addCallAdapterFactory(initRxAdapterFactory())
-                        .build()
+                if (isDebugMode()) debugMode(null)
+                else releaseMode(null)
             }
         }
         return retrofit!!.create(service)

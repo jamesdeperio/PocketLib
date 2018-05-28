@@ -7,6 +7,7 @@
 
 package jdp.pocketlib.service
 
+import okhttp3.Cache
 import retrofit2.CallAdapter
 import retrofit2.Converter
 
@@ -25,5 +26,7 @@ internal interface RetrofitContract {
     fun create(service: Class<*>): Any
     fun initConverterFactory(): Converter.Factory
     fun initRxAdapterFactory(): CallAdapter.Factory
-
+    fun isDebugMode(): Boolean
+    fun debugMode(cache: Cache?)
+    fun releaseMode(cache: Cache?)
 }
