@@ -18,6 +18,7 @@ import java.lang.ref.WeakReference
  */
 object Navigate {
     private var fromFragment: WeakReference<Fragment>? = null
+    private var removeFragment: WeakReference<Fragment>? = null
     private var fragmentManager: WeakReference<FragmentManager>? = null
     private var toFragment: WeakReference<Fragment>? = null
     private var toAnimEnter: Int = R.anim.h_fragment_pop_enter
@@ -72,7 +73,10 @@ object Navigate {
         isAnimationEnabled = true
         return this
     }
-
+    fun remove(fragmentToRemove:Fragment): Navigate {
+        this.removeFragment= WeakReference(fragmentToRemove)
+        return this
+    }
     fun commit(): Navigate {
         if (toFragment != null) changeFragment(fragmentManager!!.get()!!)
         else throw IllegalStateException("WRONG SEQUENCE COMMIT!!")
@@ -81,10 +85,18 @@ object Navigate {
     }
 
     fun commitAllowingStateLoss(): Navigate {
-        if (toFragment != null) changeFragmentWithStateLoss(fragmentManager!!.get()!!)
-        else throw IllegalStateException("WRONG SEQUENCE COMMIT!!")
+        when {
+            toFragment != null -> changeFragmentWithStateLoss(fragmentManager!!.get()!!)
+            removeFragment!=null -> removeFragmentFromView(fragmentManager!!.get()!!)
+            else -> throw IllegalStateException("WRONG SEQUENCE COMMIT!!")
+        }
         unRegister()
         return this
+    }
+
+    private fun removeFragmentFromView(fragmentManager: FragmentManager) {
+        fragmentManager.beginTransaction().remove(removeFragment!!.get()!!)
+                .commitAllowingStateLoss()
     }
 
     private fun changeFragmentWithStateLoss(fragmentManager: FragmentManager) {
