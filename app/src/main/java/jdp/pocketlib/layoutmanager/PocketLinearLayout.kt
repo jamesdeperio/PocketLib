@@ -7,6 +7,7 @@
 
 package jdp.pocketlib.layoutmanager
 
+import android.content.Context
 import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -16,7 +17,7 @@ import android.util.Log
  * Created by jamesdeperio on 8/26/2017
  *  jamesdeperio.github.com.codepocket.view
  */
-class PocketLinearLayout(activity: FragmentActivity, horizontal: Int, b: Boolean) : LinearLayoutManager(activity, horizontal, b) {
+class PocketLinearLayout(context: Context, horizontal: Int, b: Boolean) : LinearLayoutManager(context, horizontal, b) {
     private var isScrollEnabled = true
     fun setScrollEnabled(flag: Boolean) {
         this.isScrollEnabled = flag
