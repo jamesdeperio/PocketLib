@@ -16,7 +16,7 @@ import retrofit2.Converter
  *  jamesdeperio.github.com.codepocket.service
  */
 
-internal interface RetrofitContract {
+internal interface RetrofitCycle {
     fun initCacheSize(): Int
     fun initBaseURL(): String
     fun initWriteTimeOut(): Long = 10

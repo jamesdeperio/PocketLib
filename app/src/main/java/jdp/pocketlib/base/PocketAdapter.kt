@@ -18,12 +18,12 @@ import android.view.ViewGroup
 abstract class PocketAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), PocketAdapterContract.Adapter {
     private val pocketViewHolderList = ArrayList<PocketViewHolder>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        (0 until pocketViewHolderList.size).forEach {
-            if (viewType == it) {
-                pocketViewHolderList[it].setView(LayoutInflater.from(parent.context).inflate(pocketViewHolderList[it].getContentView(), parent, false))
-                return pocketViewHolderList[it].viewHolder
-            }
-        }
+        (0 until pocketViewHolderList.size)
+                .filter {  viewType==it }
+                .forEach {
+                    pocketViewHolderList[it].setView(LayoutInflater.from(parent.context).inflate(pocketViewHolderList[it].getContentView(), parent, false))
+                    return pocketViewHolderList[it].viewHolder
+                }
         return pocketViewHolderList[0].viewHolder
     }
 

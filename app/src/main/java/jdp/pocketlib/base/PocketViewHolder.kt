@@ -16,11 +16,8 @@ import android.view.View
  */
 abstract class PocketViewHolder : PocketAdapterContract.Holder {
     lateinit var viewHolder: RecyclerView.ViewHolder
-
-    private inner class Holder internal constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
-    lateinit var bindViewHolder : (rootView: View) -> Unit
+  open class Holder  constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
     override fun onCreateView(view: View, position: Int) {
-        bindViewHolder(view)
         onCreateViewHolder(view, position)
     }
 

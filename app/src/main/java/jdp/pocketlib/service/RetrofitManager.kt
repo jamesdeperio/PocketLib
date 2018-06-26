@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit
  * Created by jamesdeperio on 7/5/2017
  *  jamesdeperio.github.com.codepocket.service
  */
-abstract class RetrofitService(private val context: Context) : RetrofitContract {
+abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
     private var retrofit: Retrofit? = null
     override fun releaseMode(cache: Cache?) {
         val okHttpClient = OkHttpClient.Builder()
@@ -52,6 +52,7 @@ abstract class RetrofitService(private val context: Context) : RetrofitContract 
                 .addCallAdapterFactory(initRxAdapterFactory())
                 .build()
     }
+
     override fun create(service: Class<*>): Any {
         if (retrofit == null) {
             if (initCacheSize() != 0) {
