@@ -13,6 +13,7 @@ import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -27,6 +28,7 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
                 .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
                 .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
                 .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
+                .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
                 .build()
         retrofit = Retrofit.Builder()
                 .baseUrl(initBaseURL())
@@ -35,6 +37,7 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
                 .addCallAdapterFactory(initRxAdapterFactory())
                 .build()
     }
+
     override fun debugMode(cache: Cache?) {
         val logging = HttpLoggingInterceptor()
         logging.level = HttpLoggingInterceptor.Level.BODY
@@ -44,6 +47,7 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
                 .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
                 .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
                 .addInterceptor(logging)
+                .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
                 .build()
         retrofit = Retrofit.Builder()
                 .baseUrl(initBaseURL())
@@ -83,6 +87,7 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
                     .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
                     .addInterceptor(logging)
                     .addInterceptor(interceptor)
+                    .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
                     .build()
             retrofit = Retrofit.Builder()
                     .baseUrl(initBaseURL())
@@ -99,6 +104,7 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
                     .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
                     .addInterceptor(logging)
                     .addInterceptor(interceptor)
+                    .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
                     .build()
             retrofit = Retrofit.Builder()
                     .baseUrl(initBaseURL())

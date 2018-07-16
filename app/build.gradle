@@ -11,7 +11,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.jamesdeperio'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion 15
     }
@@ -25,11 +25,13 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     ext.android_support_version='27.1.1'
+    //noinspection GradleCompatible
     implementation "com.android.support:appcompat-v7:$android_support_version"
+    //noinspection GradleCompatible
     implementation "com.android.support:design:$android_support_version"
+    //noinspection GradleCompatible
     implementation "com.android.support:recyclerview-v7:$android_support_version"
     implementation 'com.squareup.retrofit2:retrofit:2.4.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.10.0'
     implementation 'me.yokeyword:swipebackfragment:0.4.0'
-    implementation 'jp.wasabeef:recyclerview-animators:2.2.6'
 }

@@ -10,6 +10,7 @@ package jdp.pocketlib.service
 import okhttp3.Cache
 import retrofit2.CallAdapter
 import retrofit2.Converter
+import java.io.IOException
 
 /**
  * Created by jamesdeperio on 7/5/2017
@@ -29,4 +30,5 @@ internal interface RetrofitCycle {
     fun isDebugMode(): Boolean
     fun debugMode(cache: Cache?)
     fun releaseMode(cache: Cache?)
+    fun noInternetConnectionHandler(): IOException
 }
