@@ -28,4 +28,8 @@ abstract class PocketViewHolder : PocketAdapterContract.Holder {
     inner class Holder(view: View):  RecyclerView.ViewHolder(view)  {
         init { onCreateViewHolder(view) }
     }
+
+    override fun onCreateViewHolder(view: View) {
+
+    }
 }
