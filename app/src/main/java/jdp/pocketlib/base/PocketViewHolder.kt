@@ -16,18 +16,16 @@ import android.view.View
  */
 abstract class PocketViewHolder : PocketAdapterContract.Holder {
     lateinit var viewHolder: RecyclerView.ViewHolder
-  open class Holder  constructor(itemView: View) : RecyclerView.ViewHolder(itemView)
-    override fun onCreateView(view: View, position: Int) {
-        onCreateViewHolder(view, position)
-    }
-
-    override fun setView(view: View) {
-        viewHolder = Holder(view)
-    }
-
     private var layout: Int = 0
+    override fun setView(view: View) {
+        viewHolder =  Holder(view)
+    }
+
     override fun getContentView(): Int = layout
     override fun setContentView(layoutID: Int) {
         layout = layoutID
+    }
+    inner class Holder(view: View):  RecyclerView.ViewHolder(view)  {
+        init { onCreateViewHolder(view) }
     }
 }
