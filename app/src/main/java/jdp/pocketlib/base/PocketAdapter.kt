@@ -30,7 +30,7 @@ abstract class PocketAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), 
     private var selectedLayout: Int = 0
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
-            = pocketViewHolderList[selectedLayout].onBindViewHolder(holder.itemView, position)
+            = pocketViewHolderList[selectedLayout].onBindViewHolder(holder.adapterPosition)
 
     override fun getItemViewType(position: Int): Int {
         selectedLayout = viewTypeCondition(position)
