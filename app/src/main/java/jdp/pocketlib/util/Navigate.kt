@@ -7,8 +7,11 @@
 
 package jdp.pocketlib.util
 
+import android.annotation.SuppressLint
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.support.v4.app.FragmentTransaction
+import android.view.View
 import jdp.pocketlib.pocketlib.R
 import java.lang.ref.WeakReference
 
@@ -19,7 +22,7 @@ import java.lang.ref.WeakReference
 object Navigate {
     private var fromFragment: WeakReference<Fragment>? = null
     private var removeFragment: WeakReference<Fragment>? = null
-    private var fragmentManager: WeakReference<FragmentManager>? = null
+    private var fragmentManager: WeakReference<FragmentTransaction>? = null
     private var toFragment: WeakReference<Fragment>? = null
     private var toAnimEnter: Int = R.anim.h_fragment_pop_enter
     private var toAnimExit: Int = R.anim.h_fragment_pop_exit
@@ -30,8 +33,9 @@ object Navigate {
     private var isAnimationEnabled: Boolean = false
     private var layoutID: Int = 0
 
+    @SuppressLint("CommitTransaction")
     fun using(fragmentManager: FragmentManager): Navigate {
-        Navigate.fragmentManager = WeakReference(fragmentManager)
+        Navigate.fragmentManager=WeakReference(fragmentManager.beginTransaction())
         return this
     }
 
@@ -83,7 +87,6 @@ object Navigate {
         unRegister()
         return this
     }
-
     fun commitAllowingStateLoss(): Navigate {
         when {
             toFragment != null -> changeFragmentWithStateLoss(fragmentManager!!.get()!!)
@@ -94,92 +97,84 @@ object Navigate {
         return this
     }
 
-    private fun removeFragmentFromView(fragmentManager: FragmentManager) {
-        fragmentManager.beginTransaction().remove(removeFragment!!.get()!!)
+    fun addSharedElement(view:View,name:String):Navigate {
+        fragmentManager!!.get()!!.addSharedElement(view,name)
+        return this
+    }
+    private fun removeFragmentFromView(fragmentManager: FragmentTransaction) {
+        fragmentManager.remove(removeFragment!!.get()!!)
                 .commitAllowingStateLoss()
     }
 
-    private fun changeFragmentWithStateLoss(fragmentManager: FragmentManager) {
-        if (fromFragment == null) {
-            if (isBackstackEnabled && isAnimationEnabled) {
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commitAllowingStateLoss()
-            } else if (isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commitAllowingStateLoss()
-            } else if (!isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .disallowAddToBackStack()
-                        .commitAllowingStateLoss()
-            } else throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
-        } else {
-            if (isBackstackEnabled && isAnimationEnabled) {
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .hide(fromFragment!!.get()!!)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commit()
-            } else if (isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .hide(fromFragment!!.get()!!)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commit()
-            } else if (!isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .disallowAddToBackStack()
-                        .commit()
-            } else throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+    private fun changeFragmentWithStateLoss(fragmentManager: FragmentTransaction) {
+        if (fromFragment == null) when {
+            isBackstackEnabled && isAnimationEnabled -> fragmentManager
+                    .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commitAllowingStateLoss()
+            isBackstackEnabled -> fragmentManager
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commitAllowingStateLoss()
+            !isBackstackEnabled -> fragmentManager
+                    .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .disallowAddToBackStack()
+                    .commitAllowingStateLoss()
+            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+        } else when {
+            isBackstackEnabled && isAnimationEnabled -> fragmentManager
+                    .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .hide(fromFragment!!.get()!!)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commit()
+            isBackstackEnabled -> fragmentManager
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .hide(fromFragment!!.get()!!)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commit()
+            !isBackstackEnabled -> fragmentManager
+                    .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .disallowAddToBackStack()
+                    .commit()
+            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
         }
     }
 
-    private fun changeFragment(fragmentManager: FragmentManager) {
-        if (fromFragment == null) {
-            if (isBackstackEnabled && isAnimationEnabled) {
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commit()
-            } else if (isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commit()
-            } else if (!isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .disallowAddToBackStack()
-                        .commit()
-            } else throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
-        } else {
-            if (isBackstackEnabled && isAnimationEnabled) {
-                fragmentManager.beginTransaction()
-                        .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .hide(fromFragment!!.get()!!)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commit()
-            } else if (isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .hide(fromFragment!!.get()!!)
-                        .addToBackStack(toFragment!!.javaClass.simpleName)
-                        .commit()
-            } else if (!isBackstackEnabled) {
-                fragmentManager.beginTransaction()
-                        .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
-                        .disallowAddToBackStack()
-                        .commit()
-            } else throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+    private fun changeFragment(fragmentManager: FragmentTransaction) {
+        if (fromFragment == null) when {
+            isBackstackEnabled && isAnimationEnabled -> fragmentManager
+                    .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commit()
+            isBackstackEnabled -> fragmentManager
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commit()
+            !isBackstackEnabled -> fragmentManager
+                    .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .disallowAddToBackStack()
+                    .commit()
+            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+        } else when {
+            isBackstackEnabled && isAnimationEnabled -> fragmentManager
+                    .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .hide(fromFragment!!.get()!!)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commit()
+            isBackstackEnabled -> fragmentManager
+                    .add(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .hide(fromFragment!!.get()!!)
+                    .addToBackStack(toFragment!!.javaClass.simpleName)
+                    .commit()
+            !isBackstackEnabled -> fragmentManager
+                    .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
+                    .disallowAddToBackStack()
+                    .commit()
+            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
         }
     }
 
