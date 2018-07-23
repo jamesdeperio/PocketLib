@@ -20,7 +20,7 @@
     <dimen name="pocketlib_toolbar_size">56dp</dimen>
     <dimen name="pocketlib_content_margin">16dp</dimen>
     <dimen name="pocketlib_h1_regular">34dp</dimen>
-    <dimen name="pocketlib_h2_bold">24  dp</dimen>
+    <dimen name="pocketlib_h2_bold">24dp</dimen>
     <dimen name="pocketlib_h3_bold">16dp</dimen>
     <dimen name="pocketlib_h4_bold">14dp</dimen>
     <dimen name="pocketlib_body_regular">16dp</dimen>
