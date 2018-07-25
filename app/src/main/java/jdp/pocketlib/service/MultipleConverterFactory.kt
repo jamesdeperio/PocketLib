@@ -18,8 +18,7 @@ class MultipleConverterFactory(private val mFactoryMap: Map<Class<*>, Converter.
         val jsonFactory = mFactoryMap[Gson::class.java]
         return jsonFactory?.responseBodyConverter(type!!, annotations, retrofit!!)
     }
-
-    internal class Builder {
+    open class Builder {
         private var mFactoryMap: MutableMap<Class<*>, Converter.Factory> = LinkedHashMap()
         fun add(factoryType: Class<out Annotation>?, factory: Converter.Factory?): Builder {
             if (factoryType == null) throw NullPointerException("factoryType is null")
@@ -28,7 +27,7 @@ class MultipleConverterFactory(private val mFactoryMap: Map<Class<*>, Converter.
             return this
         }
 
-        fun build(): MultipleConverterFactory {
+        open fun build(): MultipleConverterFactory {
             return MultipleConverterFactory(mFactoryMap)
         }
 
