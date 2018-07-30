@@ -9,11 +9,9 @@ package jdp.pocketlib.service
 
 import android.content.Context
 import okhttp3.Cache
-import okhttp3.Credentials
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import java.io.IOException
 import java.util.concurrent.TimeUnit
 
 /**
@@ -22,17 +20,23 @@ import java.util.concurrent.TimeUnit
  */
 abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
     private var retrofit: Retrofit? = null
+    override fun clearRetrofit() {
+        retrofit=null
+    }
+    override fun OkHttpClient.Builder.interceptorConfiguration(builder: OkHttpClient.Builder): OkHttpClient.Builder
+            = builder
+
     override fun releaseMode(cache: Cache?) {
-        val okHttpClient = OkHttpClient.Builder()
-                .cache(cache)
+        val  okHttpClientBuilder= OkHttpClient.Builder()
+        okHttpClientBuilder.cache(cache)
                 .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
                 .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
                 .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
-                .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
-                .build()
+                .interceptorConfiguration(okHttpClientBuilder)
+
         retrofit = Retrofit.Builder()
                 .baseUrl(initBaseURL())
-                .client(okHttpClient)
+                .client(okHttpClientBuilder.build())
                 .addConverterFactory(initConverterFactory())
                 .addCallAdapterFactory(initRxAdapterFactory())
                 .build()
@@ -47,7 +51,7 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
                 .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
                 .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
                 .addInterceptor(logging)
-                .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
+
                 .build()
         retrofit = Retrofit.Builder()
                 .baseUrl(initBaseURL())
@@ -72,47 +76,5 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
         return retrofit!!.create(service)
     }
 
-    override fun create(service: Class<*>, username: String, password: String): Any {
-        val authToken = Credentials.basic(username, password)
-        val interceptor = AuthenticationInterceptor(authToken)
-        if (initCacheSize() != 0) {
-            val cacheSize = initCacheSize() * 1024 * 1024
-            val cache = Cache(context.cacheDir, cacheSize.toLong())
-            val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BODY
-            val okHttpClient = OkHttpClient.Builder()
-                    .cache(cache)
-                    .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
-                    .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
-                    .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
-                    .addInterceptor(logging)
-                    .addInterceptor(interceptor)
-                    .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
-                    .build()
-            retrofit = Retrofit.Builder()
-                    .baseUrl(initBaseURL())
-                    .client(okHttpClient)
-                    .addConverterFactory(initConverterFactory())
-                    .addCallAdapterFactory(initRxAdapterFactory())
-                    .build()
-        } else {
-            val logging = HttpLoggingInterceptor()
-            logging.level = HttpLoggingInterceptor.Level.BODY
-            val okHttpClient = OkHttpClient.Builder()
-                    .writeTimeout(initWriteTimeOut(), TimeUnit.SECONDS)
-                    .connectTimeout(initConnectTimeOut(), TimeUnit.SECONDS)
-                    .readTimeout(initReadTimeOut(), TimeUnit.SECONDS)
-                    .addInterceptor(logging)
-                    .addInterceptor(interceptor)
-                    .addInterceptor (ConnectivityInterceptor(context,noInternetConnectionHandler()))
-                    .build()
-            retrofit = Retrofit.Builder()
-                    .baseUrl(initBaseURL())
-                    .client(okHttpClient)
-                    .addConverterFactory(initConverterFactory())
-                    .addCallAdapterFactory(initRxAdapterFactory())
-                    .build()
-        }
-        return retrofit!!.create(service)
-    }
+
 }

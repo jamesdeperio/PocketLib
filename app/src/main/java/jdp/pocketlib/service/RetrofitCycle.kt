@@ -8,9 +8,9 @@
 package jdp.pocketlib.service
 
 import okhttp3.Cache
+import okhttp3.OkHttpClient
 import retrofit2.CallAdapter
 import retrofit2.Converter
-import java.io.IOException
 
 /**
  * Created by jamesdeperio on 7/5/2017
@@ -23,12 +23,12 @@ internal interface RetrofitCycle {
     fun initWriteTimeOut(): Long = 10
     fun initConnectTimeOut(): Long = 10
     fun initReadTimeOut(): Long = 30
-    fun create(service: Class<*>, username: String, password: String): Any
     fun create(service: Class<*>): Any
     fun initConverterFactory(): Converter.Factory
     fun initRxAdapterFactory(): CallAdapter.Factory
     fun isDebugMode(): Boolean
     fun debugMode(cache: Cache?)
     fun releaseMode(cache: Cache?)
-    fun noInternetConnectionHandler(): IOException
+    fun OkHttpClient.Builder.interceptorConfiguration(builder: OkHttpClient.Builder): OkHttpClient.Builder
+    fun clearRetrofit()
 }
