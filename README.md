@@ -39,7 +39,7 @@ ___
 |PocketLinearLayout|
 |PocketStaggeredLayout|
 ___
-##TODO:
+## TODO:
 * material dialog
 * searchable spinner
 * cards template
