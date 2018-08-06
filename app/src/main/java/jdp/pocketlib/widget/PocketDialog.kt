@@ -2,6 +2,7 @@ package jdp.pocketlib.widget
 
 import android.app.Dialog
 import android.content.Context
+import android.view.Gravity
 import android.view.View
 import android.view.Window
 import android.widget.Button
@@ -29,11 +30,15 @@ class PocketDialog(context: Context,type:PocketDialog.Type) {
     val title= dialog.findViewById<TextView>(R.id.tvTitle)!!
     val description= dialog.findViewById<TextView>(R.id.tvDesc)!!
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
+        setActionButtonGravity(Gravity.CENTER)
         when (type) {
             Type.DIALOG_SUCCESS -> this.setAnimation(R.raw.success)
-            Type.DIALOG_WARNING -> this.setAnimation(R.raw.warning)
             Type.DIALOG_ERROR -> this.setAnimation(R.raw.error)
             Type.DIALOG_LOADER -> this.setAnimation(R.raw.loader)
+            Type.DIALOG_WARNING -> {
+                this.setAnimation(R.raw.warning)
+                setActionButtonGravity(Gravity.END)
+            }
             else -> this.setAnimation(R.raw.success)
         }
     }
