@@ -53,11 +53,13 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
     val description= dialog.findViewById<TextView>(R.id.tvDesc)!!
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
         setActionButtonGravity(Gravity.CENTER)
+        dialog.setCanceledOnTouchOutside(true)
         when (type) {
             Type.DIALOG_SUCCESS -> this.setAnimation(R.raw.success)
             Type.DIALOG_ERROR -> this.setAnimation(R.raw.error)
             Type.DIALOG_LOADER ->{
                 this.repeatCount=-1
+                dialog.setCanceledOnTouchOutside(false)
                 this.setAnimation(R.raw.loader)
             }
             Type.DIALOG_WARNING -> {
