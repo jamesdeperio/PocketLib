@@ -26,8 +26,8 @@ ___
 ___
 |View|
 |:------------------------------------------------:|
-|material dialog|
-|searchable spinner|
+|PocketDialog|
+|PocketSpinnerDialog<T>|
 |PocketHorizontalScrollView|
 |PocketNestedScrollView|
 |PocketScrollView|
