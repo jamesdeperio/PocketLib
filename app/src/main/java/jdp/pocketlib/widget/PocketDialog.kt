@@ -6,6 +6,7 @@ import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -22,6 +23,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
     }
     private val dialog=Dialog(context).apply {
         if (isFullScreen) {
+            this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             when {
                 Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                         View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
@@ -81,6 +83,10 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
 
     fun show() :PocketDialog {
         dialog.show()
+        if (isFullScreen){
+            dialog.window.decorView.systemUiVisibility = dialog.window.decorView.systemUiVisibility
+            dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        }
         lottie.playAnimation()
         return this
     }
