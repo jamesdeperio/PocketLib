@@ -2,6 +2,7 @@ package jdp.pocketlib.widget
 
 import android.app.Dialog
 import android.content.Context
+import android.os.Build
 import android.view.Gravity
 import android.view.View
 import android.view.Window
@@ -22,7 +23,22 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
     }
     private val dialog=Dialog(context).apply {
         if (isFullScreen) {
+
             this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            when {
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                        View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
+                        View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_FULLSCREEN or
+                        View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                else -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+            }
             this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         }
         this.window.attributes.windowAnimations = R.style.DialogAnimation
