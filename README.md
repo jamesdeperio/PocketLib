@@ -26,6 +26,8 @@ ___
 ___
 |View|
 |:------------------------------------------------:|
+|material dialog|
+|searchable spinner|
 |PocketHorizontalScrollView|
 |PocketNestedScrollView|
 |PocketScrollView|
@@ -40,8 +42,6 @@ ___
 |PocketStaggeredLayout|
 ___
 ## TODO:
-* material dialog
-* searchable spinner
 * cards template
 ___
 Thanks to the author of external Library used:
@@ -51,4 +51,5 @@ Thanks to the author of external Library used:
 * [com.android.support:recyclerview-v7](https://developer.android.com/topic/libraries/support-library/)
 * [com.squareup.retrofit2:retrofit](https://github.com/square/retrofit)
 * [com.squareup.okhttp3:logging-interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
+* [com.airbnb.android:lottie](https://github.com/airbnb/lottie-android)
 * [me.yokeyword:swipebackfragment](https://github.com/YoKeyword/SwipeBackFragment)

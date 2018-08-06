@@ -31,4 +31,8 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <color name="windowBG">#fff</color>
+    <style name="DialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/anim_slideup</item>
+        <item name="android:windowExitAnimation">@anim/anim_slidedown</item>
+    </style>
 </resources>
