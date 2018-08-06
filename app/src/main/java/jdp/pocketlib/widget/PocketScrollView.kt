@@ -5,20 +5,21 @@
  * A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
  */
 
-package jdp.pocketlib.view
+package jdp.pocketlib.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.widget.HorizontalScrollView
+import android.widget.ScrollView
+
 
 /**
  * Created by jamesdeperio on 8/26/2017
  *  jamesdeperio.github.com.codepocket.view
  */
 
-class PocketHorizontalScrollView : HorizontalScrollView {
+class PocketScrollView : ScrollView {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
