@@ -84,10 +84,6 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
 
     fun show() :PocketDialog {
         dialog.show()
-        if (isFullScreen){
-            dialog.window.decorView.systemUiVisibility = dialog.window.decorView.systemUiVisibility
-            dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-        }
         lottie.playAnimation()
         return this
     }

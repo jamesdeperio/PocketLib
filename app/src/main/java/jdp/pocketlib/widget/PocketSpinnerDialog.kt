@@ -74,10 +74,6 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
     fun show(): PocketSpinnerDialog<T> {
         dialog.show()
-        if (isFullScreen){
-            dialog.window.decorView.systemUiVisibility = dialog.window.decorView.systemUiVisibility
-            dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
-        }
         return this
     }
 
