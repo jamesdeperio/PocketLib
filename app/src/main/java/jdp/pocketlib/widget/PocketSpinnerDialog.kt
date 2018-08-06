@@ -35,8 +35,12 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
                         View.SYSTEM_UI_FLAG_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 else -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+
             }
             this.requestWindowFeature(Window.FEATURE_NO_TITLE)
+            this.setOnDismissListener {
+                if (isFullScreen) this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            }
         }
         this.window.attributes.windowAnimations = R.style.DialogAnimation
         this.setContentView(R.layout.dialog_spinner)

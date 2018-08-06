@@ -42,6 +42,9 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
         }
         this.window.attributes.windowAnimations = R.style.DialogAnimation
         this.setContentView(R.layout.dialog_pocket)
+        this.setOnDismissListener {
+            if (isFullScreen) this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        }
     }
 
     private val buttonContainer= dialog.findViewById<LinearLayout>(R.id.buttonContainer)!!
@@ -53,7 +56,10 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
         when (type) {
             Type.DIALOG_SUCCESS -> this.setAnimation(R.raw.success)
             Type.DIALOG_ERROR -> this.setAnimation(R.raw.error)
-            Type.DIALOG_LOADER -> this.setAnimation(R.raw.loader)
+            Type.DIALOG_LOADER ->{
+                this.repeatCount=-1
+                this.setAnimation(R.raw.loader)
+            }
             Type.DIALOG_WARNING -> {
                 this.setAnimation(R.raw.warning)
                 setActionButtonGravity(Gravity.END)
