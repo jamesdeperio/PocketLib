@@ -46,20 +46,20 @@
         android:orientation="horizontal">
 
         <Button
-            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ffffff"
+            android:layout_margin="1dp"
             android:text="CANCEL"
             android:id="@+id/btnCancel"
-            android:layout_margin="8dp"
             android:textColor="#1878ff"
             tools:ignore="ButtonStyle,HardcodedText" />
 
         <Button
-            android:layout_margin="8dp"
+            android:layout_margin="1dp"
             android:id="@+id/btnOk"
-            style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ffffff"

@@ -55,6 +55,26 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
     val title= dialog.findViewById<TextView>(R.id.tvTitle)!!
     val description= dialog.findViewById<TextView>(R.id.tvDesc)!!
     @SuppressLint("SetTextI18n")
+    val okAction= dialog.findViewById<Button>(R.id.btnOk)!!.apply {
+        this.setOnClickListener { dialog.dismiss() }
+        if (type==Type.DIALOG_LOADER)
+            this.visibility=View.GONE
+        ( this.layoutParams as LinearLayout.LayoutParams).apply {
+            this.setMargins(1,1,1,1)
+            this.width=LinearLayout.LayoutParams.WRAP_CONTENT
+        }
+    }
+    val cancelAction= dialog.findViewById<Button>(R.id.btnCancel)!!.apply {
+        this.setOnClickListener { dialog.dismiss() }
+        if (type!=Type.DIALOG_WARNING)
+            this.visibility=View.GONE
+        ( this.layoutParams as LinearLayout.LayoutParams).apply {
+            this.setMargins(1,1,1,1)
+            this.width=LinearLayout.LayoutParams.WRAP_CONTENT
+        }
+    }
+    val view= dialog.findViewById<LinearLayout>(R.id.container)!!
+    @SuppressLint("SetTextI18n")
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
         setActionButtonGravity(Gravity.CENTER)
         dialog.setCanceledOnTouchOutside(false)
@@ -71,7 +91,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
                 this.setAnimation(R.raw.trophy)
                 title.text="No Internet Connection!"
                 description.text="Cannot process request. Please try again."
-                okAction.text="Retry"
+                okAction.text = "Retry"
             }
             Type.DIALOG_ERROR -> {
                 title.text="Oops..."
@@ -92,23 +112,14 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
                 this.setAnimation(R.raw.loader)
                 ( title.layoutParams as LinearLayout.LayoutParams).apply {
                     gravity=Gravity.START
+                    topMargin=24
+                    leftMargin=24
                 }
                 setActionButtonGravity(Gravity.END)
                 this.visibility=View.GONE
             }
         }
     }
-    val okAction= dialog.findViewById<Button>(R.id.btnOk)!!.apply {
-        this.setOnClickListener { dialog.dismiss() }
-        if (type==Type.DIALOG_LOADER)
-            this.visibility=View.GONE
-    }
-    val cancelAction= dialog.findViewById<Button>(R.id.btnCancel)!!.apply {
-        this.setOnClickListener { dialog.dismiss() }
-        if (type!=Type.DIALOG_WARNING)
-            this.visibility=View.GONE
-    }
-    val view= dialog.findViewById<LinearLayout>(R.id.container)!!
 
     fun setActionButtonGravity(gravity: Int) :PocketDialog {
         ( buttonContainer.layoutParams as LinearLayout.LayoutParams).apply {
