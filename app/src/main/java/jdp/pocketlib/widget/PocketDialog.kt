@@ -1,5 +1,6 @@
 package jdp.pocketlib.widget
 
+import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
 import android.os.Build
@@ -15,8 +16,10 @@ import jdp.pocketlib.pocketlib.R
 
 class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScreen:Boolean=false) {
     enum class Type {
+         DIALOG_NO_INTERNET_CONNECTION,
          DIALOG_WARNING,
-         DIALOG_INFO,
+         DIALOG_REWARD,
+         DIALOG_BASIC,
          DIALOG_ERROR,
          DIALOG_SUCCESS,
         DIALOG_LOADER
@@ -51,22 +54,48 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
 
     val title= dialog.findViewById<TextView>(R.id.tvTitle)!!
     val description= dialog.findViewById<TextView>(R.id.tvDesc)!!
+    @SuppressLint("SetTextI18n")
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
         setActionButtonGravity(Gravity.CENTER)
-        dialog.setCanceledOnTouchOutside(true)
+        dialog.setCanceledOnTouchOutside(false)
         when (type) {
-            Type.DIALOG_SUCCESS -> this.setAnimation(R.raw.success)
-            Type.DIALOG_ERROR -> this.setAnimation(R.raw.error)
+            Type.DIALOG_SUCCESS -> {
+                this.setAnimation(R.raw.success2)
+                title.text="Success!"
+            }
+            Type.DIALOG_REWARD -> {
+                this.setAnimation(R.raw.trophy)
+                title.text="Congratulations!"
+            }
+            Type.DIALOG_NO_INTERNET_CONNECTION -> {
+                this.setAnimation(R.raw.trophy)
+                title.text="No Internet Connection!"
+                description.text="Cannot process request. Please try again."
+                okAction.text="Retry"
+            }
+            Type.DIALOG_ERROR -> {
+                title.text="Oops..."
+                this.setAnimation(R.raw.error)
+            }
             Type.DIALOG_LOADER ->{
+                title.text="Loading..."
                 this.repeatCount=-1
-                dialog.setCanceledOnTouchOutside(false)
                 this.setAnimation(R.raw.loader)
             }
             Type.DIALOG_WARNING -> {
+                title.text="Oops..."
                 this.setAnimation(R.raw.warning)
                 setActionButtonGravity(Gravity.END)
             }
-            else -> this.setAnimation(R.raw.success)
+            else -> {
+                title.text="Info"
+                this.setAnimation(R.raw.loader)
+                ( title.layoutParams as LinearLayout.LayoutParams).apply {
+                    gravity=Gravity.START
+                }
+                setActionButtonGravity(Gravity.END)
+                this.visibility=View.GONE
+            }
         }
     }
     val okAction= dialog.findViewById<Button>(R.id.btnOk)!!.apply {
@@ -76,13 +105,13 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
     }
     val cancelAction= dialog.findViewById<Button>(R.id.btnCancel)!!.apply {
         this.setOnClickListener { dialog.dismiss() }
-        if (type==Type.DIALOG_LOADER || type==Type.DIALOG_INFO || type==Type.DIALOG_ERROR || type==Type.DIALOG_SUCCESS)
+        if (type!=Type.DIALOG_WARNING)
             this.visibility=View.GONE
     }
     val view= dialog.findViewById<LinearLayout>(R.id.container)!!
 
     fun setActionButtonGravity(gravity: Int) :PocketDialog {
-        buttonContainer.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT).apply {
+        ( buttonContainer.layoutParams as LinearLayout.LayoutParams).apply {
             this.gravity=gravity
         }
         return this
