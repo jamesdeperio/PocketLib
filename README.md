@@ -39,6 +39,11 @@ ___
 |PocketLinearLayout|
 |PocketStaggeredLayout|
 ___
+## TODO:
+* material dialog
+* searchable spinner
+* cards template
+___
 Thanks to the author of external Library used:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7](https://github.com/JetBrains/kotlin/tree/master/libraries/stdlib)
 * [com.android.support:appcompat-v7](https://developer.android.com/topic/libraries/support-library/)
