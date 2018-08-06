@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -16,9 +17,13 @@ import jdp.pocketlib.base.PocketViewHolder
 import jdp.pocketlib.layoutmanager.PocketLinearLayout
 import jdp.pocketlib.pocketlib.R
 
-class PocketSpinnerDialog<T>(context: Context) : SearchView.OnQueryTextListener, DialogInterface.OnDismissListener {
+class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false) : SearchView.OnQueryTextListener, DialogInterface.OnDismissListener {
     private val dialog=Dialog(context).apply {
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        if (isFullScreen) {
+            this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            this.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        }
+        this.window.attributes.windowAnimations = R.style.DialogAnimation
         this.setContentView(R.layout.dialog_spinner)
         this.setOnDismissListener(this@PocketSpinnerDialog)
     }
@@ -54,6 +59,10 @@ class PocketSpinnerDialog<T>(context: Context) : SearchView.OnQueryTextListener,
 
     fun show(): PocketSpinnerDialog<T> {
         dialog.show()
+        if (isFullScreen){
+            dialog.window.decorView.systemUiVisibility = dialog.window.decorView.systemUiVisibility
+            dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        }
         return this
     }
 

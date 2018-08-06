@@ -5,13 +5,14 @@ import android.content.Context
 import android.view.Gravity
 import android.view.View
 import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
 import jdp.pocketlib.pocketlib.R
 
-class PocketDialog(context: Context,type:PocketDialog.Type) {
+class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScreen:Boolean=false) {
     enum class Type {
          DIALOG_WARNING,
          DIALOG_INFO,
@@ -20,7 +21,10 @@ class PocketDialog(context: Context,type:PocketDialog.Type) {
         DIALOG_LOADER
     }
     private val dialog=Dialog(context).apply {
-        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        if (isFullScreen) {
+            this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            this.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        }
         this.window.attributes.windowAnimations = R.style.DialogAnimation
         this.setContentView(R.layout.dialog_pocket)
     }
@@ -64,6 +68,10 @@ class PocketDialog(context: Context,type:PocketDialog.Type) {
 
     fun show() :PocketDialog {
         dialog.show()
+        if (isFullScreen){
+            dialog.window.decorView.systemUiVisibility = dialog.window.decorView.systemUiVisibility
+            dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+        }
         lottie.playAnimation()
         return this
     }
