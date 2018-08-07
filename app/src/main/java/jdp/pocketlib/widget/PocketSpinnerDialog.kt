@@ -19,6 +19,7 @@ import jdp.pocketlib.pocketlib.R
 
 class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false) : SearchView.OnQueryTextListener, DialogInterface.OnDismissListener {
     private val dialog=Dialog(context).apply {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (isFullScreen) {
             this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             when {
@@ -36,8 +37,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
                 else -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 
             }
-            this.requestWindowFeature(Window.FEATURE_NO_TITLE)
-            this.setOnDismissListener {
+             this.setOnDismissListener {
                 if (isFullScreen) this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             }
         }
