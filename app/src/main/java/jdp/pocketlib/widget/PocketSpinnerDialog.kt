@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
-import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.SearchView
 import android.view.View
 import android.view.Window
@@ -61,7 +60,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         viewHolder.setContentView(R.layout.item_list_spinner)
         this.addViewHolder(viewHolder)
     }
-    private val recyclerView = dialog.findViewById<RecyclerView>(R.id.recyclerView)!!.apply {
+    private val recyclerView = dialog.findViewById<PocketRecyclerView>(R.id.recyclerView)!!.apply {
         this.adapter=this@PocketSpinnerDialog.adapter
         this.layoutManager=PocketLinearLayout(context,LinearLayout.VERTICAL,false)
     }

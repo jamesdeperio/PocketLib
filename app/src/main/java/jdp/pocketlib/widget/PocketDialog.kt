@@ -61,7 +61,8 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
             this.visibility=View.GONE
         ( this.layoutParams as LinearLayout.LayoutParams).apply {
             this.setMargins(1,1,1,1)
-            this.width=LinearLayout.LayoutParams.WRAP_CONTENT
+            this.width=150
+
         }
     }
     val cancelAction= dialog.findViewById<Button>(R.id.btnCancel)!!.apply {
@@ -70,7 +71,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
             this.visibility=View.GONE
         ( this.layoutParams as LinearLayout.LayoutParams).apply {
             this.setMargins(1,1,1,1)
-            this.width=LinearLayout.LayoutParams.WRAP_CONTENT
+            this.width=150
         }
     }
     val view= dialog.findViewById<LinearLayout>(R.id.container)!!
