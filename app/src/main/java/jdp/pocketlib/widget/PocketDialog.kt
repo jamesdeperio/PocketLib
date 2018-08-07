@@ -25,6 +25,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
         DIALOG_LOADER
     }
     private val dialog=Dialog(context).apply {
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (isFullScreen) {
             this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             when {
@@ -41,8 +42,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 else -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
             }
-            this.requestWindowFeature(Window.FEATURE_NO_TITLE)
-        }
+         }
         this.window.attributes.windowAnimations = R.style.DialogAnimation
         this.setContentView(R.layout.dialog_pocket)
         this.setOnDismissListener {
