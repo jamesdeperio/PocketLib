@@ -22,9 +22,8 @@ internal interface PocketAdapterContract {
     interface Holder {
         fun getContentView(): Int
         fun setContentView(layoutID: Int)
-        fun onCreateViewHolder(view:View)
         fun setView(view: View)
-        fun onBindViewHolder(view: View, position: Int)
+        fun onCreateViewHolder(view: View, position: Int)
 
     }
 }

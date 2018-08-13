@@ -25,11 +25,5 @@ abstract class PocketViewHolder : PocketAdapterContract.Holder {
     override fun setContentView(layoutID: Int) {
         layout = layoutID
     }
-    inner class Holder(view: View):  RecyclerView.ViewHolder(view)  {
-        init { onCreateViewHolder(view) }
-    }
-
-    override fun onCreateViewHolder(view: View) {
-
-    }
+    inner class Holder(view: View):  RecyclerView.ViewHolder(view)
 }
