@@ -76,5 +76,5 @@ abstract class RetrofitManager(private val context: Context) : RetrofitCycle {
         return retrofit!!.create(service)
     }
 
-
+    override fun isDebugMode(): Boolean = false
 }

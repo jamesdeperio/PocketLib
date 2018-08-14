@@ -21,27 +21,27 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     private val dialog=Dialog(context).apply {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (isFullScreen) {
-            this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            this.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             when {
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT -> window!!.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                         View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
+                Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN -> window!!.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or
                         View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION or
                         View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_FULLSCREEN or
                         View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                else -> window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                else -> window!!.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
 
             }
              this.setOnDismissListener {
-                if (isFullScreen) this.window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+                if (isFullScreen) this.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
             }
         }
-        this.window.attributes.windowAnimations = R.style.DialogAnimation
+        this.window!!.attributes.windowAnimations = R.style.DialogAnimation
         this.setContentView(R.layout.dialog_spinner)
         this.setOnDismissListener(this@PocketSpinnerDialog)
     }
@@ -78,8 +78,8 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     fun show(): PocketSpinnerDialog<T> {
         dialog.show()
         if (isFullScreen){
-            dialog.window.decorView.systemUiVisibility = dialog.window.decorView.systemUiVisibility
-            dialog.window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
+            dialog.window!!.decorView.systemUiVisibility = dialog.window!!.decorView.systemUiVisibility
+            dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
         }
         return this
     }

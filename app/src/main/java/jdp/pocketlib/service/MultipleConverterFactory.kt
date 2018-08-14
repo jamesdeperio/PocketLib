@@ -6,29 +6,37 @@ import retrofit2.Retrofit
 import java.lang.reflect.Type
 import java.util.*
 
-class MultipleConverterFactory(private val mFactoryMap: Map<Class<*>, Converter.Factory>) : Converter.Factory() {
+class MultipleConverterFactory(private val factory: Map<Class<*>, Converter.Factory>) : Converter.Factory() {
 
     override fun responseBodyConverter(type: Type?, annotations: Array<Annotation>?, retrofit: Retrofit?): Converter<ResponseBody, *>? {
-        for (annotation in annotations!!) {
-            val factory = mFactoryMap[annotation.annotationClass.javaObjectType]
-            if (factory != null) {
-                return factory.responseBodyConverter(type!!, annotations, retrofit!!)
-            }
-        }
-        val jsonFactory = mFactoryMap[Gson::class.java]
-        return jsonFactory?.responseBodyConverter(type!!, annotations, retrofit!!)
+        annotations!!
+                .map { factory[it.annotationClass.javaObjectType] }
+                .filter { it!= null}
+                .forEach {
+                return it!!.responseBodyConverter(type!!, annotations, retrofit!!)
+                }
+        return  factory[JSONFormat::class.java]!!.responseBodyConverter(type!!, annotations, retrofit!!)
     }
     open class Builder {
-        private var mFactoryMap: MutableMap<Class<*>, Converter.Factory> = LinkedHashMap()
-        fun add(factoryType: Class<out Annotation>?, factory: Converter.Factory?): Builder {
-            if (factoryType == null) throw NullPointerException("factoryType is null")
-            if (factory == null) throw NullPointerException("factory is null")
-            mFactoryMap[factoryType] = factory
+        private var factoryMap: MutableMap<Class<*>, Converter.Factory> = LinkedHashMap()
+
+        fun addCustomConverterFactory(factoryType: Class<out Annotation>, factory: Converter.Factory): Builder {
+            factoryMap[factoryType] = factory
+            return this
+        }
+
+        fun setXMLConverterFactory( factory: Converter.Factory): Builder {
+            factoryMap[XMLFormat::class.java] = factory
+            return this
+        }
+
+        fun setJSONConverterFactory( factory: Converter.Factory): Builder {
+            factoryMap[JSONFormat::class.java] = factory
             return this
         }
 
         open fun build(): MultipleConverterFactory {
-            return MultipleConverterFactory(mFactoryMap)
+            return MultipleConverterFactory(factoryMap)
         }
 
     }
