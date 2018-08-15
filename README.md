@@ -9,15 +9,10 @@ ___
 |BaseSwipeFragment|
 |PocketAdapter|
 |PocketViewHolder|
-|RetrofitManager|
 ___
 |Builder|
 |:------------------------------------------------:|
 |PageBuilder (for PocketViewPager)|
-___
-|ConverterFactory|
-|:------------------------------------------------:|
-| MultipleConverterFactory(available annotation: @Gson @Xml)|
 ___
 |Util|
 |:------------------------------------------------:|
@@ -49,7 +44,5 @@ Thanks to the author of external Library used:
 * [com.android.support:appcompat-v7](https://developer.android.com/topic/libraries/support-library/)
 * [com.android.support:design](https://developer.android.com/topic/libraries/support-library/)
 * [com.android.support:recyclerview-v7](https://developer.android.com/topic/libraries/support-library/)
-* [com.squareup.retrofit2:retrofit](https://github.com/square/retrofit)
-* [com.squareup.okhttp3:logging-interceptor](https://github.com/square/okhttp/tree/master/okhttp-logging-interceptor)
 * [com.airbnb.android:lottie](https://github.com/airbnb/lottie-android)
 * [me.yokeyword:swipebackfragment](https://github.com/YoKeyword/SwipeBackFragment)
