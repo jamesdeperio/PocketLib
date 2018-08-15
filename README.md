@@ -11,8 +11,8 @@
 dependencies {
     implementation 'com.github.jamesdeperio:PocketLib:2.0.0'
 }
-- better if you will consider using [CodePocketBuilder](https://github.com/jamesdeperio/CodePocketBuilder)
 ```
+- better if you will consider using [CodePocketBuilder](https://github.com/jamesdeperio/CodePocketBuilder)
 ___
 | Base Class        |
 |:------------------------------------------------:|
