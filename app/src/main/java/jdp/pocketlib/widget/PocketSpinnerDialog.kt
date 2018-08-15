@@ -12,11 +12,10 @@ import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import jdp.pocketlib.R
 import jdp.pocketlib.base.PocketAdapter
 import jdp.pocketlib.base.PocketViewHolder
 import jdp.pocketlib.layoutmanager.PocketLinearLayout
-import jdp.pocketlib.pocketlib.R
-
 class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false) : SearchView.OnQueryTextListener, DialogInterface.OnDismissListener {
     private val dialog=Dialog(context).apply {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -89,7 +88,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         return this
     }
 
-    fun addItem (items:HashMap<T,String>): PocketSpinnerDialog<T> {
+    fun addItem (items:MutableMap<T,String>): PocketSpinnerDialog<T> {
         var x=0
         items.forEach { item, itemString ->
             adapter.itemList[x]= PocketSpinnerItem(item = item,itemString = itemString )
@@ -137,7 +136,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
     override fun onQueryTextChange(newText: String?): Boolean {
         if (newText!!.isNotEmpty()){
-            val filteredItemList:HashMap<Int, PocketSpinnerItem<T>> = adapter.filter(newText.toLowerCase())
+            val filteredItemList:MutableMap<Int, PocketSpinnerItem<T>> = adapter.filter(newText.toLowerCase())
             adapter.searchItemList=filteredItemList
         }else adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
@@ -147,11 +146,11 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
     data class PocketSpinnerItem <T> (var item:T? = null, var itemString:String? = null)
     inner class PocketSpinnerAdapter: PocketAdapter()  {
-        var itemList:HashMap<Int, PocketSpinnerItem<T>> = HashMap()
-        var searchItemList:HashMap<Int, PocketSpinnerItem<T>> = HashMap()
+        var itemList:MutableMap<Int, PocketSpinnerItem<T>> = HashMap()
+        var searchItemList:MutableMap<Int, PocketSpinnerItem<T>> = HashMap()
         override fun getItemCount(): Int = searchItemList.size
 
-        fun filter(newText: String) = HashMap<Int, PocketSpinnerItem<T>>().apply {
+        fun filter(newText: String):MutableMap<Int,PocketSpinnerItem<T>> = HashMap<Int, PocketSpinnerItem<T>>().apply {
                var x=0
                 itemList.filter { it.value.itemString!!.toLowerCase().contains(newText) }
                     .forEach {
