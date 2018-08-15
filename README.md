@@ -30,7 +30,7 @@ ___
 ```
 * PocketViewHolder Usage:
 ``` kotlin
- class ContentViewHolder( private val adapter: YOURADAPTER) : PocketViewHolder() {
+ class YOURViewHolder( private val adapter: YOURADAPTER) : PocketViewHolder() {
     override fun onBindViewHolder(view: View, position: Int) {
     }
 }
