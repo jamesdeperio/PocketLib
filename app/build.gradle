@@ -23,14 +23,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     ext.android_support_version='27.1.1'
     //noinspection GradleCompatible
-    implementation "com.android.support:appcompat-v7:$android_support_version"
+    compileOnly "com.android.support:appcompat-v7:$android_support_version"
     //noinspection GradleCompatible
-    implementation "com.android.support:design:$android_support_version"
+    compileOnly "com.android.support:design:$android_support_version"
     //noinspection GradleCompatible
-    implementation "com.android.support:recyclerview-v7:$android_support_version"
+    compileOnly "com.android.support:recyclerview-v7:$android_support_version"
     implementation 'me.yokeyword:swipebackfragment:0.4.0'
     //noinspection GradleDependency
     implementation 'com.airbnb.android:lottie:2.5.5'
