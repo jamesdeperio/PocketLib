@@ -11,10 +11,15 @@ apply plugin: 'com.github.dcendents.android-maven'
 group = 'com.github.jamesdeperio'
 
 android {
+
     compileSdkVersion 28
     defaultConfig {
         minSdkVersion 15
     }
+    compileOptions {
+        kotlinOptions.freeCompilerArgs += ['-module-name', 'PocketLib']
+    }
+
     lintOptions {
         abortOnError false
     }
