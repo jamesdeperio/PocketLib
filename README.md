@@ -9,7 +9,7 @@
 ### Gradle
 ```groovy
 dependencies {
-    implementation 'com.github.jamesdeperio:PocketLib:2.0'
+    implementation 'com.github.jamesdeperio:PocketLib:v2.0.0'
 }
 ```
 - better if you will consider using [CodePocketBuilder](https://github.com/jamesdeperio/CodePocketBuilder)
@@ -31,7 +31,7 @@ ___
 * PocketViewHolder Usage:
 ``` kotlin
  class YOURViewHolder( private val adapter: YOURADAPTER) : PocketViewHolder() {
-    override fun onCreateViewHolder(view: View, position: Int) {
+    override fun onBindViewHolder (view: View, position: Int) {
     }
 }
 ```
