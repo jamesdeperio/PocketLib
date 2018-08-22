@@ -26,6 +26,7 @@ ___
  class YOURADAPTER : PocketAdapter() {
   var stringList: MutableList<String> = ArrayList()
    override fun getItemCount(): Int = stringList.size
+   
  }
 ```
 * PocketViewHolder Usage:
@@ -43,8 +44,9 @@ vh1.setContentView(R.layout.yourlayout)
 val vh2= HEADERVIEWHOLDER()
 vh2.setContentView(R.layout.yourlayoutheader)
 
-adapter.addViewHolder(vh1)
-adapter.addViewHolder(vh2)
+adapter.addViewHolder(vh1) //itemType 0
+adapter.addViewHolder(vh2) //itemType 1
+//override the viewTypeCondition(position: Int) in adapter class to add your condition 
 ```
 
 ___
