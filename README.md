@@ -30,10 +30,21 @@ ___
 ```
 * PocketViewHolder Usage:
 ``` kotlin
- class YOURViewHolder( private val adapter: YOURADAPTER) : PocketViewHolder() {
+ class YOURVIEWHOLDER( private val adapter: YOURADAPTER) : PocketViewHolder() {
     override fun onBindViewHolder (view: View, position: Int) {
     }
 }
+```
+* declaration Usage:
+``` kotlin
+val adapter = YOURADAPTER()
+val vh1= YOURVIEWHOLDER()
+vh1.setContentView(R.layout.yourlayout)
+val vh2= HEADERVIEWHOLDER()
+vh2.setContentView(R.layout.yourlayoutheader)
+
+adapter.addViewHolder(vh1)
+adapter.addViewHolder(vh2)
 ```
 
 ___
