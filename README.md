@@ -2,10 +2,7 @@
 [![Release](https://jitpack.io/v/jamesdeperio/PocketLib.svg)](https://jitpack.io/#jamesdeperio/PocketLib)
 [![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-|Maintenance yes|
-
-.. |Maintenance yes| image:: https://img.shields.io/badge/Maintained%3F-yes-green.svg
-   :target: https://GitHub.com/jamesdeperio/PocketLib/graphs/commit-activity
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/jamesdeperio/PocketLib/graphs/commit-activity)
 ## TODO
 * sample app for better understanding on how it works
 ## How to?
