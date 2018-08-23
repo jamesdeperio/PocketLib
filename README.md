@@ -1,7 +1,8 @@
 # PocketLib
 [![Release](https://jitpack.io/v/jamesdeperio/PocketLib.svg)](https://jitpack.io/#jamesdeperio/PocketLib)
+[![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
+[![Build Status](https://travis-ci.org/jamesdeperio/PocketLib.png?branch=master)](https://travis-ci.org/jamesdeperio/PocketLib)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-
 ## TODO
 * sample app for better understanding on how it works
 ## How to?
