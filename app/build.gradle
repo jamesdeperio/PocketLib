@@ -16,8 +16,8 @@ android {
     defaultConfig {
         minSdkVersion 15
     }
-    compileOptions {
-        kotlinOptions.freeCompilerArgs += ['-module-name', 'PocketLib']
+    packagingOptions {
+        exclude 'META-INF/app_release.kotlin_module'
     }
 
     lintOptions {
