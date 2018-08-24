@@ -1,7 +1,15 @@
 # PocketLib
 [![Release](https://jitpack.io/v/jamesdeperio/PocketLib.svg)](https://jitpack.io/#jamesdeperio/PocketLib)
+[![GitHub release](https://img.shields.io/github/release/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/releases/)
+[![GitHub tag](https://img.shields.io/github/tag/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/tags/)
+[![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.0.0.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
+[![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
-
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/jamesdeperio/PocketLib/graphs/commit-activity)
+[![GitHub forks](https://img.shields.io/github/forks/jamesdeperio/PocketLib.svg?style=social&label=Fork&maxAge=2592000)](https://GitHub.com/jamesdeperio/PocketLib/network/)
+[![GitHub stars](https://img.shields.io/github/stars/jamesdeperio/PocketLib.svg?style=social&label=Star&maxAge=2592000)](https://GitHub.com/jamesdeperio/PocketLib/stargazers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/jamesdeperio/PocketLib.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/jamesdeperio/PocketLib/watchers/)
+[![GitHub followers](https://img.shields.io/github/followers/jamesdeperio.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/jamesdeperio?tab=followers)
 ## TODO
 * sample app for better understanding on how it works
 ## How to?
@@ -26,14 +34,27 @@ ___
  class YOURADAPTER : PocketAdapter() {
   var stringList: MutableList<String> = ArrayList()
    override fun getItemCount(): Int = stringList.size
+   
  }
 ```
 * PocketViewHolder Usage:
 ``` kotlin
- class YOURViewHolder( private val adapter: YOURADAPTER) : PocketViewHolder() {
+ class YOURVIEWHOLDER( private val adapter: YOURADAPTER) : PocketViewHolder() {
     override fun onBindViewHolder (view: View, position: Int) {
     }
 }
+```
+* declaration Usage:
+``` kotlin
+val adapter = YOURADAPTER()
+val vh1= YOURVIEWHOLDER()
+vh1.setContentView(R.layout.yourlayout)
+val vh2= HEADERVIEWHOLDER()
+vh2.setContentView(R.layout.yourlayoutheader)
+
+adapter.addViewHolder(vh1) //itemType 0
+adapter.addViewHolder(vh2) //itemType 1
+//override the viewTypeCondition(position: Int) in adapter class to add your condition 
 ```
 
 ___
