@@ -12,6 +12,7 @@
 [![GitHub watchers](https://img.shields.io/github/watchers/jamesdeperio/PocketLib.svg?style=social&label=Watch&maxAge=2592000)](https://GitHub.com/jamesdeperio/PocketLib/watchers/)
 [![GitHub followers](https://img.shields.io/github/followers/jamesdeperio.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/jamesdeperio?tab=followers)
 ## TODO
+* FULL DOCUMENTATION
 * sample app for better understanding on how it works
 ## How to?
 
