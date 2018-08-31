@@ -3,7 +3,7 @@
 [![Release](https://jitpack.io/v/jamesdeperio/PocketLib.svg)](https://jitpack.io/#jamesdeperio/PocketLib)
 [![GitHub release](https://img.shields.io/github/release/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/releases/)
 [![GitHub tag](https://img.shields.io/github/tag/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/tags/)
-[![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.0.0.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
+[![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.0.1.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
 [![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/jamesdeperio/PocketLib/graphs/commit-activity)
@@ -19,7 +19,7 @@
 ### Gradle
 ```groovy
 dependencies {
-    implementation 'com.github.jamesdeperio:PocketLib:v2.0.0'
+    implementation 'com.github.jamesdeperio:PocketLib:v2.0.1'
 }
 ```
 - better if you will consider using [CodePocketBuilder](https://github.com/jamesdeperio/CodePocketBuilder)
