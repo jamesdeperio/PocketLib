@@ -69,7 +69,7 @@ ___
 ``` kotlin
    PageBuilder.build { 
             setViewPager(VIEW_PAGER)
-            setFragmentManager(FRAGMENT_MANAGER)
+            setFragmentManager(FRAGMENT_MANAGER/CHILD_FRAGMENT_MANAGER)
             setTabLayout(TAB_LAYOUT)
             setPageTransformer(TRANSFORMER) // can be null
             addPage("tab1",YourFragment())
