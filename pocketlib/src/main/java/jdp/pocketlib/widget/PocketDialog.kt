@@ -89,7 +89,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
                 title.text="Congratulations!"
             }
             Type.DIALOG_NO_INTERNET_CONNECTION -> {
-                this.setAnimation(R.raw.trophy)
+                this.setAnimation(R.raw.antenna)
                 title.text="No Internet Connection!"
                 description.text="Cannot process request. Please try again."
                 okAction.text = "Retry"
