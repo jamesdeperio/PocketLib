@@ -12,6 +12,33 @@
 ___
 ### [READ FULL DOCUMENTATION](https://jamesdeperio.github.io/pocketlib/) 
 ___
+## CHANGELOG
+#### v2.0.3
+* FIXED: PocketSpinnerDialog error in inflating PocketRecyclerView
+* FIXED: PocketDialog.Type.DIALOG_NO_INTERNET_CONNECTION default description
+* FIXED: PocketDialog.Type.DIALOG_NO_INTERNET_CONNECTION default lottieview repeat count
+* UPDATED: PocketDialog setCancelable to false by default
+* UPDATED: PocketDialog.Type.Loading changed dialog to public
+* UPDATED: PocketSpinnerDialog support lambda for listener method
+* UPDATED: changed listener to setOnItemSelectedListener
+* ADDED: new method (setButtonAsSpinner) to assign onclicklistener and view to display text in PocketSpinnerDialog.onItemSelected
+* UPDATED: add view parameter to PocketSpinnerDialog.Listener.onItemSelected
+### ~~v2.0.2 (do not used)~~
+* Fixed: PocketDialog.Type.NoInternetConnection default lottieview
+#### v2.0.1
+* updated: kotlin dependency
+* exclude 'META-INF/app_release.kotlin_module'
+#### v2.0.1
+* version 2.x of codepocket (renamed)
+* base class for activity,fragment,adapter,viewholder
+* pagebuider for view pager
+* navigate util
+* custom view
+* added feature in 2.x:
+* pocketdialog
+* pocketspinnerdialog
+* -Removed: retrofit module has been moved to separate library
+___
 ## DEPENDENCIES
 Thanks to the author of external Library used:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7](https://github.com/JetBrains/kotlin/tree/master/libraries/stdlib)
