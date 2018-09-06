@@ -11,6 +11,7 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/jamesdeperio/PocketLib/graphs/commit-activity)
 ___
 ### [READ FULL DOCUMENTATION](https://jamesdeperio.github.io/pocketlib/) 
+### [DEMO APK](https://github.com/jamesdeperio/CodePocketBuilderDemo/blob/master/app-debug.apk)
 ___
 ## CHANGELOG
 #### v2.0.3
