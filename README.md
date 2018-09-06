@@ -17,3 +17,7 @@ ___
 Thanks to the author of external Library used:
 * [org.jetbrains.kotlin:kotlin-stdlib-jdk7](https://github.com/JetBrains/kotlin/tree/master/libraries/stdlib)
 * [com.android.support:appcompat-v7](https://developer.android.com/topic/libraries/support-library/)
+* [com.android.support:design](https://developer.android.com/topic/libraries/support-library/)
+* [com.android.support:recyclerview-v7](https://developer.android.com/topic/libraries/support-library/)
+* [me.yokeyword:swipebackfragment](https://github.com/YoKeyword/SwipeBackFragment/)
+* [com.airbnb.android:lottie](https://github.com/airbnb/lottie-android)
