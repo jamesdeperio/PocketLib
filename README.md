@@ -1,4 +1,3 @@
-# PocketLib
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/pocketlib.png "PocketLib")
 
 [![Release](https://jitpack.io/v/jamesdeperio/PocketLib.svg)](https://jitpack.io/#jamesdeperio/PocketLib)
