@@ -5,21 +5,19 @@
  * A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
  */
 
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.github.dcendents.android-maven'
+group = 'com.github.jamesdeperio'
 
 android {
 
     compileSdkVersion 28
     defaultConfig {
-        applicationId "jdp.pocketlibdemo"
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        minSdkVersion 15
+    }
+    packagingOptions {
+        exclude 'META-INF/app_release.kotlin_module'
     }
 
     lintOptions {
@@ -29,7 +27,16 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation project(':pocketlib')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    ext.android_support_version='27.1.1'
+    //noinspection GradleCompatible
+    compileOnly "com.android.support:appcompat-v7:$android_support_version"
+    //noinspection GradleCompatible
+    compileOnly "com.android.support:design:$android_support_version"
+    //noinspection GradleCompatible
+    compileOnly "com.android.support:recyclerview-v7:$android_support_version"
+    implementation 'me.yokeyword:swipebackfragment:0.4.0'
+    //noinspection GradleDependency
+    implementation 'com.airbnb.android:lottie:2.5.5'
 }

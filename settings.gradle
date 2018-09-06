@@ -1,1 +1,1 @@
-include ':app', ':pocketlib'
+include ':app'
