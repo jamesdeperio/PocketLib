@@ -76,7 +76,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
     private var listener: Listener<T> = object :Listener<T> {
         override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: Button?) {
-            button?.setText(selectedIndex)
+            button?.text = selectedItem
         }
     }
 
@@ -87,7 +87,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     fun setOnItemSelectedListener(onItemSelectedListener:(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: Button?)-> Unit) {
         this.listener=object :Listener<T>{
             override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: Button?) {
-                button?.setText(selectedIndex)
+                button?.text = selectedItem
                 onItemSelectedListener(selectedObject,selectedItem,selectedIndex,spinner)
             }
         }
