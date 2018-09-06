@@ -23,7 +23,7 @@ ___
 * UPDATED: changed listener to setOnItemSelectedListener
 * ADDED: new method (setButtonAsSpinner) to assign onclicklistener and view to display text in PocketSpinnerDialog.onItemSelected
 * UPDATED: add view parameter to PocketSpinnerDialog.Listener.onItemSelected
-### ~~v2.0.2 (do not used)~~
+#### ~~v2.0.2 (do not used)~~
 * Fixed: PocketDialog.Type.NoInternetConnection default lottieview
 #### v2.0.1
 * updated: kotlin dependency
