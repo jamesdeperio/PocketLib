@@ -68,7 +68,30 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     var selectedIndex=-1
     var itemBackgroundColor="#ffffff"
     var itemTextColor="#1d1d1d"
-    lateinit var listener: Listener<T>
+    var button:Button?= null
+    fun setButtonAsSpinner(button:Button){
+        this.button=button
+    }
+
+    private var listener: Listener<T> = object :Listener<T> {
+        override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: Button?) {
+            spinner?.setText(selectedIndex)
+        }
+    }
+
+    fun setOnItemSelectedListener(listener: Listener<T>) {
+        this.listener=listener
+    }
+
+    fun setOnItemSelectedListener(onItemSelectedListener:(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: Button?)-> Unit) {
+        this.listener=object :Listener<T>{
+            override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: Button?) {
+                spinner?.setText(selectedIndex)
+                onItemSelectedListener(selectedObject,selectedItem,selectedIndex,spinner)
+            }
+        }
+    }
+
 
     override fun onDismiss(p0: DialogInterface?) {
         searchView.setQuery("",false)
@@ -171,7 +194,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
                     selectedItem=adapter.searchItemList[position]!!.itemString!!
                     selectedObject=adapter.searchItemList[position]!!.item!!
                     selectedIndex=position
-                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex)
+                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,button)
                     dialog.dismiss()
                 }
             }
@@ -182,6 +205,6 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         val NO_SELECTED_ITEM=-1
     }
     interface Listener<T> {
-        fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int)
+        fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: Button?)
     }
 }

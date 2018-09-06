@@ -14,7 +14,7 @@ import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
 import jdp.pocketlib.R
 
-class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScreen:Boolean=false) {
+open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScreen:Boolean=false) {
     enum class Type {
          DIALOG_NO_INTERNET_CONNECTION,
          DIALOG_WARNING,
@@ -24,7 +24,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
          DIALOG_SUCCESS,
         DIALOG_LOADER
     }
-    private val dialog=Dialog(context).apply {
+   open val dialog=Dialog(context).apply {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (isFullScreen) {
             this.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
@@ -79,6 +79,7 @@ class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScr
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
         setActionButtonGravity(Gravity.CENTER)
         dialog.setCanceledOnTouchOutside(false)
+        dialog.setCancelable(false)
         when (type) {
             Type.DIALOG_SUCCESS -> {
                 this.setAnimation(R.raw.success2)
