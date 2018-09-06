@@ -68,9 +68,10 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     var selectedIndex=-1
     var itemBackgroundColor="#ffffff"
     var itemTextColor="#1d1d1d"
-    var button:Button?= null
+   private var button:Button?= null
     fun setButtonAsSpinner(button:Button){
         this.button=button
+        this.button!!.setOnClickListener { show() }
     }
 
     private var listener: Listener<T> = object :Listener<T> {
