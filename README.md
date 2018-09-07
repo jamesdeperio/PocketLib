@@ -29,7 +29,7 @@ ___
 #### v2.0.1
 * updated: kotlin dependency
 * exclude 'META-INF/app_release.kotlin_module'
-#### v2.0.1
+#### v2.0.0
 * version 2.x of codepocket (renamed)
 * base class for activity,fragment,adapter,viewholder
 * pagebuider for view pager
