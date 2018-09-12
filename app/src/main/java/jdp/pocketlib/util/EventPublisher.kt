@@ -7,14 +7,21 @@ package jdp.pocketlib.util
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.Subject
+import io.reactivex.subjects.*
 
-class EventPublisher<T : Subject<Any>>(private val bus: T) {
-    private var publisher: MutableMap<String,T> = HashMap()
+@Suppress("UNCHECKED_CAST", "NON_EXHAUSTIVE_WHEN")
+class EventPublisher(private val bus: Bus) {
+    private var publisher: MutableMap<String,Subject<Any>> = HashMap()
 
     fun sendEvent(channel:String,event: Any): Unit? {
         if (publisher[channel]==null) throw RuntimeException("CHANNEL IS NOT REGISTERED! Please Subscribe.")
-        return publisher[channel]!!.onNext(event)
+        return when (bus) {
+            Bus.PublishSubject -> (publisher[channel]!! as PublishSubject<Any>).onNext(event)
+            Bus.BehaviorSubject -> (publisher[channel]!! as BehaviorSubject<Any>).onNext(event)
+            Bus.AsyncSubject -> (publisher[channel]!! as AsyncSubject<Any>).onNext(event)
+            Bus.ReplaySubject -> (publisher[channel]!! as ReplaySubject<Any>).onNext(event)
+            Bus.UnicastSubject -> (publisher[channel]!! as UnicastSubject<Any>).onNext(event)
+        }
     }
 
     fun unSubscribeReceiver(channel:String) {
@@ -23,14 +30,26 @@ class EventPublisher<T : Subject<Any>>(private val bus: T) {
     }
 
     fun subscribeReceiver(channel:String,eventReceiver: Consumer<in Any> ) {
-        publisher[channel]  = bus
+         when (bus) {
+            Bus.PublishSubject ->   publisher[channel]  = PublishSubject.create<Any>()
+            Bus.BehaviorSubject ->  publisher[channel]  = BehaviorSubject.create<Any>()
+             Bus.AsyncSubject -> publisher[channel]  = AsyncSubject.create<Any>()
+             Bus.ReplaySubject -> publisher[channel]  = ReplaySubject.create<Any>()
+            Bus.UnicastSubject ->  publisher[channel]  = UnicastSubject.create<Any>()
+        }
         publisher[channel]!!.subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe(eventReceiver)
     }
 
     fun subscribeReceiver(channel: String, eventReceiver: (event:Any) -> Unit) {
-        publisher[channel]  = bus
+        when (bus) {
+            Bus.PublishSubject ->   publisher[channel]  = PublishSubject.create<Any>()
+            Bus.BehaviorSubject ->  publisher[channel]  = BehaviorSubject.create<Any>()
+            Bus.AsyncSubject -> publisher[channel]  = AsyncSubject.create<Any>()
+            Bus.ReplaySubject -> publisher[channel]  = ReplaySubject.create<Any>()
+            Bus.UnicastSubject ->  publisher[channel]  = UnicastSubject.create<Any>()
+        }
         publisher[channel]!!.subscribeOn(Schedulers.io())
                 .observeOn(Schedulers.newThread())
                 .subscribe { eventReceiver(it) }
