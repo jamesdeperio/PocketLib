@@ -11,7 +11,7 @@ import io.reactivex.subjects.*
 
 @Suppress("UNCHECKED_CAST", "NON_EXHAUSTIVE_WHEN")
 class EventPublisher(private val bus: Bus) {
-    private var publisher: MutableMap<String,Disposable> = HashMap()
+    private var publisher: MutableMap<String,Any> = HashMap()
 
     fun sendEvent(channel:String,event: Any): Unit? {
         if (publisher[channel]==null) throw RuntimeException("CHANNEL IS NOT REGISTERED! Please Subscribe.")
@@ -26,7 +26,7 @@ class EventPublisher(private val bus: Bus) {
 
     fun unSubscribeReceiver(channel:String) {
         if (publisher[channel]==null) throw RuntimeException("CHANNEL IS NOT REGISTERED! Please Subscribe.")
-        publisher[channel]!!.dispose()
+        (publisher[channel] as Disposable).dispose()
     }
 
     fun subscribeReceiver(channel:String,eventReceiver: Consumer<in Any> ) = when (bus) {
