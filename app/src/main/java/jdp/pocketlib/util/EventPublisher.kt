@@ -10,7 +10,7 @@ import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.Subject
 
 class EventPublisher<T : Subject<Any>>(private val bus: T) {
-    private lateinit var publisher: MutableMap<String,T>
+    private var publisher: MutableMap<String,T> = HashMap()
 
     fun sendEvent(channel:String,event: Any): Unit? {
         if (publisher[channel]==null) throw RuntimeException("CHANNEL IS NOT REGISTERED! Please Subscribe.")
