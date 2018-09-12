@@ -24,7 +24,7 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
          DIALOG_SUCCESS,
         DIALOG_LOADER
     }
-   open val dialog=Dialog(context).apply {
+    val dialog=Dialog(context).apply {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (isFullScreen) {
             this.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
