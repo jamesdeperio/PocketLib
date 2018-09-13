@@ -66,31 +66,31 @@ class EventPublisher(private val bus: Bus) {
         if (!publisher.containsKey(channel)) when (bus) {
             Bus.PublishSubject -> {
                 publisher[channel]  = PublishSubject.create<Any>()
-                (publisher[channel]!! as PublishSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
+                disposable[channel]= (publisher[channel]!! as PublishSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
                     eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
                 }
             }
             Bus.BehaviorSubject -> {
                 publisher[channel]  = BehaviorSubject.create<Any>()
-                (publisher[channel]!! as BehaviorSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
+                disposable[channel]=(publisher[channel]!! as BehaviorSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
                     eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
                 }
             }
             Bus.AsyncSubject -> {
                 publisher[channel]  = AsyncSubject.create<Any>()
-                (publisher[channel]!! as AsyncSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
+                disposable[channel]= (publisher[channel]!! as AsyncSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
                     eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
                 }
             }
             Bus.ReplaySubject -> {
                 publisher[channel]  = ReplaySubject.create<Any>()
-                (publisher[channel]!! as ReplaySubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
+                disposable[channel]= (publisher[channel]!! as ReplaySubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
                     eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
                 }
             }
             Bus.UnicastSubject -> {
                 publisher[channel]  = UnicastSubject.create<Any>()
-                (publisher[channel]!! as UnicastSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
+                disposable[channel]= (publisher[channel]!! as UnicastSubject<Any>).subscribeOn(AndroidSchedulers.mainThread()).observeOn(Schedulers.newThread()).subscribe{
                     eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
                 }
             }
