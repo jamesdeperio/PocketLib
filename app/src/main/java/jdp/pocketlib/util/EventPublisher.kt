@@ -5,7 +5,6 @@
 package jdp.pocketlib.util
 
 import io.reactivex.disposables.Disposable
-import io.reactivex.functions.Consumer
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.*
 
@@ -13,9 +12,22 @@ import io.reactivex.subjects.*
 class EventPublisher(private val bus: Bus) {
     private var publisher: MutableMap<String,Any> = HashMap()
     private var disposable: MutableMap<String,Disposable> = HashMap()
+    private var eventReceiverF: MutableMap<String,MutableMap<Int,(event:Any) -> Unit>> = HashMap()
 
-    fun sendEvent(channel:String,event: Any): Unit? {
-        if (publisher[channel]==null) throw RuntimeException("CHANNEL IS NOT REGISTERED! Please Subscribe.")
+
+    fun getActiveChannel(): List<String> = disposable.filter { !it.value.isDisposed }.map { it.key }
+    fun getActiveChannelSize(): Int = disposable.size
+    fun getActiveReceiverID(channel: String): List<Int> {
+        if (eventReceiverF[channel]==null) throw RuntimeException("CHANNEL IS NOT YET REGISTERED")
+        return eventReceiverF[channel]!!.map { it.key }
+    }
+    fun getActiveReceiverSize(channel: String): Int {
+        if (eventReceiverF[channel]==null) throw RuntimeException("CHANNEL IS NOT YET REGISTERED")
+        return eventReceiverF[channel]!!.size
+    }
+
+    fun sendEvent(channel:String,event: Any) {
+        if (publisher[channel]==null) return
         return when (bus) {
             Bus.PublishSubject -> (publisher[channel]!! as PublishSubject<Any>).onNext(event)
             Bus.BehaviorSubject -> (publisher[channel]!! as BehaviorSubject<Any>).onNext(event)
@@ -25,60 +37,64 @@ class EventPublisher(private val bus: Bus) {
         }
     }
 
-    fun unSubscribeReceiver(channel:String) {
-        if (disposable[channel]==null) throw RuntimeException("CHANNEL IS NOT REGISTERED! Please Subscribe.")
+    fun unSubscribeReceiver(channel:String,receiverID:Int) {
+        if (eventReceiverF[channel]==null) throw RuntimeException("RECEIVER IS NOT YET SUBSCRIBE TO ANY CHANNEL")
+        eventReceiverF[channel]!!.remove(receiverID)
+    }
+
+    fun disposeChannel(channel:String) {
+        if (publisher[channel]==null) throw RuntimeException("CHANNEL IS NOT YET REGISTERED")
+        publisher.remove(channel)
         disposable[channel]!!.dispose()
+        disposable.remove(channel)
+        eventReceiverF[channel]!!.clear()
+        eventReceiverF.remove(channel)
     }
 
-    fun subscribeReceiver(channel:String,eventReceiver: Consumer<in Any> ) {
-        when (bus) {
+    fun disposeAllChannel() {
+        publisher.clear()
+        disposable.forEach { it.value.dispose() }
+        disposable.clear()
+        eventReceiverF.clear()
+    }
+    fun subscribeReceiver(channel: String, eventReceiver: (event:Any) -> Unit): Int {
+        if (eventReceiverF[channel]==null) eventReceiverF[channel] = HashMap()
+        val eventReceiverID = eventReceiverF[channel]!!.size +1
+        eventReceiverF[channel]!![eventReceiverID] = eventReceiver
+
+        if (!publisher.containsKey(channel)) when (bus) {
             Bus.PublishSubject -> {
                 publisher[channel]  = PublishSubject.create<Any>()
-                disposable[channel]= (publisher[channel]!! as PublishSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(eventReceiver)
+                (publisher[channel]!! as PublishSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{
+                    eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
+                }
             }
             Bus.BehaviorSubject -> {
                 publisher[channel]  = BehaviorSubject.create<Any>()
-                disposable[channel]=(publisher[channel]!! as BehaviorSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(eventReceiver)
+                (publisher[channel]!! as BehaviorSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{
+                    eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
+                }
             }
             Bus.AsyncSubject -> {
                 publisher[channel]  = AsyncSubject.create<Any>()
-                disposable[channel]= (publisher[channel]!! as AsyncSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(eventReceiver)
+                (publisher[channel]!! as AsyncSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{
+                    eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
+                }
             }
             Bus.ReplaySubject -> {
                 publisher[channel]  = ReplaySubject.create<Any>()
-                disposable[channel]= (publisher[channel]!! as ReplaySubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(eventReceiver)
+                (publisher[channel]!! as ReplaySubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{
+                    eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
+                }
             }
             Bus.UnicastSubject -> {
                 publisher[channel]  = UnicastSubject.create<Any>()
-                disposable[channel]= (publisher[channel]!! as UnicastSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe(eventReceiver)
+                (publisher[channel]!! as UnicastSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{
+                    eventReceiverF[channel]!!.forEach {receiver-> receiver.value(it) }
+                }
             }
         }
+        return eventReceiverID
     }
-
-    fun subscribeReceiver(channel: String, eventReceiver: (event:Any) -> Unit){
-        when (bus) {
-            Bus.PublishSubject -> {
-                publisher[channel]  = PublishSubject.create<Any>()
-                (publisher[channel]!! as PublishSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{ eventReceiver(it) }
-            }
-            Bus.BehaviorSubject -> {
-                publisher[channel]  = BehaviorSubject.create<Any>()
-                (publisher[channel]!! as BehaviorSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{ eventReceiver(it) }
-            }
-            Bus.AsyncSubject -> {
-                publisher[channel]  = AsyncSubject.create<Any>()
-                (publisher[channel]!! as AsyncSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{ eventReceiver(it) }
-            }
-            Bus.ReplaySubject -> {
-                publisher[channel]  = ReplaySubject.create<Any>()
-                (publisher[channel]!! as ReplaySubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{ eventReceiver(it) }
-            }
-            Bus.UnicastSubject -> {
-                publisher[channel]  = UnicastSubject.create<Any>()
-                (publisher[channel]!! as UnicastSubject<Any>).subscribeOn(Schedulers.io()).observeOn(Schedulers.newThread()).subscribe{ eventReceiver(it) }
-            }
-        }
-    }
-
 }
 
