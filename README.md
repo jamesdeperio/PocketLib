@@ -20,11 +20,11 @@ ___
 ___
 * **Pocket Spinner Dialog**
 ___
-![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/multipleviewholder.png "multipleviewholder")
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/pocketspinner.png "pocketspinner")
 ___
 * **Pocket Dialog**
 ___
-![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/multipleviewholder.png "multipleviewholder")
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/pocketdialog.png "pocketdialog")
 ___
 ## CHANGELOG
 #### v2.1.0
