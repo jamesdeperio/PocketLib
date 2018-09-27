@@ -36,9 +36,9 @@ dependencies {
     compileOnly "com.android.support:design:$android_support_version"
     //noinspection GradleCompatible
     compileOnly "com.android.support:recyclerview-v7:$android_support_version"
-    implementation 'me.yokeyword:swipebackfragment:0.4.0'
+    compileOnly 'me.yokeyword:swipebackfragment:0.4.0'
     //noinspection GradleDependency
-    implementation 'com.airbnb.android:lottie:2.7.0'
+    compileOnly 'com.airbnb.android:lottie:2.7.0'
     compileOnly "io.reactivex.rxjava2:rxjava:2.2.2"
     compileOnly 'io.reactivex.rxjava2:rxandroid:2.1.0'
 
