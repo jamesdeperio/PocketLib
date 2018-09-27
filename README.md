@@ -15,6 +15,15 @@ ___
 ___
 ## SCREENSHOTS
 * **EASY TO CREATE MULTIPLE VIEWHOLDER**
+___
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/multipleviewholder.png "multipleviewholder")
+___
+* **Pocket Spinner Dialog**
+___
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/multipleviewholder.png "multipleviewholder")
+___
+* **Pocket Dialog**
+___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/multipleviewholder.png "multipleviewholder")
 ___
 ## CHANGELOG
