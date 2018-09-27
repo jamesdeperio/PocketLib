@@ -24,7 +24,7 @@ ___
 ___
 * **Pocket Dialog**
 ___
-![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/pocketdialog.png "pocketdialog")
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
 ___
 ## CHANGELOG
 #### v2.1.0
