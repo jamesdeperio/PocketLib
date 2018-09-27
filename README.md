@@ -22,7 +22,7 @@ ___
 ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/pocketspinner.png "pocketspinner")
 ___
-* **Pocket Dialog**
+* **Customizable Pocket Dialog**
 ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
 ___
