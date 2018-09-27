@@ -4,7 +4,7 @@
 [![GitHub release](https://img.shields.io/github/release/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/releases/)
 [![GitHub tag](https://img.shields.io/github/tag/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/tags/)
 [![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.0.3.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.2.61-green.svg?style=flat-square)](http://kotlinlang.org)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.2.71-green.svg?style=flat-square)](http://kotlinlang.org)
 [![Build Status](https://img.shields.io/travis/jamesdeperio/PocketLib.svg?style=flat-square)](https://travis-ci.org/jamesdeperio/PocketLib)
 [![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
@@ -14,6 +14,15 @@ ___
 ### [DEMO APK](https://github.com/jamesdeperio/CodePocketBuilderDemo/blob/master/app-debug.apk)
 ___
 ## CHANGELOG
+#### v2.1.0
+* UPDATED: kotlin dependency to v1.2.71
+* UPDATED: gradle dependency to v3.2.0
+* UPDATED: lottie dependency to v2.7.0
+* UPDATED: gradle dependency to v3.2.0
+* UPDATED: android support dependency to v28.0.0
+* ADDED: rxjava2 dependency v2.2.2
+* ADDED: rxandroid dependency v2.1.0
+* ADDED: EventPublisher class use to listen in a channel.
 #### v2.0.3
 * FIXED: PocketSpinnerDialog error in inflating PocketRecyclerView
 * FIXED: PocketDialog.Type.DIALOG_NO_INTERNET_CONNECTION default description
