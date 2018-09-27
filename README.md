@@ -24,9 +24,9 @@ ___
 * ADDED: rxandroid dependency v2.1.0
 * ADDED: EventPublisher class use to listen in a channel.
 * CHANGES: 
-- To used BaseSwipeFragment include 'me.yokeyword:swipebackfragment:0.4.0' as dependency
-- To used EventPublisher include rxjava & rxandroid as dependency
-- To used PocketDialog include 'com.airbnb.android:lottie:2.7.0' as dependency
+- To use BaseSwipeFragment include **'me.yokeyword:swipebackfragment:0.4.0'** as dependency
+- To use EventPublisher include **rxjava & rxandroid** as dependency
+- To use PocketDialog include **'com.airbnb.android:lottie:2.7.0'** as dependency
 #### v2.0.3
 * FIXED: PocketSpinnerDialog error in inflating PocketRecyclerView
 * FIXED: PocketDialog.Type.DIALOG_NO_INTERNET_CONNECTION default description
