@@ -31,7 +31,6 @@ ___
 * UPDATED: kotlin dependency to v1.2.71
 * UPDATED: gradle dependency to v3.2.0
 * UPDATED: lottie dependency to v2.7.0
-* UPDATED: gradle dependency to v3.2.0
 * UPDATED: android support dependency to v28.0.0
 * ADDED: rxjava dependency v2.2.2
 * ADDED: rxandroid dependency v2.1.0
