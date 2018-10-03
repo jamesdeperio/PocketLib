@@ -3,8 +3,8 @@
 [![Release](https://jitpack.io/v/jamesdeperio/PocketLib.svg)](https://jitpack.io/#jamesdeperio/PocketLib)
 [![GitHub release](https://img.shields.io/github/release/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/releases/)
 [![GitHub tag](https://img.shields.io/github/tag/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/tags/)
-[![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.0.3.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.2.61-green.svg?style=flat-square)](http://kotlinlang.org)
+[![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.1.0.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.2.71-green.svg?style=flat-square)](http://kotlinlang.org)
 [![Build Status](https://img.shields.io/travis/jamesdeperio/PocketLib.svg?style=flat-square)](https://travis-ci.org/jamesdeperio/PocketLib)
 [![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
@@ -13,7 +13,32 @@ ___
 ### [READ FULL DOCUMENTATION](https://jamesdeperio.github.io/pocketlib/) 
 ### [DEMO APK](https://github.com/jamesdeperio/CodePocketBuilderDemo/blob/master/app-debug.apk)
 ___
+## SCREENSHOTS
+* **EASY TO CREATE MULTIPLE VIEWHOLDER**
+___
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/multipleviewholder.png "multipleviewholder")
+___
+* **Pocket Spinner Dialog**
+___
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/pocketspinner.png "pocketspinner")
+___
+* **Customizable Pocket Dialog**
+___
+![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
+___
 ## CHANGELOG
+#### v2.1.0
+* UPDATED: kotlin dependency to v1.2.71
+* UPDATED: gradle dependency to v3.2.0
+* UPDATED: lottie dependency to v2.7.0
+* UPDATED: android support dependency to v28.0.0
+* ADDED: rxjava dependency v2.2.2
+* ADDED: rxandroid dependency v2.1.0
+* ADDED: EventPublisher class use to listen in a channel.
+* CHANGES: 
+- To use BaseSwipeFragment include **'me.yokeyword:swipebackfragment:0.4.0'** as dependency
+- To use EventPublisher include **rxjava & rxandroid** as dependency
+- To use PocketDialog include **'com.airbnb.android:lottie:2.7.0'** as dependency
 #### v2.0.3
 * FIXED: PocketSpinnerDialog error in inflating PocketRecyclerView
 * FIXED: PocketDialog.Type.DIALOG_NO_INTERNET_CONNECTION default description
@@ -48,3 +73,21 @@ Thanks to the author of external Library used:
 * [com.android.support:recyclerview-v7](https://developer.android.com/topic/libraries/support-library/)
 * [me.yokeyword:swipebackfragment](https://github.com/YoKeyword/SwipeBackFragment/)
 * [com.airbnb.android:lottie](https://github.com/airbnb/lottie-android)
+
+
+### LICENSE
+```
+Copyright 2018 The PocketLib Author
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+```
