@@ -9,6 +9,7 @@ import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
@@ -74,6 +75,7 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
         }
     }
     val view= dialog.findViewById<LinearLayout>(R.id.container)!!
+    val viewSeparator= dialog.findViewById<FrameLayout>(R.id.viewSeparator)!!
     @SuppressLint("SetTextI18n")
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
         setActionButtonGravity(Gravity.CENTER)
@@ -100,11 +102,13 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
                 this.setAnimation(R.raw.failed)
             }
             Type.DIALOG_LOADER ->{
+                viewSeparator.visibility=View.GONE
                 title.text="Loading..."
                 this.repeatCount=-1
                 this.setAnimation(R.raw.loader)
             }
             Type.DIALOG_SEARCH ->{
+                viewSeparator.visibility=View.GONE
                 title.text="Searching..."
                 this.repeatCount=-1
                 this.setAnimation(R.raw.loader)
