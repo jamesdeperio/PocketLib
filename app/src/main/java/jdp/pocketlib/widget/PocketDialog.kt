@@ -63,8 +63,6 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
             this.visibility=View.GONE
         ( this.layoutParams as LinearLayout.LayoutParams).apply {
             this.setMargins(1,1,1,1)
-            this.width=150
-
         }
     }
     val cancelAction= dialog.findViewById<Button>(R.id.btnCancel)!!.apply {
@@ -73,7 +71,6 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
             this.visibility=View.GONE
         ( this.layoutParams as LinearLayout.LayoutParams).apply {
             this.setMargins(1,1,1,1)
-            this.width=150
         }
     }
     val view= dialog.findViewById<LinearLayout>(R.id.container)!!
