@@ -72,7 +72,6 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
     val viewSeparator= dialog.findViewById<FrameLayout>(R.id.viewSeparator)!!
     @SuppressLint("SetTextI18n")
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
-        setActionButtonGravity(Gravity.CENTER)
         dialog.setCanceledOnTouchOutside(false)
         dialog.setCancelable(false)
         when (type) {
@@ -110,7 +109,6 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
             Type.DIALOG_WARNING -> {
                 title.text="Oops..."
                 this.setAnimation(R.raw.warning)
-                setActionButtonGravity(Gravity.END)
             }
             else -> {
                 title.text="Info"
@@ -119,7 +117,6 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
                     topMargin=24
                     leftMargin=24
                 }
-                setActionButtonGravity(Gravity.END)
                 this.visibility=View.GONE
             }
         }

@@ -48,7 +48,7 @@
         android:layout_marginRight="15dp"
         android:background="#3c3c3c"/>
     <LinearLayout
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:id="@+id/buttonContainer"
         android:layout_height="wrap_content"
@@ -59,6 +59,7 @@
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:layout_margin="1dp"
+            android:minWidth="50dp"
             android:text="CANCEL"
             android:id="@+id/btnCancel"
             android:textAllCaps="true"
@@ -70,6 +71,7 @@
             android:textAllCaps="true"
             android:layout_margin="1dp"
             android:id="@+id/btnOk"
+            android:minWidth="50dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#ffffff"
