@@ -22,6 +22,8 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
          DIALOG_BASIC,
          DIALOG_ERROR,
          DIALOG_SUCCESS,
+         DIALOG_SEARCH,
+         DIALOG_CUSTOM,
         DIALOG_LOADER
     }
     val dialog=Dialog(context).apply {
@@ -98,10 +100,15 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
             }
             Type.DIALOG_ERROR -> {
                 title.text="Oops..."
-                this.setAnimation(R.raw.error)
+                this.setAnimation(R.raw.failed)
             }
             Type.DIALOG_LOADER ->{
                 title.text="Loading..."
+                this.repeatCount=-1
+                this.setAnimation(R.raw.loader)
+            }
+            Type.DIALOG_SEARCH ->{
+                title.text="Searching..."
                 this.repeatCount=-1
                 this.setAnimation(R.raw.loader)
             }
@@ -112,7 +119,6 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
             }
             else -> {
                 title.text="Info"
-                this.setAnimation(R.raw.loader)
                 ( title.layoutParams as LinearLayout.LayoutParams).apply {
                     gravity=Gravity.START
                     topMargin=24
