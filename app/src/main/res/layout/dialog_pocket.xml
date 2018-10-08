@@ -51,6 +51,8 @@
         android:layout_gravity="end"
         android:layout_width="wrap_content"
         android:id="@+id/buttonContainer"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 

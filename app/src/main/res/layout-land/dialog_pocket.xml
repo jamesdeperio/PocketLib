@@ -52,6 +52,8 @@
         android:layout_width="wrap_content"
         android:id="@+id/buttonContainer"
         android:layout_height="wrap_content"
+        android:paddingEnd="15dp"
+        android:paddingStart="15dp"
         android:orientation="horizontal">
 
         <Button
