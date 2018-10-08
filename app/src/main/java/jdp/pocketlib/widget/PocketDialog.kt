@@ -62,17 +62,11 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
         this.setOnClickListener { dialog.dismiss() }
         if (type==Type.DIALOG_LOADER)
             this.visibility=View.GONE
-        ( this.layoutParams as LinearLayout.LayoutParams).apply {
-            this.setMargins(1,1,1,1)
-        }
     }
     val cancelAction= dialog.findViewById<Button>(R.id.btnCancel)!!.apply {
         this.setOnClickListener { dialog.dismiss() }
         if (type!=Type.DIALOG_WARNING)
             this.visibility=View.GONE
-        ( this.layoutParams as LinearLayout.LayoutParams).apply {
-            this.setMargins(1,1,1,1)
-        }
     }
     val view= dialog.findViewById<LinearLayout>(R.id.container)!!
     val viewSeparator= dialog.findViewById<FrameLayout>(R.id.viewSeparator)!!
