@@ -61,13 +61,11 @@
             android:layout_margin="1dp"
             android:text="CANCEL"
             android:id="@+id/btnCancel"
-            android:textAllCaps="true"
             android:textColor="#1878ff"
             tools:ignore="ButtonStyle,HardcodedText" />
 
 
         <Button
-            android:textAllCaps="true"
             android:layout_margin="1dp"
             android:id="@+id/btnOk"
             android:layout_width="wrap_content"
