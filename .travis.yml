@@ -1,21 +1,16 @@
-language: android	language: android
+language: android	
 sudo: required	
-jdk: oraclejdk8	jdk: oraclejdk8
-sudo: false
-android:	android:
-  components:	  components:
-    # Update Android SDK Tools	  - tools
-    - tools	  - tools
-   - build-tools-27.0.3
-    - build-tools-28.0.2	  - android-27
-    - android-28	cache:
-   directories:
-    # Support library	  - "$HOME/.gradle/caches/"
+jdk: oraclejdk8	
+android:	
+  components:	 
+    # Update Android SDK Tools
+    - tools	 
+  
+    - build-tools-28.0.2	
+    - android-28	
+
+    # Support library	
     - extra-android-support	
     - extra-android-m2repository	
- script:	script:
-- chmod +x ./gradlew	- "./gradlew build jacocoTestReport publishSnapshot"
-before_install:	
-    - pip install --user codecov	
-after_success:	after_success:
-  - bash <(curl -s https://codecov.io/bash)
+ script:	
+- chmod +x ./gradlew
