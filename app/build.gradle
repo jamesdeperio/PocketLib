@@ -24,7 +24,13 @@ android {
     lintOptions {
         abortOnError false
     }
-
+ buildTypes {
+    debug {
+      applicationIdSuffix '.debug'
+      versionNameSuffix '-debug'
+      testCoverageEnabled true
+    }
+  }
 }
 
 dependencies {
