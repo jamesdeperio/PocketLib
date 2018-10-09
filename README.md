@@ -9,6 +9,7 @@
 [![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
 [![License](https://img.shields.io/badge/License%20-Apache%202-337ab7.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/jamesdeperio/PocketLib/graphs/commit-activity)
+[![codecov](https://codecov.io/gh/jamesdeperio/PocketLib/branch/master/graph/badge.svg)](https://codecov.io/gh/jamesdeperio/PocketLib)
 ___
 ### [READ FULL DOCUMENTATION](https://jamesdeperio.github.io/pocketlib/) 
 ### [DEMO APK](https://github.com/jamesdeperio/CodePocketBuilderDemo/blob/master/app-debug.apk)
