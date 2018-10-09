@@ -8,7 +8,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'jacoco-android'
 group = 'com.github.jamesdeperio'
 
 android {
@@ -24,13 +23,6 @@ android {
     lintOptions {
         abortOnError false
     }
- buildTypes {
-    debug {
-      applicationIdSuffix '.debug'
-      versionNameSuffix '-debug'
-      testCoverageEnabled true
-    }
-  }
 }
 
 dependencies {
