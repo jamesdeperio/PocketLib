@@ -15,5 +15,7 @@ android:
 
 script:
 - chmod +x ./gradlew
+before_install:
+    - pip install --user codecov
 after_success:
   - bash <(curl -s https://codecov.io/bash)
