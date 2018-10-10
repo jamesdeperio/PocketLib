@@ -11,7 +11,6 @@
 [![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://GitHub.com/jamesdeperio/PocketLib/graphs/commit-activity)
 [![Open Source Helpers](https://www.codetriage.com/jamesdeperio/pocketlib/badges/users.svg)](https://www.codetriage.com/jamesdeperio/pocketlib)
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/jamesdeperio/PocketLib.svg?columns=all)](https://waffle.io/jamesdeperio/PocketLib)
-[![Throughput Graph](https://graphs.waffle.io/PocketLib/guide/throughput.svg)](https://waffle.io/PocketLib/guide/metrics)
 
 ___
 ### [READ FULL DOCUMENTATION](https://jamesdeperio.github.io/pocketlib/) 
