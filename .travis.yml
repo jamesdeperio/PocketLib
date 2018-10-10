@@ -1,16 +1,17 @@
-language: android	
-sudo: required	
-jdk: oraclejdk8	
-android:	
-  components:	 
+language: android
+sudo: required
+jdk: oraclejdk8
+android:
+  components:
     # Update Android SDK Tools
-    - tools	 
-  
-    - build-tools-28.0.2	
-    - android-28	
+    - tools
 
-    # Support library	
-    - extra-android-support	
-    - extra-android-m2repository	
- script:	
+    - build-tools-28.0.2
+    - android-28
+
+    # Support library
+    - extra-android-support
+    - extra-android-m2repository
+
+script:
 - chmod +x ./gradlew
