@@ -43,14 +43,15 @@ class PageBuilder {
 
         fun build() {
             viewPager.adapter = PocketViewPagerAdapter(fragmentManager, fragmentList, titleList)
-            if (tabLayout != null) tabLayout!!.setupWithViewPager(viewPager)
+            tabLayout?.setupWithViewPager(viewPager)
             viewPager.setPageTransformer(true, pageTransformer)
         }
 
-        fun addPage(title: String, fragment: Fragment) {
+        fun addPage(title: String = "", fragment: Fragment) {
             titleList.add(title)
             fragmentList.add(fragment)
         }
+      
     }
 
     companion object {
