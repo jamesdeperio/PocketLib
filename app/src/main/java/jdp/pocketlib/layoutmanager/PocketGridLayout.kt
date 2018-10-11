@@ -17,10 +17,7 @@ import android.util.Log
  *  jamesdeperio.github.com.codepocket.view
  */
 class PocketGridLayout(context: Context, spanCount: Int, orientation: Int, reverseLayout: Boolean) : GridLayoutManager(context, spanCount, orientation, reverseLayout) {
-    private var isScrollEnabled = true
-    fun setScrollEnabled(flag: Boolean) {
-        this.isScrollEnabled = flag
-    }
+    var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean = isScrollEnabled && super.canScrollVertically()
 
@@ -30,7 +27,7 @@ class PocketGridLayout(context: Context, spanCount: Int, orientation: Int, rever
         try {
             super.onLayoutChildren(recycler, state)
         } catch (e: IndexOutOfBoundsException) {
-            Log.e("probe", "meet a IOOBE in RecyclerView")
+            Log.e("PocketGridLayout", "catch animation error ${e.message}")
         }
 
     }

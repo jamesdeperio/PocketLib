@@ -18,12 +18,7 @@ import android.util.Log
  */
 
 class PocketStaggeredLayout(spanCount: Int, orientation: Int) : StaggeredGridLayoutManager(spanCount, orientation) {
-
-    private var isScrollEnabled = true
-
-    fun setScrollEnabled(flag: Boolean) {
-        this.isScrollEnabled = flag
-    }
+    var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean = isScrollEnabled && super.canScrollVertically()
 
@@ -35,7 +30,7 @@ class PocketStaggeredLayout(spanCount: Int, orientation: Int) : StaggeredGridLay
         try {
             super.onLayoutChildren(recycler, state)
         } catch (e: IndexOutOfBoundsException) {
-            Log.e("probe", "meet a IOOBE in RecyclerView")
+            Log.e("PocketStaggeredLayout", "catch animation error ${e.message}")
         }
 
     }

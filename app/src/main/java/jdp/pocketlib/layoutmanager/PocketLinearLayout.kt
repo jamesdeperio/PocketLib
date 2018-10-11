@@ -18,10 +18,7 @@ import android.util.Log
  *  jamesdeperio.github.com.codepocket.view
  */
 class PocketLinearLayout(context: Context, horizontal: Int, b: Boolean) : LinearLayoutManager(context, horizontal, b) {
-    private var isScrollEnabled = true
-    fun setScrollEnabled(flag: Boolean) {
-        this.isScrollEnabled = flag
-    }
+    var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean = isScrollEnabled && super.canScrollVertically()
 
@@ -33,7 +30,7 @@ class PocketLinearLayout(context: Context, horizontal: Int, b: Boolean) : Linear
         try {
             super.onLayoutChildren(recycler, state)
         } catch (e: IndexOutOfBoundsException) {
-            Log.e("probe", "meet a IOOBE in RecyclerView")
+            Log.e("PocketLinearLayout", "catch animation error ${e.message}")
         }
 
     }

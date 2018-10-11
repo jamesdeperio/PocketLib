@@ -18,43 +18,24 @@ import jdp.pocketlib.base.PocketViewPagerAdapter
  */
 
 class PageBuilder {
-    class Builder {
-        private lateinit var viewPager: ViewPager
-        private lateinit var fragmentManager: FragmentManager
-        private val titleList: MutableList<String> = ArrayList()
-        private val fragmentList: MutableList<Fragment> = ArrayList()
-        private var tabLayout: TabLayout? = null
-        private var pageTransformer: ViewPager.PageTransformer? = null
-        fun setViewPager(viewPager: ViewPager) {
-            this.viewPager = viewPager
-        }
+    lateinit var viewPager: ViewPager
+    lateinit var fragmentManager: FragmentManager
+    private val titleList: MutableList<String> = ArrayList()
+    private val fragmentList: MutableList<Fragment> = ArrayList()
+    var tabLayout: TabLayout? = null
+    var pageTransformer: ViewPager.PageTransformer? = null
 
-        fun setTabLayout(tabLayout: TabLayout) {
-            this.tabLayout = tabLayout
-        }
-
-        fun setFragmentManager(fragmentManager: FragmentManager) {
-            this.fragmentManager = fragmentManager
-        }
-
-        fun setPageTransformer(pageTransformer: ViewPager.PageTransformer) {
-            this.pageTransformer = pageTransformer
-        }
-
-        fun build() {
-            viewPager.adapter = PocketViewPagerAdapter(fragmentManager, fragmentList, titleList)
-            if (tabLayout != null) tabLayout!!.setupWithViewPager(viewPager)
-            viewPager.setPageTransformer(true, pageTransformer)
-        }
-
-        fun addPage(title: String, fragment: Fragment) {
-            titleList.add(title)
-            fragmentList.add(fragment)
-        }
+    fun create() {
+        viewPager.adapter = PocketViewPagerAdapter(fragmentManager, fragmentList, titleList)
+        tabLayout?.setupWithViewPager(viewPager)
+        viewPager.setPageTransformer(true, pageTransformer)
     }
 
-    companion object {
-        inline fun build(properties: Builder.() -> Unit) = Builder().apply(properties).build()
+    fun addPage(title: String="", fragment: Fragment) {
+        titleList.add(title)
+        fragmentList.add(fragment)
     }
-
+    companion object Builder {
+        inline fun build(properties: PageBuilder.() -> Unit) = PageBuilder().apply(properties).create()
+    }
 }
