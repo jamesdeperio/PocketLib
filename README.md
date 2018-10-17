@@ -30,7 +30,7 @@ ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
 ___
 ## CHANGELOG
-#### v2.1.0
+#### v2.1.1
 - ADDED: isDialogShowing() method for PocketDialog
 - ADDED: PocketDialog.Type.DIALOG_SEARCH
 - FIXED: action button margin
