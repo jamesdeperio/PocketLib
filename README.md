@@ -39,7 +39,7 @@ ___
 - UPDATED: PocketDialog.Type.ERROR changed default lottieview animation
 - UPDATED: kotlin gradle to v3.2.1
 - UPDATED: kotlin maven to v2.1
-- MERGED: PR of @marjorietiozon :<br/>
+- MERGED: PR of [@marjorietiozon](https://github.com/marjorietiozon) :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ADDED: default blank value for title in PageBuilder.addPage()<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- IMPROVED: optimized code for PageBuilder.setupWithViewPager
 #### v2.1.0
