@@ -59,13 +59,15 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textSize="15dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:background="#ffffff"
             android:layout_margin="1dp"
             android:minWidth="50dp"
             android:text="CANCEL"
             android:id="@+id/btnCancel"
             android:textColor="#1878ff"
-            tools:ignore="ButtonStyle,HardcodedText" />
+            tools:ignore="ButtonStyle,HardcodedText,SpUsage" />
 
 
         <Button
@@ -75,8 +77,10 @@
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:text="OK"
+            android:textSize="15dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:minWidth="50dp"
             android:textColor="#1878ff"
-            tools:ignore="ButtonStyle,HardcodedText" />
+            tools:ignore="ButtonStyle,HardcodedText,SpUsage" />
     </LinearLayout>
 </LinearLayout>
