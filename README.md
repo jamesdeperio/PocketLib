@@ -3,7 +3,7 @@
 [![Release](https://jitpack.io/v/jamesdeperio/PocketLib.svg)](https://jitpack.io/#jamesdeperio/PocketLib)
 [![GitHub release](https://img.shields.io/github/release/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/releases/)
 [![GitHub tag](https://img.shields.io/github/tag/jamesdeperio/PocketLib.svg)](https://GitHub.com/jamesdeperio/PocketLib/tags/)
-[![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.1.0.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
+[![GitHub commits](https://img.shields.io/github/commits-since/jamesdeperio/PocketLib/v2.1.1.svg)](https://GitHub.com/jamesdeperio/PocketLib/commit/)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.2.71-green.svg?style=flat-square)](http://kotlinlang.org)
 [![Build Status](https://img.shields.io/travis/jamesdeperio/PocketLib.svg?style=flat-square)](https://travis-ci.org/jamesdeperio/PocketLib)
 [![HitCount](http://hits.dwyl.io/jamesdeperio/PocketLib.svg)](http://hits.dwyl.io/jamesdeperio/PocketLib)
@@ -30,6 +30,18 @@ ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
 ___
 ## CHANGELOG
+#### v2.1.0
+- ADDED: isDialogShowing() method for PocketDialog
+- ADDED: PocketDialog.Type.DIALOG_SEARCH
+- FIXED: action button margin
+- FIXED: viewSeparator should not be visible by default in PocketDialog.Loader
+- IMPROVED: reduced method count
+- UPDATED: PocketDialog.Type.ERROR changed default lottieview animation
+- UPDATED: kotlin gradle to v3.2.1
+- UPDATED: kotlin maven to v2.1
+- MERGED: PR of @marjorietiozon :
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ADDED: default blank value for title in PageBuilder.addPage()
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- IMPROVED: optimized code for PageBuilder.setupWithViewPager
 #### v2.1.0
 * UPDATED: kotlin dependency to v1.2.71
 * UPDATED: gradle dependency to v3.2.0
