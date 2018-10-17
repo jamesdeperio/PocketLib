@@ -37,8 +37,8 @@ ___
 - FIXED: viewSeparator should not be visible by default in PocketDialog.Loader
 - IMPROVED: reduced method count
 - UPDATED: PocketDialog.Type.ERROR changed default lottieview animation
-- UPDATED: kotlin gradle to v3.2.1
-- UPDATED: kotlin maven to v2.1
+- UPDATED: gradle dependency to v3.2.1
+- UPDATED: maven dependency to v2.1
 - MERGED: PR of [@marjorietiozon](https://github.com/marjorietiozon) :<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- ADDED: default blank value for title in PageBuilder.addPage()<br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- IMPROVED: optimized code for PageBuilder.setupWithViewPager
