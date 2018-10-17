@@ -129,6 +129,7 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
         return this
     }
 
+    fun isShowing() :Boolean = dialog.isShowing
 
     fun show() :PocketDialog {
         dialog.show()
