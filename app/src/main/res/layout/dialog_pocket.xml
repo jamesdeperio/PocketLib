@@ -63,10 +63,12 @@
             android:layout_margin="1dp"
             android:minWidth="50dp"
             android:text="CANCEL"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:id="@+id/btnCancel"
             android:textAllCaps="true"
+            android:textSize="15dp"
             android:textColor="#1878ff"
-            tools:ignore="ButtonStyle,HardcodedText" />
+            tools:ignore="ButtonStyle,HardcodedText,SpUsage" />
 
 
         <Button
@@ -78,7 +80,9 @@
             android:layout_height="wrap_content"
             android:background="#ffffff"
             android:text="OK"
+            android:textSize="15dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
             android:textColor="#1878ff"
-            tools:ignore="ButtonStyle,HardcodedText" />
+            tools:ignore="ButtonStyle,HardcodedText,SpUsage" />
     </LinearLayout>
 </LinearLayout>
