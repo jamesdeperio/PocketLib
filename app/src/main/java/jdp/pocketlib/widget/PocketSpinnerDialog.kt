@@ -127,7 +127,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     fun addItem (items:MutableMap<T,String>): PocketSpinnerDialog<T> {
         var x=0
         items.forEach {
-            adapter.itemList[adapter.itemList.size+x+1]= PocketSpinnerItem(item = it.key,itemString = it.value )
+            adapter.itemList[adapter.itemList.size+x]= PocketSpinnerItem(item = it.key,itemString = it.value )
             x++
         }
         adapter.searchItemList=adapter.itemList
@@ -137,7 +137,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
     fun addItem (items:MutableList<T>): PocketSpinnerDialog<T> {
         items.withIndex().forEach {
-            adapter.itemList[adapter.itemList.size+it.index+1]= PocketSpinnerItem(item = it.value ,itemString = it.value.toString() )
+            adapter.itemList[adapter.itemList.size+it.index]= PocketSpinnerItem(item = it.value ,itemString = it.value.toString() )
         }
         adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
@@ -147,7 +147,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     fun addItem (itemObject:MutableList<T>,itemString:MutableList<String>): PocketSpinnerDialog<T> {
         if (itemObject.size!=itemString.size) throw RuntimeException("objectlist and itemlist did not match!")
         itemObject.withIndex().forEach {
-            adapter.itemList[adapter.itemList.size+it.index+1]= PocketSpinnerItem(item = it.value ,itemString = itemString[it.index] )
+            adapter.itemList[adapter.itemList.size+it.index]= PocketSpinnerItem(item = it.value ,itemString = itemString[it.index] )
         }
         adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
