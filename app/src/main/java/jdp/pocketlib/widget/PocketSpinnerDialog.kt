@@ -5,7 +5,9 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
+import android.support.design.widget.TextInputEditText
 import android.support.v7.widget.SearchView
+import android.text.InputType
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -69,14 +71,23 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     var itemBackgroundColor="#ffffff"
     var itemTextColor="#1d1d1d"
    private var button:Button?= null
+   private var textInputEditText:TextInputEditText?= null
     fun setButtonAsSpinner(button:Button){
         this.button=button
         this.button!!.setOnClickListener { show() }
     }
+    fun setTextInputEditTextAsSpinner(textInputEditText:TextInputEditText){
+        this.textInputEditText=textInputEditText
+        this.textInputEditText!!.isClickable=true
+        this.textInputEditText!!.isFocusable = false
+        this.textInputEditText!!.inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
+        this.textInputEditText!!.setOnClickListener { show() }
+    }
 
     private var listener: Listener<T> = object :Listener<T> {
-        override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: Button?) {
+        override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: View?) {
             button?.text = selectedItem
+            textInputEditText?.setText(selectedItem)
         }
     }
 
@@ -84,10 +95,11 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         this.listener=listener
     }
 
-    fun setOnItemSelectedListener(onItemSelectedListener:(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: Button?)-> Unit) {
+    fun setOnItemSelectedListener(onItemSelectedListener:(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: View?)-> Unit) {
         this.listener=object :Listener<T>{
-            override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: Button?) {
+            override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: View?) {
                 button?.text = selectedItem
+                textInputEditText?.setText(selectedItem)
                 onItemSelectedListener(selectedObject,selectedItem,selectedIndex,spinner)
             }
         }
@@ -114,8 +126,8 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
     fun addItem (items:MutableMap<T,String>): PocketSpinnerDialog<T> {
         var x=0
-        items.forEach { item, itemString ->
-            adapter.itemList[x]= PocketSpinnerItem(item = item,itemString = itemString )
+        items.forEach {
+            adapter.itemList[adapter.itemList.size+x+1]= PocketSpinnerItem(item = it.key,itemString = it.value )
             x++
         }
         adapter.searchItemList=adapter.itemList
@@ -125,7 +137,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
     fun addItem (items:MutableList<T>): PocketSpinnerDialog<T> {
         items.withIndex().forEach {
-            adapter.itemList[it.index]= PocketSpinnerItem(item = it.value ,itemString = it.value.toString() )
+            adapter.itemList[adapter.itemList.size+it.index+1]= PocketSpinnerItem(item = it.value ,itemString = it.value.toString() )
         }
         adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
@@ -135,7 +147,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     fun addItem (itemObject:MutableList<T>,itemString:MutableList<String>): PocketSpinnerDialog<T> {
         if (itemObject.size!=itemString.size) throw RuntimeException("objectlist and itemlist did not match!")
         itemObject.withIndex().forEach {
-            adapter.itemList[it.index]= PocketSpinnerItem(item = it.value ,itemString = itemString[it.index] )
+            adapter.itemList[adapter.itemList.size+it.index+1]= PocketSpinnerItem(item = it.value ,itemString = itemString[it.index] )
         }
         adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
@@ -195,7 +207,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
                     selectedItem=adapter.searchItemList[position]!!.itemString!!
                     selectedObject=adapter.searchItemList[position]!!.item!!
                     selectedIndex=position
-                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,button)
+                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,button?:textInputEditText)
                     dialog.dismiss()
                 }
             }
@@ -206,6 +218,6 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         val NO_SELECTED_ITEM=-1
     }
     interface Listener<T> {
-        fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: Button?)
+        fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: View?)
     }
 }
