@@ -21,7 +21,6 @@ class PocketSpinner : FrameLayout {
     private var hintColor:Int =Color.BLACK
     private var bgColor:Int =Color.BLACK
     private var gravity:Int =Gravity.START
-    private var hintGravity:Int =Gravity.START
     private var layout: View
 
     fun setFontFamilyFromAsset(fontPath:String): PocketSpinner {
@@ -35,6 +34,11 @@ class PocketSpinner : FrameLayout {
         layout.findViewById<TextInputLayout>(R.id.textboxLayout).hint = hint
         return this
     }
+
+    fun setText(text:String): PocketSpinner {
+        layout.findViewById<TextInputEditText>(R.id.textbox).hint = text
+        return this
+    }
     fun setHintColor(color:Int): PocketSpinner {
         layout.findViewById<TextInputEditText>(R.id.textbox).setHintTextColor(color)
         return this
@@ -44,10 +48,6 @@ class PocketSpinner : FrameLayout {
         return this
     }
 
-    fun setHintGravity(gravity:Int): PocketSpinner {
-        layout.findViewById<TextInputLayout>(R.id.textboxLayout).gravity = gravity
-        return this
-    }
     fun setGravity(gravity:Int): PocketSpinner {
         layout.findViewById<TextInputEditText>(R.id.textbox).gravity = gravity
         return this
@@ -78,7 +78,6 @@ class PocketSpinner : FrameLayout {
             bgColor = attrib.getColor(R.styleable.PocketSpinner_pkt_background_color,Color.WHITE)
             hintColor = attrib.getColor(R.styleable.PocketSpinner_pkt_hint_color,Color.BLUE)
             gravity = attrib.getInt(R.styleable.PocketSpinner_pkt_gravity,0)
-            hintGravity = attrib.getInt(R.styleable.PocketSpinner_pkt_hint_gravity,0)
             attrib.recycle()
         }
         layout.findViewById<TextInputEditText>(R.id.textbox).apply {
@@ -88,18 +87,12 @@ class PocketSpinner : FrameLayout {
             this.gravity = when(this@PocketSpinner.gravity){
                 0-> Gravity.START
                 1-> Gravity.END
-                2-> Gravity.TOP
+                2-> Gravity.CENTER
                 else -> Gravity.START
             }
         }
         layout.findViewById<TextInputLayout>(R.id.textboxLayout).apply {
             this.hint=this@PocketSpinner.hint?:""
-            this.gravity = when(this@PocketSpinner.gravity){
-                0-> Gravity.START
-                1-> Gravity.END
-                2-> Gravity.TOP
-                else -> Gravity.START
-            }
         }
 
         setBackgroundColor(this@PocketSpinner.bgColor)

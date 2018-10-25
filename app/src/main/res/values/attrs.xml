@@ -9,12 +9,7 @@
         <attr name="pkt_gravity" format="enum">
             <enum name="start" value="0"/>
             <enum name="end" value="1"/>
-            <enum name="top" value="2"/>
-        </attr>
-        <attr name="pkt_hint_gravity" format="enum">
-            <enum name="start" value="0"/>
-            <enum name="end" value="1"/>
-            <enum name="top" value="2"/>
+            <enum name="center" value="2"/>
         </attr>
     </declare-styleable>
 </resources>

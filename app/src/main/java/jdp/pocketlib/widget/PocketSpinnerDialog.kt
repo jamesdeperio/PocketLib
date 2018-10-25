@@ -72,11 +72,16 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     var itemTextColor="#1d1d1d"
    private var button:Button?= null
    private var textInputEditText:TextInputEditText?= null
-    fun setButtonAsSpinner(button:Button){
+   private var pocketSpinner:PocketSpinner?= null
+    fun setSpinnerView(pocketSpinner:PocketSpinner){
+        this.pocketSpinner=pocketSpinner
+        this.pocketSpinner!!.setOnClickListener { show() }
+    }
+    fun setSpinnerView(button:Button){
         this.button=button
         this.button!!.setOnClickListener { show() }
     }
-    fun setTextInputEditTextAsSpinner(textInputEditText:TextInputEditText){
+    fun setSpinnerView(textInputEditText:TextInputEditText){
         this.textInputEditText=textInputEditText
         this.textInputEditText!!.isClickable=true
         this.textInputEditText!!.isFocusable = false
@@ -88,6 +93,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: View?) {
             button?.text = selectedItem
             textInputEditText?.setText(selectedItem)
+            pocketSpinner?.setText(selectedItem)
         }
     }
 
@@ -100,6 +106,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
             override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: View?) {
                 button?.text = selectedItem
                 textInputEditText?.setText(selectedItem)
+                pocketSpinner?.setText(selectedItem)
                 onItemSelectedListener(selectedObject,selectedItem,selectedIndex,spinner)
             }
         }
@@ -205,7 +212,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
                     selectedItem=adapter.searchItemList[position]!!.itemString!!
                     selectedObject=adapter.searchItemList[position]!!.item!!
                     selectedIndex=position
-                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,button?:textInputEditText)
+                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,pocketSpinner?:button?:textInputEditText)
                     dialog.dismiss()
                 }
             }

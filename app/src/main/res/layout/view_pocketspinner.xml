@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="#fff"
     android:layout_marginTop="5dp"
     android:layout_marginStart="15dp"
     android:id="@+id/textboxmainLayout"
@@ -13,6 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:id="@+id/textboxLayout"
+        android:longClickable="false"
         android:layout_marginStart="10dp"
         android:gravity="start">
 
@@ -23,6 +23,7 @@
             android:clickable="true"
             android:focusable="false"
             android:gravity="start"
+            android:longClickable="false"
             android:hint="Hint"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
@@ -35,9 +36,8 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_gravity="end|center"
-        android:background="#fff"
         android:id="@+id/textboxImg"
-        android:layout_marginBottom="0dp"
+        android:layout_marginBottom="-1dp"
         android:src="@drawable/ic_arrow_drop_down_black_24dp"
         android:layout_height="wrap_content"
         tools:ignore="ContentDescription" />
