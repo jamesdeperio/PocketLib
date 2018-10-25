@@ -23,7 +23,6 @@
             android:focusable="false"
             android:gravity="start"
             android:hint="Hint"
-            android:fontFamily="@font/comfortaa"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
             android:textColor="#000"

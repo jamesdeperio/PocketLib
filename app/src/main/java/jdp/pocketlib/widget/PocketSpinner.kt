@@ -9,7 +9,11 @@ import android.widget.FrameLayout
 import jdp.pocketlib.R
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.ImageView
 import android.widget.LinearLayout
+import android.graphics.Typeface
+
+
 
 
 
@@ -23,6 +27,12 @@ class PocketSpinner : FrameLayout {
     var bgColor:Int =Color.BLACK
     var gravity:Int =Gravity.START
     private  var layout: View
+
+    fun setFontFamilyFromAsset(fontPath:String): PocketSpinner {
+        val font = Typeface.createFromAsset(resources.assets, fontPath)
+        layout.findViewById<TextInputEditText>(R.id.textbox).typeface = font
+        return this
+    }
     constructor(context: Context): super(context) {
         layout  = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.view_pocketspinner, this)
         if (!isInEditMode)    setup(null)
@@ -65,7 +75,7 @@ class PocketSpinner : FrameLayout {
         layout.findViewById<FrameLayout>(R.id.textboxLayout).apply {
             this.setBackgroundColor(this@PocketSpinner.bgColor)
         }
-        layout.findViewById<FrameLayout>(R.id.textboxImg).apply {
+        layout.findViewById<ImageView>(R.id.textboxImg).apply {
             this.setBackgroundColor(this@PocketSpinner.bgColor)
         }
       }
