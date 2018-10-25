@@ -2,20 +2,15 @@ package jdp.pocketlib.widget
 
 import android.content.Context
 import android.graphics.Color
+import android.graphics.Typeface
 import android.support.design.widget.TextInputEditText
 import android.util.AttributeSet
 import android.view.Gravity
-import android.widget.FrameLayout
-import jdp.pocketlib.R
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.graphics.Typeface
-
-
-
-
+import jdp.pocketlib.R
 
 
 class PocketSpinner : FrameLayout {
