@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PocketSpinner">
+        <attr name="pkt_hint" format="string"/>
+        <attr name="pkt_text" format="string"/>
+        <attr name="pkt_font_color" format="color"/>
+        <attr name="pkt_hint_color" format="color"/>
+        <attr name="pkt_background_color" format="color"/>
+        <attr name="pkt_gravity" format="enum">
+            <enum name="start" value="0"/>
+            <enum name="end" value="1"/>
+            <enum name="top" value="2"/>
+        </attr>
+    </declare-styleable>
+</resources>

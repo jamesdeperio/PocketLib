@@ -14,7 +14,7 @@ android {
 
     compileSdkVersion 28
     defaultConfig {
-        minSdkVersion 15
+        minSdkVersion 16
     }
     packagingOptions {
         exclude 'META-INF/app_release.kotlin_module'
