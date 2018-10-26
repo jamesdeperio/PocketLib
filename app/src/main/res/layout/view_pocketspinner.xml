@@ -7,31 +7,25 @@
     android:layout_marginEnd="15dp"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:id="@+id/textboxLayout"
-        android:longClickable="false"
-        android:layout_marginStart="10dp"
-        android:gravity="start">
 
-        <android.support.design.widget.TextInputEditText
+
+        <EditText
             android:id="@+id/textbox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:minLines="1"
             android:focusable="false"
+            android:ellipsize="start"
             android:gravity="start"
             android:longClickable="false"
-            android:hint="Hint"
+            android:textColorHint="#fff"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textSize="15dp"
             android:textStyle="bold"
             tools:ignore="HardcodedText,KeyboardInaccessibleWidget,SpUsage" />
-    </android.support.design.widget.TextInputLayout>
     <ImageView
         android:layout_width="wrap_content"
         android:layout_gravity="end|center"
