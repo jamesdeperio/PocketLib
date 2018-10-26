@@ -7,6 +7,7 @@
         <attr name="pkt_text_size" format="integer"/>
         <attr name="pkt_hint_color" format="color"/>
         <attr name="pkt_hint_size" format="integer"/>
+        <attr name="pkt_bottomline_color" format="color"/>
         <attr name="pkt_background_color" format="color"/>
         <attr name="pkt_gravity" format="enum">
             <enum name="start" value="0"/>

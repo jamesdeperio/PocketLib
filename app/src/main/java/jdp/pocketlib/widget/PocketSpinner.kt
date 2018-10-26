@@ -57,6 +57,10 @@ class PocketSpinner : FrameLayout {
         layout.findViewById<Button>(R.id.textbox).gravity = gravity
         return this
     }
+    fun setBottomLineColor(color:Int): PocketSpinner {
+        layout.findViewById<FrameLayout>(R.id.bottomLine).setBackgroundColor(color)
+        return this
+    }
 
     fun setHintGravity(gravity:Int): PocketSpinner {
         layout.findViewById<TextView>(R.id.tvHint).gravity = gravity
@@ -82,6 +86,9 @@ class PocketSpinner : FrameLayout {
     private fun setup(attrs: AttributeSet?) {
         if (attrs != null) {
             val attrib = context.obtainStyledAttributes(attrs, R.styleable.PocketSpinner)
+            layout.findViewById<FrameLayout>(R.id.bottomLine).apply {
+                this.setBackgroundColor(attrib.getColor(R.styleable.PocketSpinner_pkt_bottomline_color, Color.BLACK))
+            }
             layout.findViewById<TextView>(R.id.tvHint).apply {
                 this.setTextColor(attrib.getColor(R.styleable.PocketSpinner_pkt_hint_color, Color.BLUE))
                 this.text = attrib.getString(R.styleable.PocketSpinner_pkt_hint)?: ""

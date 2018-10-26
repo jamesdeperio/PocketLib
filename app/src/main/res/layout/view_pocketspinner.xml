@@ -42,6 +42,7 @@
     </FrameLayout>
 
     <FrameLayout
+        android:id="@+id/bottomLine"
         android:layout_width="match_parent"
         android:background="#232323"
         android:layout_height="1dp"
