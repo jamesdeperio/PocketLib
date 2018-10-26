@@ -23,6 +23,7 @@
             android:minLines="1"
             android:focusable="false"
             android:text="option"
+            android:textAllCaps="false"
             android:textColor="#000"
             android:ellipsize="start"
             android:gravity="start|center"
