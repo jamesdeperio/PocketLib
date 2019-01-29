@@ -32,7 +32,7 @@
             android:layout_width="match_parent"
             android:id="@+id/searchView"
             android:layout_height="50dp" />
-        <jdp.pocketlib.widget.PocketRecyclerView
+        <jdp.pocketlib.widget.RecyclerView
             android:layout_width="280dp"
             android:id="@+id/recyclerView"
             android:layout_height="150dp"

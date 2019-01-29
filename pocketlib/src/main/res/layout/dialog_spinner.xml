@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:id="@+id/searchView"
             android:layout_height="50dp" />
-        <jdp.pocketlib.widget.PocketRecyclerView
+        <jdp.pocketlib.widget.RecyclerView
             android:layout_width="280dp"
             android:id="@+id/recyclerView"
             android:layout_height="300dp"
@@ -50,16 +50,17 @@
            android:background="#383838"
             tools:ignore="UselessLeaf" />
         <Button
-            android:id="@+id/btnClose"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CLOSE"
-            android:textSize="15dp"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_marginBottom="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_gravity="end"
-            android:textColor="#005eff"
-            android:background="#00000000"
-            tools:ignore="HardcodedText,SpUsage" />
+                android:id="@+id/btnClose"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CLOSE"
+                android:textSize="15dp"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_marginBottom="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_gravity="end"
+                android:textColor="#005eff"
+                android:background="#00000000"
+                tools:ignore="HardcodedText,SpUsage"
+                android:layout_marginRight="5dp"/>
 </LinearLayout>
