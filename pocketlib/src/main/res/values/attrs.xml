@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="PocketSpinner">
+    <declare-styleable name="Spinner">
         <attr name="pkt_hint" format="string"/>
         <attr name="pkt_text" format="string"/>
         <attr name="pkt_font_color" format="color"/>
@@ -22,7 +22,7 @@
 
 
     </declare-styleable>
-    <declare-styleable name="PocketGaugeView">
+    <declare-styleable name="GaugeView">
         <attr name="progress" format="integer"/>
         <attr name="angle" format="integer"/>
         <attr name="widthStroke" format="integer"/>
