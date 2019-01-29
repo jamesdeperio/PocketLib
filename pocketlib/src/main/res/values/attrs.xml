@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PocketSpinner">
+        <attr name="pkt_hint" format="string"/>
+        <attr name="pkt_text" format="string"/>
+        <attr name="pkt_font_color" format="color"/>
+        <attr name="pkt_text_size" format="integer"/>
+        <attr name="pkt_hint_color" format="color"/>
+        <attr name="pkt_hint_size" format="integer"/>
+        <attr name="pkt_bottomline_color" format="color"/>
+        <attr name="pkt_background_color" format="color"/>
+        <attr name="pkt_gravity" format="enum">
+            <enum name="start" value="0"/>
+            <enum name="end" value="1"/>
+            <enum name="center" value="2"/>
+        </attr>
+        <attr name="pkt_hint_gravity" format="enum">
+            <enum name="start" value="0"/>
+            <enum name="end" value="1"/>
+            <enum name="center" value="2"/>
+        </attr>
+
+
+    </declare-styleable>
+    <declare-styleable name="PocketGaugeView">
+        <attr name="progress" format="integer"/>
+        <attr name="angle" format="integer"/>
+        <attr name="widthStroke" format="integer"/>
+        <attr name="showProgressText" format="boolean"/>
+    </declare-styleable>
+</resources>

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:background="#fff"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Select:"
+            android:textSize="15dp"
+            android:padding="15dp"
+            tools:ignore="HardcodedText,SpUsage" />
+        <FrameLayout
+            android:id="@+id/topSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:background="#383838"
+            tools:ignore="UselessLeaf" />
+
+        <android.support.v7.widget.SearchView
+            android:layout_width="match_parent"
+            android:id="@+id/searchView"
+            android:layout_height="50dp" />
+        <jdp.pocketlib.widget.PocketRecyclerView
+            android:layout_width="280dp"
+            android:id="@+id/recyclerView"
+            android:layout_height="150dp"
+            />
+
+        <FrameLayout
+            android:id="@+id/bottomSeparator"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:background="#383838"
+            tools:ignore="UselessLeaf" />
+        <Button
+            android:id="@+id/btnClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CLOSE"
+            android:textSize="15dp"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_marginBottom="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_gravity="end"
+            android:textColor="#005eff"
+            android:background="#00000000"
+            tools:ignore="HardcodedText,SpUsage" />
+</LinearLayout>

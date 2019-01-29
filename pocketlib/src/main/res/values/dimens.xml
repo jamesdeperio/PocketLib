@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">16dp</dimen>
+    <dimen name="nav_header_height">160dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+
+    <dimen name="pocketlib_toolbar_size">56dp</dimen>
+    <dimen name="pocketlib_content_margin">16dp</dimen>
+    <dimen name="pocketlib_h1_regular">34dp</dimen>
+    <dimen name="pocketlib_h2_bold">24dp</dimen>
+    <dimen name="pocketlib_h3_bold">16dp</dimen>
+    <dimen name="pocketlib_h4_bold">14dp</dimen>
+    <dimen name="pocketlib_body_regular">16dp</dimen>
+    <dimen name="pocketlib_body_regular_small">14dp</dimen>
+    <dimen name="pocketlib_caption_regular">12dp</dimen>
+    <dimen name="pocketlib_button_bold">14dp</dimen>
+    <dimen name="pocketlib_all_caps_regular">14dp</dimen>
+    <dimen name="pocketlib_title_height">72dp</dimen>
+    <integer name="top" />
+</resources>

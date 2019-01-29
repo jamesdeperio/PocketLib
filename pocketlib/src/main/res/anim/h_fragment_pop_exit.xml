@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ jamesdeperio/PocketLib is licensed under the
+  ~
+  ~ Apache License 2.0
+  ~ A permissive license whose main conditions require preservation of copyright and license notices. Contributors provide an express grant of patent rights. Licensed works, modifications, and larger works may be distributed under different terms and without source code.
+  -->
+
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+    <translate
+        android:duration="300"
+        android:fromXDelta="0"
+        android:interpolator="@android:anim/accelerate_interpolator"
+        android:toXDelta="100%p" />
+</set>
