@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
-import android.support.design.widget.TextInputEditText
 import android.support.v7.widget.SearchView
-import android.text.InputType
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -70,30 +68,9 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
     var selectedIndex=-1
     var itemBackgroundColor="#ffffff"
     var itemTextColor="#1d1d1d"
-   private var button:Button?= null
-   private var textInputEditText:TextInputEditText?= null
-   private var spinner:Spinner?= null
-    fun setSpinnerView(spinner:Spinner){
-        this.spinner=spinner
-        this.spinner!!.findViewById<TextView>(R.id.textbox).setOnClickListener { show() }
-    }
-    fun setSpinnerView(button:Button){
-        this.button=button
-        this.button!!.setOnClickListener { show() }
-    }
-    fun setSpinnerView(textInputEditText:TextInputEditText){
-        this.textInputEditText=textInputEditText
-        this.textInputEditText!!.isClickable=true
-        this.textInputEditText!!.isFocusable = false
-        this.textInputEditText!!.inputType = InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS
-        this.textInputEditText!!.setOnClickListener { show() }
-    }
 
     private var listener: Listener<T> = object :Listener<T> {
-        override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: View?) {
-            button?.text = selectedItem
-            textInputEditText?.setText(selectedItem)
-            this@SpinnerDialog.spinner?.setText(selectedItem)
+        override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int) {
         }
     }
 
@@ -101,13 +78,10 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         this.listener=listener
     }
 
-    fun setOnItemSelectedListener(onItemSelectedListener:(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: View?)-> Unit) {
+    fun setOnItemSelectedListener(onItemSelectedListener:(selectedObject: T, selectedItem: String, selectedIndex: Int)-> Unit) {
         this.listener=object :Listener<T>{
-            override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: View?) {
-                button?.text = selectedItem
-                textInputEditText?.setText(selectedItem)
-                this@SpinnerDialog.spinner?.setText(selectedItem)
-                onItemSelectedListener(selectedObject,selectedItem,selectedIndex,spinner)
+            override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int) {
+                onItemSelectedListener(selectedObject,selectedItem,selectedIndex)
             }
         }
     }
@@ -212,7 +186,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
                     selectedItem=adapter.searchItemList[position]!!.itemString!!
                     selectedObject=adapter.searchItemList[position]!!.item!!
                     selectedIndex=position
-                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,spinner?:button?:textInputEditText)
+                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex)
                     dialog.dismiss()
                 }
             }
@@ -223,6 +197,6 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         val NO_SELECTED_ITEM=-1
     }
     interface Listener<T> {
-        fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: View?)
+        fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int)
     }
 }

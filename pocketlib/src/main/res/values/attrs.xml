@@ -3,6 +3,7 @@
     <declare-styleable name="Spinner">
         <attr name="pkt_hint" format="string"/>
         <attr name="pkt_text" format="string"/>
+        <attr name="pkt_font" format="string"/>
         <attr name="pkt_font_color" format="color"/>
         <attr name="pkt_text_size" format="integer"/>
         <attr name="pkt_hint_color" format="color"/>
