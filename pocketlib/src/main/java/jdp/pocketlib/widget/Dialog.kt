@@ -47,7 +47,7 @@ open class Dialog(context: Context, type:Dialog.Type, private var isFullScreen:B
             }
          }
         this.window!!.attributes.windowAnimations = R.style.DialogAnimation
-        this.setContentView(R.layout.dialog_pocket)
+        this.setContentView(R.layout.dialog_lottie)
         this.setOnDismissListener {
             if (isFullScreen) this.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
         }

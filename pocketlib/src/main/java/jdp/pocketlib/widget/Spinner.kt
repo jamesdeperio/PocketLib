@@ -67,17 +67,17 @@ class Spinner : FrameLayout {
     }
 
     constructor(context: Context): super(context) {
-        layout  = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.view_pocketspinner, this)
+        layout  = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.widget_spinner, this)
         if (!isInEditMode)    setup(null)
     }
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        layout = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.view_pocketspinner, this)
+        layout = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.widget_spinner, this)
         if (!isInEditMode)  setup(attrs)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr) {
-        layout = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.view_pocketspinner, this)
+        layout = (context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater).inflate(R.layout.widget_spinner, this)
         if (!isInEditMode)   setup(attrs)
     }
 
