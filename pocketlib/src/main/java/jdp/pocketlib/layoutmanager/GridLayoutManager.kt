@@ -16,7 +16,7 @@ import android.util.Log
  * Created by jamesdeperio on 8/26/2017
  *  jamesdeperio.github.com.codepocket.view
  */
-class PocketGridLayout(context: Context, spanCount: Int, orientation: Int, reverseLayout: Boolean) : GridLayoutManager(context, spanCount, orientation, reverseLayout) {
+class GridLayoutManager(context: Context, spanCount: Int, orientation: Int, reverseLayout: Boolean) : GridLayoutManager(context, spanCount, orientation, reverseLayout) {
     var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean = isScrollEnabled && super.canScrollVertically()
@@ -27,7 +27,7 @@ class PocketGridLayout(context: Context, spanCount: Int, orientation: Int, rever
         try {
             super.onLayoutChildren(recycler, state)
         } catch (e: IndexOutOfBoundsException) {
-            Log.e("PocketGridLayout", "catch animation error ${e.message}")
+            Log.e("GridLayoutManager", "catch animation error ${e.message}")
         }
     }
 }

@@ -6,9 +6,7 @@ import android.view.View
 import jdp.pocketlib.R
 
 
-class PocketWalletLayout(
-        private val maxItemCount: Int
-) : RecyclerView.LayoutManager() {
+class PocketWalletLayout: RecyclerView.LayoutManager() {
     var isScrollEnabled = true
 
     private val addedChildren: List<View>
@@ -23,7 +21,6 @@ class PocketWalletLayout(
         try {
             when {
                 state.itemCount == 0 -> return
-                state.itemCount > maxItemCount -> throw RuntimeException("Can not set more than max item count!")
                 else -> {
                     detachAndScrapAttachedViews(recycler)
                     (0 until state.itemCount).forEach { i ->
@@ -41,7 +38,7 @@ class PocketWalletLayout(
                 }
             }
         } catch (e: IndexOutOfBoundsException) {
-            Log.e("PocketGridLayout", "catch animation error ${e.message}")
+            Log.e("GridLayoutManager", "catch animation error ${e.message}")
         }
 
     }
