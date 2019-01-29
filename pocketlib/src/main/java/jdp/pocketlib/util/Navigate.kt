@@ -21,7 +21,7 @@ import java.lang.ref.WeakReference
  * Created by jamesdeperio on 7/15/2017
  *  jamesdeperio.github.com.codepocket.util
  */
-@Deprecated("Use FragmentTransaction for replacement")
+@Deprecated("Use FragmentManager.add {}  or FragmentManager.replace {} ")
 object Navigate {
     private var fromFragment: WeakReference<Fragment>? = null
     private var removeFragment: WeakReference<Fragment>? = null
