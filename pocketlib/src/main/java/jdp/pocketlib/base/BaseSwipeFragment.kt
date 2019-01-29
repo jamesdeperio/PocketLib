@@ -22,12 +22,12 @@ abstract class BaseSwipeFragment : SwipeBackFragment(),
         BaseContract.Common {
     var rootView: View? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        initialization(savedInstanceState)
+        onInitialization(savedInstanceState)
         return attachToSwipeBack(rootView)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onLoadEvent(savedInstanceState)
+        onViewDidLoad(savedInstanceState)
     }
 }

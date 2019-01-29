@@ -7,21 +7,20 @@
 
 package jdp.pocketlib.base
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 
 /**
  * Created by jamesdeperio on 7/7/2017
  *  jamesdeperio.github.com.codepocket.adapter
  */
-abstract class PocketViewHolder : PocketAdapterContract.Holder {
-    lateinit var viewHolder: RecyclerView.ViewHolder
-    var layout: Int = 0
-    override fun setView(view: View) {
-        viewHolder =  Holder(view)
+internal interface HasAdapterContract {
+    interface Adapter {
+        fun viewTypeCondition(position: Int): Int
+        fun addViewHolder(viewHolder: ViewHolder)
     }
-    override fun setContentView(layoutID: Int) {
-        layout = layoutID
+    interface Holder {
+        fun setContentView(layoutID: Int)
+        fun setView(view: View)
+        fun onBindViewHolder(view: View, position: Int)
     }
-    inner class Holder(view: View):  RecyclerView.ViewHolder(view)
 }

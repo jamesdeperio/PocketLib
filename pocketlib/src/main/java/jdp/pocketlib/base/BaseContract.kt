@@ -14,8 +14,8 @@ import android.os.Bundle
  **/
 interface BaseContract {
     interface Common {
-        fun initialization(savedInstanceState: Bundle?)
-        fun onLoadEvent(savedInstanceState: Bundle?)
+        fun onInitialization(savedInstanceState: Bundle?)
+        fun onViewDidLoad(savedInstanceState: Bundle?)
 
     }
 

@@ -20,12 +20,12 @@ abstract class BaseActivity : AppCompatActivity(),
         BaseContract.Common {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        initialization(savedInstanceState)
+        onInitialization(savedInstanceState)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
-        onLoadEvent(savedInstanceState)
+        onViewDidLoad(savedInstanceState)
     }
 
 }

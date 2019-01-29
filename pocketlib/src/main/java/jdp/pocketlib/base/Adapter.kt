@@ -15,8 +15,8 @@ import android.view.ViewGroup
  * Created by jamesdeperio on 7/7/2017
  *  jamesdeperio.github.com.codepocket.adapter
  */
-abstract class PocketAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), PocketAdapterContract.Adapter {
-    private val pocketViewHolderList = ArrayList<PocketViewHolder>()
+abstract class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), HasAdapterContract.Adapter {
+    private val pocketViewHolderList = ArrayList<ViewHolder>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         (0 until pocketViewHolderList.size)
                 .filter {  viewType==it }
@@ -39,7 +39,7 @@ abstract class PocketAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>(), 
 
     override fun viewTypeCondition(position: Int): Int = 0
 
-    override fun addViewHolder(viewHolder: PocketViewHolder) {
+    override fun addViewHolder(viewHolder: ViewHolder) {
         pocketViewHolderList.add(viewHolder)
     }
 

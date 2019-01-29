@@ -8,17 +8,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 
 
-abstract class PocketPagedAdapter: PocketAdapterContract.Adapter {
+abstract class PagedListAdapter: HasAdapterContract.Adapter {
 
-    private val pocketViewHolderList = ArrayList<PocketViewHolder>()
+    private val pocketViewHolderList = ArrayList<ViewHolder>()
     private var selectedLayout: Int = 0
     private val adapter= BasePagedAdapter()
 
-    fun  getDelegate():PocketPagedAdapter.BasePagedAdapter = adapter
+    fun  getDelegate(): BasePagedAdapter = adapter
 
     override fun viewTypeCondition(position: Int): Int = 0
 
-    override fun addViewHolder(viewHolder: PocketViewHolder) {
+    override fun addViewHolder(viewHolder: ViewHolder) {
         pocketViewHolderList.add(viewHolder)
     }
 
@@ -33,14 +33,14 @@ abstract class PocketPagedAdapter: PocketAdapterContract.Adapter {
         })
 
         override fun getItemViewType(position: Int): Int {
-            selectedLayout = this@PocketPagedAdapter.viewTypeCondition(position)
+            selectedLayout = this@PagedListAdapter.viewTypeCondition(position)
             return selectedLayout
         }
          constructor(diffCallback: DiffUtil.ItemCallback<Any>) : super(diffCallback)
 
          constructor(config: AsyncDifferConfig<Any>) : super(config)
 
-         override fun getItemCount(): Int  = this@PocketPagedAdapter.getItemCount()
+         override fun getItemCount(): Int  = this@PagedListAdapter.getItemCount()
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
             (0 until pocketViewHolderList.size)
                     .filter {  viewType==it }
