@@ -9,21 +9,23 @@ package jdp.pocketlib.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.widget.NestedScrollView
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.support.v7.widget.RecyclerView as AppCompatRecyclerView
 
 
 /**
  * Created by jamesdeperio on 8/26/2017
  *  jamesdeperio.github.com.codepocket.view
  */
-class PocketNestedScrollView : NestedScrollView {
+
+class RecyclerView : AppCompatRecyclerView {
+
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
 
-    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
+    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean = try {
@@ -37,7 +39,6 @@ class PocketNestedScrollView : NestedScrollView {
         super.onInterceptTouchEvent(ev)
     } catch (ex: IllegalArgumentException) {
         ex.printStackTrace()
-
         false
     }
 }

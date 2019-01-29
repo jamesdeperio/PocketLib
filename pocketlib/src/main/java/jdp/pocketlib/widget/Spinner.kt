@@ -12,56 +12,56 @@ import android.widget.TextView
 import jdp.pocketlib.R
 
 
-class PocketSpinner : FrameLayout {
+class Spinner : FrameLayout {
 
     private var layout: View
 
-    fun setFontFamilyFromAsset(fontPath:String): PocketSpinner {
+    fun setFontFamilyFromAsset(fontPath:String): Spinner {
         val font = Typeface.createFromAsset(resources.assets, fontPath)
         layout.findViewById<TextView>(R.id.textbox).typeface = font
         layout.findViewById<TextView>(R.id.tvHint).typeface = font
         return this
     }
 
-    fun setHint(hint:String): PocketSpinner {
+    fun setHint(hint:String): Spinner {
         layout.findViewById<TextView>(R.id.tvHint).text = hint
         return this
     }
 
-    fun setText(text:String): PocketSpinner {
+    fun setText(text:String): Spinner {
         layout.findViewById<TextView>(R.id.textbox).text = text
         return this
     }
-    fun setHintColor(color:Int): PocketSpinner {
+    fun setHintColor(color:Int): Spinner {
         layout.findViewById<TextView>(R.id.tvHint).setTextColor(color)
         return this
     }
 
-    fun setHintSize(size:Float): PocketSpinner {
+    fun setHintSize(size:Float): Spinner {
         layout.findViewById<TextView>(R.id.tvHint).textSize = size
         return this
     }
 
-    fun setTextSize(size:Float): PocketSpinner {
+    fun setTextSize(size:Float): Spinner {
         layout.findViewById<TextView>(R.id.textbox).textSize = size
         return this
     }
 
-    fun setTextColor(color:Int): PocketSpinner {
+    fun setTextColor(color:Int): Spinner {
         layout.findViewById<TextView>(R.id.textbox).setTextColor(color)
         return this
     }
 
-    fun setGravity(gravity:Int): PocketSpinner {
+    fun setGravity(gravity:Int): Spinner {
         layout.findViewById<TextView>(R.id.textbox).gravity = gravity
         return this
     }
-    fun setBottomLineColor(color:Int): PocketSpinner {
+    fun setBottomLineColor(color:Int): Spinner {
         layout.findViewById<FrameLayout>(R.id.bottomLine).setBackgroundColor(color)
         return this
     }
 
-    fun setHintGravity(gravity:Int): PocketSpinner {
+    fun setHintGravity(gravity:Int): Spinner {
         layout.findViewById<TextView>(R.id.tvHint).gravity = gravity
         return this
     }
@@ -84,15 +84,15 @@ class PocketSpinner : FrameLayout {
 
     private fun setup(attrs: AttributeSet?) {
         if (attrs != null) {
-            val attrib = context.obtainStyledAttributes(attrs, R.styleable.PocketSpinner)
+            val attrib = context.obtainStyledAttributes(attrs, R.styleable.Spinner)
             layout.findViewById<FrameLayout>(R.id.bottomLine).apply {
-                this.setBackgroundColor(attrib.getColor(R.styleable.PocketSpinner_pkt_bottomline_color, Color.BLACK))
+                this.setBackgroundColor(attrib.getColor(R.styleable.Spinner_pkt_bottomline_color, Color.BLACK))
             }
             layout.findViewById<TextView>(R.id.tvHint).apply {
-                this.setTextColor(attrib.getColor(R.styleable.PocketSpinner_pkt_hint_color, Color.BLUE))
-                this.text = attrib.getString(R.styleable.PocketSpinner_pkt_hint)?: ""
-                this.textSize = attrib.getInt(R.styleable.PocketSpinner_pkt_hint_size,15).toFloat()
-                this.gravity = when (attrib.getInt(R.styleable.PocketSpinner_pkt_hint_gravity, 0)) {
+                this.setTextColor(attrib.getColor(R.styleable.Spinner_pkt_hint_color, Color.BLUE))
+                this.text = attrib.getString(R.styleable.Spinner_pkt_hint)?: ""
+                this.textSize = attrib.getInt(R.styleable.Spinner_pkt_hint_size,15).toFloat()
+                this.gravity = when (attrib.getInt(R.styleable.Spinner_pkt_hint_gravity, 0)) {
                     0 -> Gravity.START
                     1 -> Gravity.END
                     2 -> Gravity.CENTER
@@ -100,17 +100,17 @@ class PocketSpinner : FrameLayout {
                 }
             }
             layout.findViewById<TextView>(R.id.textbox).apply {
-                this.text = attrib.getString(R.styleable.PocketSpinner_pkt_text)?: ""
-                this.textSize = attrib.getInt(R.styleable.PocketSpinner_pkt_text_size,15).toFloat()
-                this.setTextColor( attrib.getColor(R.styleable.PocketSpinner_pkt_font_color, Color.BLACK))
-                this.gravity = when (attrib.getInt(R.styleable.PocketSpinner_pkt_gravity, 0)) {
+                this.text = attrib.getString(R.styleable.Spinner_pkt_text)?: ""
+                this.textSize = attrib.getInt(R.styleable.Spinner_pkt_text_size,15).toFloat()
+                this.setTextColor( attrib.getColor(R.styleable.Spinner_pkt_font_color, Color.BLACK))
+                this.gravity = when (attrib.getInt(R.styleable.Spinner_pkt_gravity, 0)) {
                     0 -> Gravity.START
                     1 -> Gravity.END
                     2 -> Gravity.CENTER
                     else -> Gravity.START
                 }
             }
-            setBackgroundColor(attrib.getColor(R.styleable.PocketSpinner_pkt_background_color, Color.WHITE))
+            setBackgroundColor(attrib.getColor(R.styleable.Spinner_pkt_background_color, Color.WHITE))
             attrib.recycle()
         }
       }

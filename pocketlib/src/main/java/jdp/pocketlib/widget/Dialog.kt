@@ -1,7 +1,6 @@
 package jdp.pocketlib.widget
 
 import android.annotation.SuppressLint
-import android.app.Dialog
 import android.content.Context
 import android.os.Build
 import android.view.Gravity
@@ -14,8 +13,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.airbnb.lottie.LottieAnimationView
 import jdp.pocketlib.R
+import android.app.Dialog as AndroidDialog
 
-open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFullScreen:Boolean=false) {
+open class Dialog(context: Context, type:Dialog.Type, private var isFullScreen:Boolean=false) {
     enum class Type {
          DIALOG_NO_INTERNET_CONNECTION,
          DIALOG_WARNING,
@@ -27,7 +27,7 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
          DIALOG_CUSTOM,
         DIALOG_LOADER
     }
-    val dialog=Dialog(context).apply {
+    val dialog=AndroidDialog(context).apply {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (isFullScreen) {
             this.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
@@ -122,7 +122,7 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
         }
     }
 
-    fun setActionButtonGravity(gravity: Int) :PocketDialog {
+    fun setActionButtonGravity(gravity: Int) :Dialog {
         ( buttonContainer.layoutParams as LinearLayout.LayoutParams).apply {
             this.gravity=gravity
         }
@@ -131,7 +131,7 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
 
     fun isShowing() :Boolean = dialog.isShowing
 
-    fun show() :PocketDialog {
+    fun show() :Dialog {
         dialog.show()
         if (isFullScreen){
             dialog.window!!.decorView.systemUiVisibility = dialog.window!!.decorView.systemUiVisibility
@@ -141,7 +141,7 @@ open class PocketDialog(context: Context,type:PocketDialog.Type,private var isFu
         return this
     }
 
-    fun dismiss() :PocketDialog {
+    fun dismiss() :Dialog {
         dialog.dismiss()
         return this
     }

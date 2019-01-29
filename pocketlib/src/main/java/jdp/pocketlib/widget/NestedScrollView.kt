@@ -9,7 +9,7 @@ package jdp.pocketlib.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.design.widget.TabLayout
+import android.support.v4.widget.NestedScrollView
 import android.util.AttributeSet
 import android.view.MotionEvent
 
@@ -18,11 +18,12 @@ import android.view.MotionEvent
  * Created by jamesdeperio on 8/26/2017
  *  jamesdeperio.github.com.codepocket.view
  */
-
-class PocketTabLayout : TabLayout {
+class NestedScrollView : NestedScrollView {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+
+    constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(context, attrs, defStyleAttr)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean = try {

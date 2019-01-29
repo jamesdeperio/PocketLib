@@ -13,7 +13,7 @@ import android.view.View
 import android.view.animation.AnticipateOvershootInterpolator
 import jdp.pocketlib.R
 
-open class PocketGaugeView : View {
+open class GaugeView : View {
     private var defaultWidth:Float = dp2px(200f)
     private var defaultHeight:Float = dp2px(100f)
     private var path = Path()
@@ -59,11 +59,11 @@ open class PocketGaugeView : View {
     }
 
     private fun setup(attrs: AttributeSet?) {
-        val attrSet: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.PocketGaugeView)
-        this.progress = attrSet.getInt(R.styleable.PocketGaugeView_progress, 0)
-        this.angle = attrSet.getInt(R.styleable.PocketGaugeView_angle, 0)
-        this.lineStrokeWidth = attrSet.getInt(R.styleable.PocketGaugeView_widthStroke, 0)
-        this.showProgressText = attrSet.getBoolean(R.styleable.PocketGaugeView_showProgressText, true)
+        val attrSet: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.GaugeView)
+        this.progress = attrSet.getInt(R.styleable.GaugeView_progress, 0)
+        this.angle = attrSet.getInt(R.styleable.GaugeView_angle, 0)
+        this.lineStrokeWidth = attrSet.getInt(R.styleable.GaugeView_widthStroke, 0)
+        this.showProgressText = attrSet.getBoolean(R.styleable.GaugeView_showProgressText, true)
         attrSet.recycle()
         this.linePaint.color = Color.BLACK
         this.linePaint.strokeWidth = dp2px(this.lineStrokeWidth.toFloat())

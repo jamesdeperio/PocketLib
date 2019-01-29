@@ -1,6 +1,5 @@
 package jdp.pocketlib.widget
 
-import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
@@ -15,11 +14,12 @@ import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
 import jdp.pocketlib.R
-import jdp.pocketlib.base.PocketAdapter
-import jdp.pocketlib.base.PocketViewHolder
-import jdp.pocketlib.layoutmanager.PocketLinearLayout
-class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false) : SearchView.OnQueryTextListener, DialogInterface.OnDismissListener {
-    private val dialog=Dialog(context).apply {
+import jdp.pocketlib.base.Adapter
+import jdp.pocketlib.base.ViewHolder
+import jdp.pocketlib.layoutmanager.LinearLayoutManager
+import android.app.Dialog as AndroidDialog
+class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false) : SearchView.OnQueryTextListener, DialogInterface.OnDismissListener {
+    private val dialog=AndroidDialog(context).apply {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
         if (isFullScreen) {
             this.window!!.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
@@ -44,7 +44,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         }
         this.window!!.attributes.windowAnimations = R.style.DialogAnimation
         this.setContentView(R.layout.dialog_spinner)
-        this.setOnDismissListener(this@PocketSpinnerDialog)
+        this.setOnDismissListener(this@SpinnerDialog)
     }
     val title = dialog.findViewById<TextView>(R.id.tvTitle)!!
     val closeButton = dialog.findViewById<Button>(R.id.btnClose)!!.apply {
@@ -54,16 +54,16 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     val bottomSeparator = dialog.findViewById<View>(R.id.bottomSeparator)!!
     val view = dialog.findViewById<View>(R.id.container)!!
     private val searchView = dialog.findViewById<SearchView>(R.id.searchView)!!.apply {
-        this.setOnQueryTextListener(this@PocketSpinnerDialog)
+        this.setOnQueryTextListener(this@SpinnerDialog)
     }
-    private val adapter = PocketSpinnerAdapter().apply {
-        val viewHolder= PocketSpinnerViewHolder(this)
+    private val adapter = SpinnerAdapter().apply {
+        val viewHolder= SpinnerViewHolder(this)
         viewHolder.setContentView(R.layout.item_list_spinner)
         this.addViewHolder(viewHolder)
     }
-    private val recyclerView = dialog.findViewById<PocketRecyclerView>(R.id.recyclerView)!!.apply {
-        this.adapter=this@PocketSpinnerDialog.adapter
-        this.layoutManager=PocketLinearLayout(context,LinearLayout.VERTICAL,false)
+    private val recyclerView = dialog.findViewById<RecyclerView>(R.id.recyclerView)!!.apply {
+        this.adapter=this@SpinnerDialog.adapter
+        this.layoutManager=LinearLayoutManager(context,LinearLayout.VERTICAL,false)
     }
     var selectedObject:T? = null
     var selectedItem:String=""
@@ -72,10 +72,10 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
     var itemTextColor="#1d1d1d"
    private var button:Button?= null
    private var textInputEditText:TextInputEditText?= null
-   private var pocketSpinner:PocketSpinner?= null
-    fun setSpinnerView(pocketSpinner:PocketSpinner){
-        this.pocketSpinner=pocketSpinner
-        this.pocketSpinner!!.findViewById<TextView>(R.id.textbox).setOnClickListener { show() }
+   private var spinner:Spinner?= null
+    fun setSpinnerView(spinner:Spinner){
+        this.spinner=spinner
+        this.spinner!!.findViewById<TextView>(R.id.textbox).setOnClickListener { show() }
     }
     fun setSpinnerView(button:Button){
         this.button=button
@@ -93,7 +93,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int,spinner: View?) {
             button?.text = selectedItem
             textInputEditText?.setText(selectedItem)
-            pocketSpinner?.setText(selectedItem)
+            this@SpinnerDialog.spinner?.setText(selectedItem)
         }
     }
 
@@ -106,7 +106,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
             override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int, spinner: View?) {
                 button?.text = selectedItem
                 textInputEditText?.setText(selectedItem)
-                pocketSpinner?.setText(selectedItem)
+                this@SpinnerDialog.spinner?.setText(selectedItem)
                 onItemSelectedListener(selectedObject,selectedItem,selectedIndex,spinner)
             }
         }
@@ -117,7 +117,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         searchView.setQuery("",false)
     }
 
-    fun show(): PocketSpinnerDialog<T> {
+    fun show(): SpinnerDialog<T> {
         dialog.show()
         if (isFullScreen){
             dialog.window!!.decorView.systemUiVisibility = dialog.window!!.decorView.systemUiVisibility
@@ -126,12 +126,12 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         return this
     }
 
-    fun dismiss(): PocketSpinnerDialog<T> {
+    fun dismiss(): SpinnerDialog<T> {
         dialog.dismiss()
         return this
     }
 
-    fun addItem (items:MutableMap<T,String>): PocketSpinnerDialog<T> {
+    fun addItem (items:MutableMap<T,String>): SpinnerDialog<T> {
         items.forEach {
             adapter.itemList[adapter.itemList.size]= PocketSpinnerItem(item = it.key,itemString = it.value )
         }
@@ -140,7 +140,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         return this
     }
 
-    fun addItem (items:MutableList<T>): PocketSpinnerDialog<T> {
+    fun addItem (items:MutableList<T>): SpinnerDialog<T> {
         items.withIndex().forEach {
             adapter.itemList[adapter.itemList.size]= PocketSpinnerItem(item = it.value ,itemString = it.value.toString() )
         }
@@ -149,7 +149,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         return this
     }
 
-    fun addItem (itemObject:MutableList<T>,itemString:MutableList<String>): PocketSpinnerDialog<T> {
+    fun addItem (itemObject:MutableList<T>,itemString:MutableList<String>): SpinnerDialog<T> {
         if (itemObject.size!=itemString.size) throw RuntimeException("objectlist and itemlist did not match!")
         itemObject.withIndex().forEach {
             adapter.itemList[adapter.itemList.size]= PocketSpinnerItem(item = it.value ,itemString = itemString[it.index] )
@@ -159,14 +159,14 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
         return this
     }
 
-    fun addItem (itemObject:T,itemString:String): PocketSpinnerDialog<T> {
+    fun addItem (itemObject:T,itemString:String): SpinnerDialog<T> {
         adapter.itemList[adapter.itemList.size]= PocketSpinnerItem(item = itemObject ,itemString = itemString)
         adapter.searchItemList=adapter.itemList
         adapter.notifyItemInserted(adapter.itemCount)
         return this
     }
 
-    fun addItem (itemString:T): PocketSpinnerDialog<T> {
+    fun addItem (itemString:T): SpinnerDialog<T> {
         adapter.itemList[adapter.itemList.size]= PocketSpinnerItem(item = itemString ,itemString = itemString as String)
         adapter.searchItemList=adapter.itemList
         adapter.notifyItemInserted(adapter.itemCount)
@@ -186,7 +186,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
 
 
     data class PocketSpinnerItem <T> (var item:T? = null, var itemString:String? = null)
-    inner class PocketSpinnerAdapter: PocketAdapter()  {
+    inner class SpinnerAdapter: Adapter()  {
         var itemList:MutableMap<Int, PocketSpinnerItem<T>> = HashMap()
         var searchItemList:MutableMap<Int, PocketSpinnerItem<T>> = HashMap()
         override fun getItemCount(): Int = searchItemList.size
@@ -200,7 +200,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
                     }
             }
     }
-    inner class PocketSpinnerViewHolder(private val adapter: PocketSpinnerAdapter) : PocketViewHolder() {
+    inner class SpinnerViewHolder(private val adapter: SpinnerAdapter) : ViewHolder() {
         override fun onBindViewHolder(view: View, position: Int) {
             view.findViewById<TextView>(R.id.tvItem).apply {
                 this.text=adapter.searchItemList[position]!!.itemString
@@ -212,7 +212,7 @@ class PocketSpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=
                     selectedItem=adapter.searchItemList[position]!!.itemString!!
                     selectedObject=adapter.searchItemList[position]!!.item!!
                     selectedIndex=position
-                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,pocketSpinner?:button?:textInputEditText)
+                    listener.onItemSelected(selectedObject!!,selectedItem,selectedIndex,spinner?:button?:textInputEditText)
                     dialog.dismiss()
                 }
             }

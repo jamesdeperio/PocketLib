@@ -9,9 +9,9 @@ package jdp.pocketlib.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v7.widget.RecyclerView
 import android.util.AttributeSet
 import android.view.MotionEvent
+import android.support.design.widget.TabLayout as AppCompatTabLayout
 
 
 /**
@@ -19,13 +19,10 @@ import android.view.MotionEvent
  *  jamesdeperio.github.com.codepocket.view
  */
 
-class PocketRecyclerView : RecyclerView {
-
+class TabLayout : AppCompatTabLayout {
     constructor(context: Context) : super(context)
 
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
-
-    constructor(context: Context, attrs: AttributeSet?, defStyle: Int) : super(context, attrs, defStyle)
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(ev: MotionEvent): Boolean = try {
@@ -39,6 +36,7 @@ class PocketRecyclerView : RecyclerView {
         super.onInterceptTouchEvent(ev)
     } catch (ex: IllegalArgumentException) {
         ex.printStackTrace()
+
         false
     }
 }

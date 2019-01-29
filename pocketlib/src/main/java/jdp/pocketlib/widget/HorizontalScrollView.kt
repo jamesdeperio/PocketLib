@@ -11,14 +11,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.widget.HorizontalScrollView
+import android.widget.HorizontalScrollView as AppCompatHorizontalScrollView
 
 /**
  * Created by jamesdeperio on 8/26/2017
  *  jamesdeperio.github.com.codepocket.view
  */
 
-class PocketHorizontalScrollView : HorizontalScrollView {
+class HorizontalScrollView : AppCompatHorizontalScrollView {
     constructor(context: Context) : super(context)
 
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
