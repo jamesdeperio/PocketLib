@@ -9,20 +9,16 @@ import jdp.pocketlib.R
 import java.util.*
 
 
-
-
 class DateRangePickerFragmentDialog : DialogFragment(), View.OnClickListener {
 
-    private var onDateRangeSelectedListener: OnDateRangeSelectedListener? = null
+    var listener: OnDateRangeSelectedListener? = null
 
+    var startDatePicker: DatePicker? = null
+    var endDatePicker: DatePicker? = null
     private var tabHost: TabHost? = null
-    private var startDatePicker: DatePicker? = null
-    private var endDatePicker: DatePicker? = null
-    private var butSetDateRange: Button? = null
-    fun initialize(callback: OnDateRangeSelectedListener) {
-        onDateRangeSelectedListener = callback
-    }
-
+    private var okAction: Button? = null
+    lateinit var endDatePage:TabHost.TabSpec
+    lateinit var startDatePage:TabHost.TabSpec
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -30,19 +26,19 @@ class DateRangePickerFragmentDialog : DialogFragment(), View.OnClickListener {
         dialog.window!!.requestFeature(Window.FEATURE_NO_TITLE)
         dialog.setCanceledOnTouchOutside(true)
         tabHost = root.findViewById(R.id.tabHost)
-        butSetDateRange = root.findViewById(R.id.but_set_time_range)
+        okAction = root.findViewById(R.id.but_set_time_range)
         startDatePicker = root.findViewById(R.id.start_date_picker)
         endDatePicker = root.findViewById(R.id.end_date_picker)
-        butSetDateRange!!.setOnClickListener(this)
+        okAction!!.setOnClickListener(this)
         tabHost!!.findViewById<View>(R.id.tabHost)
         tabHost!!.setup()
-        val startDatePage = tabHost!!.newTabSpec("start")
+        startDatePage = tabHost!!.newTabSpec("start")
         startDatePage.setContent(R.id.start_date_group)
         startDatePage.setIndicator("From")
 
-        val endDatePage = tabHost!!.newTabSpec("end")
+        endDatePage = tabHost!!.newTabSpec("end")
         endDatePage.setContent(R.id.end_date_group)
-        endDatePage.setIndicator("TO")
+        endDatePage.setIndicator("To")
 
         val current= Calendar.getInstance()
         startDatePicker!!.updateDate(current.get(Calendar.YEAR),0,1)
@@ -61,9 +57,6 @@ class DateRangePickerFragmentDialog : DialogFragment(), View.OnClickListener {
     }
 
 
-    fun setOnDateRangeSelectedListener(callback: OnDateRangeSelectedListener) {
-        this.onDateRangeSelectedListener = callback
-    }
 
     override fun onClick(v: View) {
         val c1 = Calendar.getInstance()
@@ -72,8 +65,8 @@ class DateRangePickerFragmentDialog : DialogFragment(), View.OnClickListener {
         c2.set(endDatePicker!!.year, endDatePicker!!.month, endDatePicker!!.dayOfMonth)
         if (c1.timeInMillis < c2.timeInMillis) {
             dismiss()
-            onDateRangeSelectedListener!!.onDateRangeSelected(c1, c2)
-        } else onDateRangeSelectedListener!!.onInvalidDateRange()
+            listener!!.onDateRangeSelected(c1, c2)
+        } else listener!!.onInvalidDateRange()
     }
 
     interface OnDateRangeSelectedListener {
@@ -81,12 +74,9 @@ class DateRangePickerFragmentDialog : DialogFragment(), View.OnClickListener {
         fun onInvalidDateRange()
     }
 
+
     companion object {
-        fun newInstance(callback: OnDateRangeSelectedListener): DateRangePickerFragmentDialog {
-            val dateRangePickerFragment = DateRangePickerFragmentDialog()
-            dateRangePickerFragment.initialize(callback)
-            return dateRangePickerFragment
-        }
+        fun newInstance(): DateRangePickerFragmentDialog  = DateRangePickerFragmentDialog()
     }
 
 }
