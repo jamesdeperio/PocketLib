@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">PocketLib</string>
+    <string name="top_sheet_behavior" >jdp.pocketlib.widget.TopSheetBehavior</string>
 </resources>
