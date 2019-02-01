@@ -1,8 +1,10 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package jdp.pocketlib.ext
 
 import java.io.File
 
-fun installAPK(filePath: String): Boolean {
+inline fun installAPK(filePath: String): Boolean {
     val file = File(filePath)
     return if (file.exists()) try {
         val proc:Process = Runtime.getRuntime().exec(arrayOf("su", "-c", "pm install -r $filePath"))
@@ -15,7 +17,7 @@ fun installAPK(filePath: String): Boolean {
     else false
 }
 
-fun shutdownDevice(): Boolean = try {
+inline fun shutdownDevice(): Boolean = try {
     val proc = Runtime.getRuntime().exec(arrayOf("su", "-c", "reboot -p"))
     proc.waitFor()
     true
@@ -24,7 +26,7 @@ fun shutdownDevice(): Boolean = try {
     false
 }
 
- fun rebootDevice(): Boolean = try {
+inline fun rebootDevice(): Boolean = try {
       val proc = Runtime.getRuntime()
               .exec(arrayOf("su", "-c", "reboot "))
       proc.waitFor()

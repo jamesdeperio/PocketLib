@@ -1,3 +1,5 @@
+@file:Suppress("NOTHING_TO_INLINE")
+
 package jdp.pocketlib.ext
 
 import android.Manifest
@@ -24,7 +26,7 @@ import java.net.NetworkInterface
 import java.util.*
 
 
-fun getIPAddress(): String? {
+inline fun getIPAddress(): String? {
     try {
         Collections.list(NetworkInterface.getNetworkInterfaces()).forEach {
             val addrs = Collections.list(it.inetAddresses)
@@ -40,7 +42,9 @@ fun getIPAddress(): String? {
     return null
 }
 
-private val cpu_file = arrayOf("cat sys/devices/system/cpu/cpu0/cpufreq/cpu_temp" ,
+
+inline fun getCPUTemperature(): Float {
+    val cpu_file = arrayOf("cat sys/devices/system/cpu/cpu0/cpufreq/cpu_temp" ,
         "cat sys/devices/system/cpu/cpu0/cpufreq/FakeShmoo_cpu_temp" ,
         "cat sys/class/thermal/thermal_zone1/temp",
         "cat sys/class/i2c-adapter/i2c-4/4-004c/temperature" ,
@@ -54,8 +58,6 @@ private val cpu_file = arrayOf("cat sys/devices/system/cpu/cpu0/cpufreq/cpu_temp
         "cat sys/class/hwmon/hwmon0/device/temp1_input" ,
         "cat sys/devices/virtual/thermal/thermal_zone1/temp" ,
         "cat sys/devices/platform/s5p-tmu/curr_temp" )
-
-fun getCPUTemperature(): Float {
     try {
         cpu_file.forEach {
             val p:Process? = Runtime.getRuntime().exec(it)
@@ -73,8 +75,7 @@ fun getCPUTemperature(): Float {
         return 0.0f
     }
 }
-
-private fun formatSize(it: Long): String {
+ inline fun formatSize(it: Long): String {
     var suffix: String? = null
     var size = it
     if (size >= 1024) {
@@ -95,7 +96,7 @@ private fun formatSize(it: Long): String {
     return resultBuffer.toString()
 }
 
-fun getAvailablelStorageSize(absolutePath: String): String {
+inline fun getAvailablelStorageSize(absolutePath: String): String {
     try{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             val path = File(absolutePath)
@@ -110,7 +111,7 @@ fun getAvailablelStorageSize(absolutePath: String): String {
     }
 }
 
-fun getTotalStorageSize(absolutePath: String): String {
+inline fun getTotalStorageSize(absolutePath: String): String {
     try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             val path = File(absolutePath)
@@ -125,7 +126,7 @@ fun getTotalStorageSize(absolutePath: String): String {
     }
 }
 
-fun getRamInfo(context: Context): String {
+inline fun getRamInfo(context: Context): String {
     val mi = ActivityManager.MemoryInfo()
     val activityManager = context.getSystemService(Service.ACTIVITY_SERVICE) as ActivityManager
     activityManager.getMemoryInfo(mi)
@@ -135,7 +136,7 @@ fun getRamInfo(context: Context): String {
 }
 
 @SuppressLint("MissingPermission")
-fun isNetworkConnectionAvailable(context: Context): Boolean {
+inline fun isNetworkConnectionAvailable(context: Context): Boolean {
     if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED )
         throw RuntimeException("ACCESS_NETWORK_STATE is not permitted!")
 
@@ -151,22 +152,22 @@ fun getScreenSize(windowManager: WindowManager): Point {
     return size
 }
 
-fun lockOrientation(activity: Activity) {
+inline fun lockOrientation(activity: Activity) {
     val currentOrientation = activity.resources.configuration.orientation
     if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
         activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
     else activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
 }
-fun unlockOrientation(activity: Activity) {
+inline fun unlockOrientation(activity: Activity) {
     activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
 }
 
-fun setVolume(context: Context,volume:Int) {
+inline fun setVolume(context: Context,volume:Int) {
     val  audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0)
 }
 
-fun enableFullscreen (decorView: View) {
+inline fun enableFullscreen (decorView: View) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
         decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
