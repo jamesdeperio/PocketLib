@@ -68,7 +68,6 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
     var selectedIndex=-1
     var itemBackgroundColor="#ffffff"
     var itemTextColor="#1d1d1d"
-
     private var listener: Listener<T> = object :Listener<T> {
         override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int) {
         }
@@ -111,6 +110,10 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         }
         adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
+        if (adapter.itemList.size==1) {
+            selectedIndex=0
+            selectedItem=adapter.itemList[0]!!.itemString!!
+        }
         return this
     }
 
@@ -120,6 +123,10 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         }
         adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
+        if (adapter.itemList.size==1) {
+            selectedIndex=0
+            selectedItem=adapter.itemList[0]!!.itemString!!
+        }
         return this
     }
 
@@ -130,6 +137,10 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         }
         adapter.searchItemList=adapter.itemList
         adapter.notifyDataSetChanged()
+        if (adapter.itemList.size==1) {
+            selectedIndex=0
+            selectedItem=adapter.itemList[0]!!.itemString!!
+        }
         return this
     }
 
@@ -137,6 +148,10 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         adapter.itemList[adapter.itemList.size]= PocketSpinnerItem(item = itemObject ,itemString = itemString)
         adapter.searchItemList=adapter.itemList
         adapter.notifyItemInserted(adapter.itemCount)
+        if (adapter.itemList.size==1) {
+            selectedIndex=0
+            selectedItem=adapter.itemList[0]!!.itemString!!
+        }
         return this
     }
 
@@ -144,6 +159,10 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         adapter.itemList[adapter.itemList.size]= PocketSpinnerItem(item = itemString ,itemString = itemString as String)
         adapter.searchItemList=adapter.itemList
         adapter.notifyItemInserted(adapter.itemCount)
+        if (adapter.itemList.size==1) {
+            selectedIndex=0
+            selectedItem=adapter.itemList[0]!!.itemString!!
+        }
         return this
     }
 

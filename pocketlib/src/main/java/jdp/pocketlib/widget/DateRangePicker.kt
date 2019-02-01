@@ -22,7 +22,18 @@ class DateRangePicker : FrameLayout{
     private var isFullScreen:Boolean=false
     lateinit var fragmentManager: FragmentManager
     var dialog: DateRangePickerFragmentDialog = DateRangePickerFragmentDialog.newInstance()
+    private var listener: OnDateRangeSelectedListener? = null
 
+    fun setOnDateRangeSelectedListener(task:(start:Calendar, end:Calendar)-> Unit) {
+        listener = object : OnDateRangeSelectedListener {
+            override fun onDateRangeSelected(start: Calendar, end: Calendar) {
+                task(start, end)
+            }
+        }
+    }
+    interface OnDateRangeSelectedListener {
+        fun onDateRangeSelected(start: Calendar, end: Calendar)
+     }
     fun setFontFamilyFromAsset(fontPath:String): DateRangePicker {
         val font = Typeface.createFromAsset(resources.assets, fontPath)
         layout.findViewById<TextView>(R.id.textbox).typeface = font
@@ -107,6 +118,7 @@ class DateRangePicker : FrameLayout{
             }
             dialog.listener =object :DateRangePickerFragmentDialog.OnDateRangeSelectedListener {
                 override fun onDateRangeSelected(start: Calendar, end: Calendar) {
+                    listener!!.onDateRangeSelected(start,end)
                     setText("${start.get(Calendar.MONTH)+1}/${start.get(Calendar.DAY_OF_MONTH)}/${start.get(Calendar.YEAR)} - ${end.get(Calendar.MONTH)+1}/${end.get(Calendar.DAY_OF_MONTH)}/${end.get(Calendar.YEAR)}")
 
                 }
