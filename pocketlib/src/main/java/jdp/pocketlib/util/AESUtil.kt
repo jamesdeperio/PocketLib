@@ -1,41 +1,44 @@
 package jdp.pocketlib.util
 
-import android.annotation.SuppressLint
 import javax.crypto.Cipher
-import javax.crypto.spec.SecretKeySpec
+import javax.crypto.SecretKey
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
+import javax.crypto.spec.PBEParameterSpec
+
+
 
 class AESUtil(private var keyValue:String="secure_key") {
+     private var cipher: Cipher? = null
+    private var secretKey: SecretKey? = null
+    private var keyFactory: SecretKeyFactory? = null
+    private var pbeKey: PBEKeySpec? = null
+    private var paramSpec: PBEParameterSpec? = null
+    private var salt = byteArrayOf(111, 123, 56, 123, 99, 108, 45, 65)
+    private val iterationCount = 21
     private var hex=" 0123456789ABCDEF"
+
+    init {
+        this.paramSpec = PBEParameterSpec(this.salt, this.iterationCount)
+        this.pbeKey = PBEKeySpec(this.keyValue.toCharArray())
+        this.keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES")
+        this.secretKey = keyFactory!!.generateSecret(this.pbeKey)
+        this.cipher = Cipher.getInstance("PBEWithMD5AndDES")
+    }
 
     @Throws(Exception::class)
     fun encrypt(cleartext: String): String {
-        val key = SecretKeySpec(keyValue.toByteArray(), "AES")
-        val result = encrypt(key.encoded, cleartext.toByteArray())
-        return toHex(result)
+        cipher!!.init(Cipher.ENCRYPT_MODE, this.secretKey, this.paramSpec)
+        val encrypted = cipher!!.doFinal(cleartext.toByteArray())
+        return toHex(encrypted)
     }
 
     @Throws(Exception::class)
     fun decrypt(encrypted: String): String {
-        val enc = toByte(encrypted)
-        val result = decrypt(enc)
-        return String(result)
-    }
+        cipher!!.init(Cipher.DECRYPT_MODE, this.secretKey, this.paramSpec)
+       val decryptedText = cipher!!.doFinal(toByte(encrypted))
 
-    @Throws(Exception::class)
-    private fun encrypt(raw: ByteArray, clear: ByteArray): ByteArray {
-        val skeySpec = SecretKeySpec(raw, "AES")
-        val cipher = Cipher.getInstance("AES")
-        cipher.init(Cipher.ENCRYPT_MODE, skeySpec)
-        return cipher.doFinal(clear)
-    }
-
-    @SuppressLint("GetInstance")
-    @Throws(Exception::class)
-    private fun decrypt(encrypted: ByteArray): ByteArray {
-        val skeySpec = SecretKeySpec(keyValue.toByteArray(), "AES")
-        val cipher = Cipher.getInstance("AES")
-        cipher.init(Cipher.DECRYPT_MODE, skeySpec)
-        return cipher.doFinal(encrypted)
+        return  String(decryptedText)
     }
 
     private fun toByte(hexString: String): ByteArray {
@@ -50,12 +53,9 @@ class AESUtil(private var keyValue:String="secure_key") {
     }
 
     private fun toHex(buf: ByteArray?): String {
-        if (buf == null)
-            return ""
+        if (buf == null) return ""
         val result = StringBuffer(2 * buf.size)
-        for (i in buf.indices) {
-            appendHex(result, buf[i])
-        }
+        for (i in buf.indices) appendHex(result, buf[i])
         return result.toString()
     }
 
