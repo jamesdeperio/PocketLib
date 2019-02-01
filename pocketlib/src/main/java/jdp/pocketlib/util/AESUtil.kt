@@ -1,5 +1,6 @@
 package jdp.pocketlib.util
 
+import java.util.*
 import javax.crypto.Cipher
 import javax.crypto.SecretKey
 import javax.crypto.SecretKeyFactory
@@ -27,40 +28,19 @@ class AESUtil(private var keyValue:String="secure_key") {
     }
 
     @Throws(Exception::class)
-    fun encrypt(cleartext: String): String {
+    fun encrypt(cleartext: ByteArray): String {
         cipher!!.init(Cipher.ENCRYPT_MODE, this.secretKey, this.paramSpec)
-        val encrypted = cipher!!.doFinal(cleartext.toByteArray())
-        return toHex(encrypted)
+        val data:String = Arrays.toString(cipher!!.doFinal(cleartext))
+        return data
     }
 
     @Throws(Exception::class)
     fun decrypt(encrypted: String): String {
         cipher!!.init(Cipher.DECRYPT_MODE, this.secretKey, this.paramSpec)
-       val decryptedText = cipher!!.doFinal(toByte(encrypted))
-
+        val split = encrypted.substring(1, encrypted.length - 1).split(", ")
+        val array = ByteArray(split.size)
+        for (i in split.indices) array[i] = java.lang.Byte.parseByte(split[i])
+       val decryptedText = cipher!!.doFinal(array)
         return  String(decryptedText)
-    }
-
-    private fun toByte(hexString: String): ByteArray {
-        val len = hexString.length / 2
-        val result = ByteArray(len)
-        for (i in 0 until len)
-            result[i] = Integer.valueOf(
-                hexString.substring(2 * i, 2 * i + 2),
-                16
-            ).toByte()
-        return result
-    }
-
-    private fun toHex(buf: ByteArray?): String {
-        if (buf == null) return ""
-        val result = StringBuffer(2 * buf.size)
-        for (i in buf.indices) appendHex(result, buf[i])
-        return result.toString()
-    }
-
-    private fun appendHex(sb: StringBuffer, b: Byte) {
-        sb.append(hex[(b.toInt() shr 4) and 0x0f])
-        sb.append(hex[b.toInt()  and 0x0f])
     }
 }

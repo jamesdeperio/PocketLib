@@ -13,7 +13,8 @@ class UserPrefManager( val context: Context, keyValue: String) {
             prefList[key+"|"+T::class.java.simpleName] = context.getSharedPreferences(T::class.java.simpleName, Context.MODE_PRIVATE)
         }
         val prefsEditor:SharedPreferences.Editor = prefList[key+"|"+T::class.java.simpleName]!!.edit()
-        prefsEditor.putString(key, aes.encrypt(Gson().toJson(value).toByteArray()))
+        val data:String= aes.encrypt(Gson().toJson(value).toByteArray())
+        prefsEditor.putString(key,data )
         prefsEditor.apply()
         return this
     }
