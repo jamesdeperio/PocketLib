@@ -34,6 +34,7 @@ class Spinner<T> : FrameLayout{
         layout.findViewById<TextView>(R.id.textbox).text = text
         return this
     }
+    fun getText():String = layout.findViewById<TextView>(R.id.textbox).text.toString()
     fun setHintColor(color:Int): Spinner<T> {
         layout.findViewById<TextView>(R.id.tvHint).setTextColor(color)
         return this
@@ -92,6 +93,9 @@ class Spinner<T> : FrameLayout{
     private fun setup(attrs: AttributeSet?, context: Context) {
         if (attrs != null) {
             dialog = SpinnerDialog(context,isFullScreen)
+            dialog.setOnItemSelectedListener { _, selectedItem, _ ->
+                setText(selectedItem)
+            }
             val attrib = context.obtainStyledAttributes(attrs, R.styleable.Spinner)
             val  f= attrib.getString(R.styleable.Spinner_spinner_font)?: ""
             var font:Typeface? = null

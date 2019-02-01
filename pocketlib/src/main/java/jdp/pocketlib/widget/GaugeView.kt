@@ -61,8 +61,8 @@ open class GaugeView : View {
     private fun setup(attrs: AttributeSet?) {
         val attrSet: TypedArray = context.obtainStyledAttributes(attrs, R.styleable.GaugeView)
         this.progress = attrSet.getInt(R.styleable.GaugeView_gauge_progress, 0)
-        this.angle = attrSet.getInt(R.styleable.GaugeView_gauge_angle, 0)
-        this.lineStrokeWidth = attrSet.getInt(R.styleable.GaugeView_gauge_width_stroke, 0)
+        this.angle = attrSet.getInt(R.styleable.GaugeView_gauge_angle, 1)
+        this.lineStrokeWidth = attrSet.getInt(R.styleable.GaugeView_gauge_width_stroke, 2)
         this.showProgressText = attrSet.getBoolean(R.styleable.GaugeView_gauge_show_progress_text, true)
         attrSet.recycle()
         this.linePaint.color = Color.BLACK

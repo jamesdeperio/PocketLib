@@ -11,11 +11,14 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.TextView
 import jdp.pocketlib.R
+import java.util.*
 
 
 class DateRangePicker : FrameLayout{
 
     private var layout: View
+    private var errorDialog= Dialog(context = context,type = Dialog.Type.DIALOG_ERROR)
+    var errorMessage:String ="Start Date should be greater than End Date"
     private var isFullScreen:Boolean=false
     lateinit var fragmentManager: FragmentManager
     var dialog: DateRangePickerFragmentDialog = DateRangePickerFragmentDialog.newInstance()
@@ -50,6 +53,7 @@ class DateRangePicker : FrameLayout{
         layout.findViewById<TextView>(R.id.textbox).textSize = size
         return this
     }
+    fun getText():String = layout.findViewById<TextView>(R.id.textbox).text.toString()
 
     fun setTextColor(color:Int): DateRangePicker {
         layout.findViewById<TextView>(R.id.textbox).setTextColor(color)
@@ -100,6 +104,18 @@ class DateRangePicker : FrameLayout{
             layout.findViewById<FrameLayout>(R.id.bottomLine).apply {
                 this.setBackgroundColor(attrib.getColor(R.styleable.DateRangePicker_date_range_bottomline_color, Color.BLACK))
                 this.setOnClickListener { dialog.show(fragmentManager,"DatePicker") }
+            }
+            dialog.listener =object :DateRangePickerFragmentDialog.OnDateRangeSelectedListener {
+                override fun onDateRangeSelected(start: Calendar, end: Calendar) {
+                    setText("${start.get(Calendar.MONTH)+1}/${start.get(Calendar.DAY_OF_MONTH)}/${start.get(Calendar.YEAR)} - ${end.get(Calendar.MONTH)+1}/${end.get(Calendar.DAY_OF_MONTH)}/${end.get(Calendar.YEAR)}")
+
+                }
+
+                override fun onInvalidDateRange() {
+                    errorDialog.description.text=errorMessage
+                    errorDialog.show()
+                }
+
             }
             layout.findViewById<TextView>(R.id.tvHint).apply {
                 this.setTextColor(attrib.getColor(R.styleable.DateRangePicker_date_range_hint_color, Color.BLUE))
