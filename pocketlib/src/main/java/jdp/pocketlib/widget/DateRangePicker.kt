@@ -118,7 +118,7 @@ class DateRangePicker : FrameLayout{
             }
             dialog.listener =object :DateRangePickerFragmentDialog.OnDateRangeSelectedListener {
                 override fun onDateRangeSelected(start: Calendar, end: Calendar) {
-                    listener!!.onDateRangeSelected(start,end)
+                    listener?.onDateRangeSelected(start,end)
                     setText("${start.get(Calendar.MONTH)+1}/${start.get(Calendar.DAY_OF_MONTH)}/${start.get(Calendar.YEAR)} - ${end.get(Calendar.MONTH)+1}/${end.get(Calendar.DAY_OF_MONTH)}/${end.get(Calendar.YEAR)}")
 
                 }
@@ -143,7 +143,7 @@ class DateRangePicker : FrameLayout{
                 if (font!=null) this.typeface=font
             }
             layout.findViewById<TextView>(R.id.textbox).apply {
-                this.text = attrib.getString(R.styleable.DateRangePicker_date_range_text)?: ""
+                this.text = attrib.getString(R.styleable.DateRangePicker_date_range_text)?: "MM/dd/yyyy - MM/dd/yyyy"
                 this.textSize = attrib.getInt(R.styleable.DateRangePicker_date_range_text_size,15).toFloat()
                 this.setTextColor( attrib.getColor(R.styleable.DateRangePicker_date_range_font_color, Color.BLACK))
                 this.gravity = when (attrib.getInt(R.styleable.DateRangePicker_date_range_gravity, 0)) {
@@ -152,7 +152,7 @@ class DateRangePicker : FrameLayout{
                     2 -> Gravity.CENTER
                     else -> Gravity.START
                 }
-                this.setOnClickListener {    this.setOnClickListener { dialog.show(fragmentManager,"DatePicker") }}
+                this.setOnClickListener { dialog.show(fragmentManager,"DatePicker") }
                 if (font!=null) this.typeface=font
             }
             setBackgroundColor(attrib.getColor(R.styleable.DateRangePicker_date_range_background_color, Color.WHITE))
