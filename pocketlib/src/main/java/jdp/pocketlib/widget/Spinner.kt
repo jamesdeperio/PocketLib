@@ -93,18 +93,18 @@ class Spinner<T> : FrameLayout{
         if (attrs != null) {
             dialog = SpinnerDialog(context,isFullScreen)
             val attrib = context.obtainStyledAttributes(attrs, R.styleable.Spinner)
-            val  f= attrib.getString(R.styleable.Spinner_pkt_font)?: ""
+            val  f= attrib.getString(R.styleable.Spinner_spinner_font)?: ""
             var font:Typeface? = null
             if (f.isNotEmpty()) font=Typeface.createFromAsset(resources.assets, f)
             layout.findViewById<FrameLayout>(R.id.bottomLine).apply {
-                this.setBackgroundColor(attrib.getColor(R.styleable.Spinner_pkt_bottomline_color, Color.BLACK))
+                this.setBackgroundColor(attrib.getColor(R.styleable.Spinner_spinner_bottomline_color, Color.BLACK))
                 this.setOnClickListener { dialog.show() }
             }
             layout.findViewById<TextView>(R.id.tvHint).apply {
-                this.setTextColor(attrib.getColor(R.styleable.Spinner_pkt_hint_color, Color.BLUE))
-                this.text = attrib.getString(R.styleable.Spinner_pkt_hint)?: ""
-                this.textSize = attrib.getInt(R.styleable.Spinner_pkt_hint_size,15).toFloat()
-                this.gravity = when (attrib.getInt(R.styleable.Spinner_pkt_hint_gravity, 0)) {
+                this.setTextColor(attrib.getColor(R.styleable.Spinner_spinner_hint_color, Color.BLUE))
+                this.text = attrib.getString(R.styleable.Spinner_spinner_hint)?: ""
+                this.textSize = attrib.getInt(R.styleable.Spinner_spinner_hint_size,15).toFloat()
+                this.gravity = when (attrib.getInt(R.styleable.Spinner_spinner_hint_gravity, 0)) {
                     0 -> Gravity.START
                     1 -> Gravity.END
                     2 -> Gravity.CENTER
@@ -114,10 +114,10 @@ class Spinner<T> : FrameLayout{
                 if (font!=null) this.typeface=font
             }
             layout.findViewById<TextView>(R.id.textbox).apply {
-                this.text = attrib.getString(R.styleable.Spinner_pkt_text)?: ""
-                this.textSize = attrib.getInt(R.styleable.Spinner_pkt_text_size,15).toFloat()
-                this.setTextColor( attrib.getColor(R.styleable.Spinner_pkt_font_color, Color.BLACK))
-                this.gravity = when (attrib.getInt(R.styleable.Spinner_pkt_gravity, 0)) {
+                this.text = attrib.getString(R.styleable.Spinner_spinner_text)?: ""
+                this.textSize = attrib.getInt(R.styleable.Spinner_spinner_text_size,15).toFloat()
+                this.setTextColor( attrib.getColor(R.styleable.Spinner_spinner_font_color, Color.BLACK))
+                this.gravity = when (attrib.getInt(R.styleable.Spinner_spinner_gravity, 0)) {
                     0 -> Gravity.START
                     1 -> Gravity.END
                     2 -> Gravity.CENTER
@@ -126,7 +126,7 @@ class Spinner<T> : FrameLayout{
                 this.setOnClickListener { dialog.show() }
                 if (font!=null) this.typeface=font
             }
-            setBackgroundColor(attrib.getColor(R.styleable.Spinner_pkt_background_color, Color.WHITE))
+            setBackgroundColor(attrib.getColor(R.styleable.Spinner_spinner_background_color, Color.WHITE))
             attrib.recycle()
         }
       }

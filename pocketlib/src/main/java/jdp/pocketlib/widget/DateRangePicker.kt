@@ -94,18 +94,18 @@ class DateRangePicker : FrameLayout{
     private fun setup(attrs: AttributeSet?, context: Context) {
         if (attrs != null) {
             val attrib = context.obtainStyledAttributes(attrs, R.styleable.DateRangePicker)
-            val  f= attrib.getString(R.styleable.DateRangePicker_pkt_font)?: ""
+            val  f= attrib.getString(R.styleable.DateRangePicker_date_range_font)?: ""
             var font:Typeface? = null
             if (f.isNotEmpty()) font=Typeface.createFromAsset(resources.assets, f)
             layout.findViewById<FrameLayout>(R.id.bottomLine).apply {
-                this.setBackgroundColor(attrib.getColor(R.styleable.DateRangePicker_pkt_bottomline_color, Color.BLACK))
+                this.setBackgroundColor(attrib.getColor(R.styleable.DateRangePicker_date_range_bottomline_color, Color.BLACK))
                 this.setOnClickListener { dialog.show(fragmentManager,"DatePicker") }
             }
             layout.findViewById<TextView>(R.id.tvHint).apply {
-                this.setTextColor(attrib.getColor(R.styleable.DateRangePicker_pkt_hint_color, Color.BLUE))
-                this.text = attrib.getString(R.styleable.DateRangePicker_pkt_hint)?: ""
-                this.textSize = attrib.getInt(R.styleable.DateRangePicker_pkt_hint_size,15).toFloat()
-                this.gravity = when (attrib.getInt(R.styleable.DateRangePicker_pkt_hint_gravity, 0)) {
+                this.setTextColor(attrib.getColor(R.styleable.DateRangePicker_date_range_hint_color, Color.BLUE))
+                this.text = attrib.getString(R.styleable.DateRangePicker_date_range_hint)?: ""
+                this.textSize = attrib.getInt(R.styleable.DateRangePicker_date_range_hint_size,15).toFloat()
+                this.gravity = when (attrib.getInt(R.styleable.DateRangePicker_date_range_hint_gravity, 0)) {
                     0 -> Gravity.START
                     1 -> Gravity.END
                     2 -> Gravity.CENTER
@@ -115,10 +115,10 @@ class DateRangePicker : FrameLayout{
                 if (font!=null) this.typeface=font
             }
             layout.findViewById<TextView>(R.id.textbox).apply {
-                this.text = attrib.getString(R.styleable.DateRangePicker_pkt_text)?: ""
-                this.textSize = attrib.getInt(R.styleable.DateRangePicker_pkt_text_size,15).toFloat()
-                this.setTextColor( attrib.getColor(R.styleable.DateRangePicker_pkt_font_color, Color.BLACK))
-                this.gravity = when (attrib.getInt(R.styleable.DateRangePicker_pkt_gravity, 0)) {
+                this.text = attrib.getString(R.styleable.DateRangePicker_date_range_text)?: ""
+                this.textSize = attrib.getInt(R.styleable.DateRangePicker_date_range_text_size,15).toFloat()
+                this.setTextColor( attrib.getColor(R.styleable.DateRangePicker_date_range_font_color, Color.BLACK))
+                this.gravity = when (attrib.getInt(R.styleable.DateRangePicker_date_range_gravity, 0)) {
                     0 -> Gravity.START
                     1 -> Gravity.END
                     2 -> Gravity.CENTER
@@ -127,7 +127,7 @@ class DateRangePicker : FrameLayout{
                 this.setOnClickListener {    this.setOnClickListener { dialog.show(fragmentManager,"DatePicker") }}
                 if (font!=null) this.typeface=font
             }
-            setBackgroundColor(attrib.getColor(R.styleable.DateRangePicker_pkt_background_color, Color.WHITE))
+            setBackgroundColor(attrib.getColor(R.styleable.DateRangePicker_date_range_background_color, Color.WHITE))
             attrib.recycle()
         }
       }

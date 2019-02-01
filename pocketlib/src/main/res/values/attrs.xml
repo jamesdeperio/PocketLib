@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="Spinner">
-        <attr name="pkt_hint" format="string"/>
-        <attr name="pkt_text" format="string"/>
-        <attr name="pkt_font" format="string"/>
-        <attr name="pkt_font_color" format="color"/>
-        <attr name="pkt_text_size" format="integer"/>
-        <attr name="pkt_hint_color" format="color"/>
-        <attr name="pkt_hint_size" format="integer"/>
-        <attr name="pkt_bottomline_color" format="color"/>
-        <attr name="pkt_background_color" format="color"/>
-        <attr name="pkt_gravity" format="enum">
+        <attr name="spinner_text" format="string"/>
+        <attr name="spinner_hint" format="string"/>
+        <attr name="spinner_font" format="string"/>
+        <attr name="spinner_font_color" format="color"/>
+        <attr name="spinner_text_size" format="integer"/>
+        <attr name="spinner_hint_color" format="color"/>
+        <attr name="spinner_hint_size" format="integer"/>
+        <attr name="spinner_bottomline_color" format="color"/>
+        <attr name="spinner_background_color" format="color"/>
+        <attr name="spinner_gravity" format="enum">
             <enum name="start" value="0"/>
             <enum name="end" value="1"/>
             <enum name="center" value="2"/>
         </attr>
-        <attr name="pkt_hint_gravity" format="enum">
+        <attr name="spinner_hint_gravity" format="enum">
             <enum name="start" value="0"/>
             <enum name="end" value="1"/>
             <enum name="center" value="2"/>
         </attr>
     </declare-styleable>
     <declare-styleable name="DateRangePicker">
-        <attr name="pkt_hint" format="string"/>
-        <attr name="pkt_text" format="string"/>
-        <attr name="pkt_font" format="string"/>
-        <attr name="pkt_font_color" format="color"/>
-        <attr name="pkt_text_size" format="integer"/>
-        <attr name="pkt_hint_color" format="color"/>
-        <attr name="pkt_hint_size" format="integer"/>
-        <attr name="pkt_bottomline_color" format="color"/>
-        <attr name="pkt_background_color" format="color"/>
-        <attr name="pkt_gravity" format="enum">
+        <attr name="date_range_text" format="string"/>
+        <attr name="date_range_hint" format="string"/>
+        <attr name="date_range_font" format="string"/>
+        <attr name="date_range_font_color" format="color"/>
+        <attr name="date_range_text_size" format="integer"/>
+        <attr name="date_range_hint_color" format="color"/>
+        <attr name="date_range_hint_size" format="integer"/>
+        <attr name="date_range_bottomline_color" format="color"/>
+        <attr name="date_range_background_color" format="color"/>
+        <attr name="date_range_gravity" format="enum">
             <enum name="start" value="0"/>
             <enum name="end" value="1"/>
             <enum name="center" value="2"/>
         </attr>
-        <attr name="pkt_hint_gravity" format="enum">
+        <attr name="date_range_hint_gravity" format="enum">
             <enum name="start" value="0"/>
             <enum name="end" value="1"/>
             <enum name="center" value="2"/>
         </attr>
     </declare-styleable>
     <declare-styleable name="GaugeView">
-        <attr name="progress" format="integer"/>
-        <attr name="angle" format="integer"/>
-        <attr name="widthStroke" format="integer"/>
-        <attr name="showProgressText" format="boolean"/>
+        <attr name="gauge_progress" format="integer"/>
+        <attr name="gauge_angle" format="integer"/>
+        <attr name="gauge_width_stroke" format="integer"/>
+        <attr name="gauge_show_progress_text" format="boolean"/>
     </declare-styleable>
 </resources>
