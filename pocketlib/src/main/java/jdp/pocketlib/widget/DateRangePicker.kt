@@ -17,12 +17,13 @@ import java.util.*
 class DateRangePicker : FrameLayout{
 
     private var layout: View
-    private var errorDialog= Dialog(context = context,type = Dialog.Type.DIALOG_ERROR)
+    var errorDialog= Dialog(context = context,type = Dialog.Type.DIALOG_ERROR)
     var errorMessage:String ="Start Date should be greater than End Date"
     private var isFullScreen:Boolean=false
     lateinit var fragmentManager: FragmentManager
     var dialog: DateRangePickerFragmentDialog = DateRangePickerFragmentDialog.newInstance()
     private var listener: OnDateRangeSelectedListener? = null
+    private var invalidListener: OnDateRangeInvalidListener? = null
 
     fun setOnDateRangeSelectedListener(task:(start:Calendar, end:Calendar)-> Unit) {
         listener = object : OnDateRangeSelectedListener {
@@ -31,9 +32,20 @@ class DateRangePicker : FrameLayout{
             }
         }
     }
+
+    fun setOnDateRangeInvalidListener(task:()-> Unit) {
+        invalidListener = object : OnDateRangeInvalidListener {
+            override fun onInvalidDateRange() {
+                task()
+            }
+        }
+    }
     interface OnDateRangeSelectedListener {
         fun onDateRangeSelected(start: Calendar, end: Calendar)
      }
+    interface OnDateRangeInvalidListener {
+        fun onInvalidDateRange()
+    }
     fun setFontFamilyFromAsset(fontPath:String): DateRangePicker {
         val font = Typeface.createFromAsset(resources.assets, fontPath)
         layout.findViewById<TextView>(R.id.textbox).typeface = font
@@ -124,8 +136,10 @@ class DateRangePicker : FrameLayout{
                 }
 
                 override fun onInvalidDateRange() {
-                    errorDialog.description.text=errorMessage
-                    errorDialog.show()
+                    if (invalidListener==null){
+                        errorDialog.description.text=errorMessage
+                        errorDialog.show()
+                    }else invalidListener?.onInvalidDateRange()
                 }
 
             }
