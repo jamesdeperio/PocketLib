@@ -4,9 +4,9 @@ import android.content.SharedPreferences
 import com.google.gson.Gson
 import jdp.pocketlib.util.AESUtil
 
-class UserPrefManager( val context: Context, key: String) {
+class UserPrefManager( val context: Context, keyValue: String) {
     var prefList:MutableMap<String,SharedPreferences> = HashMap()
-    var aes = AESUtil(key)
+    var aes = AESUtil(keyValue)
     @Synchronized
     inline fun <reified  T> set( key:String,value: T): UserPrefManager {
         if (prefList.none { it.key==key+"|"+T::class.java.simpleName }) {
