@@ -9,6 +9,8 @@
             android:layout_width="match_parent"
             android:text="Hint"
             android:id="@+id/tvHint"
+            android:clickable="true"
+            android:focusable="true"
             android:textColor="#ff0000"
             android:layout_height="wrap_content"
             tools:ignore="HardcodedText"/>
@@ -20,7 +22,6 @@
             android:layout_width="match_parent"
             android:minHeight="20dp"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:minLines="1"
             android:text="option"
             android:textColor="#000"
