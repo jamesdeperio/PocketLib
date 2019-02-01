@@ -18,7 +18,8 @@ import android.view.*
 import jdp.pocketlib.R
 import java.lang.ref.WeakReference
 
-class TopSheetBehavior<V : View> : CoordinatorLayout.Behavior<V> {
+class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(context: Context, attrs: AttributeSet) :
+    CoordinatorLayout.Behavior<V>(context, attrs) {
     private val mMaximumVelocity: Float
     var peekHeight: Int = 0
         set(peekHeight) {
@@ -143,11 +144,10 @@ class TopSheetBehavior<V : View> : CoordinatorLayout.Behavior<V> {
 
     @IntDef(STATE_EXPANDED, STATE_COLLAPSED, STATE_DRAGGING, STATE_SETTLING, STATE_HIDDEN)
     @Retention(AnnotationRetention.SOURCE)
-    annotation class State {}
+    annotation class State
 
 
-    @SuppressLint("PrivateResource")
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+    init {
         val a = context.obtainStyledAttributes(attrs, R.styleable.BottomSheetBehavior_Layout)
         peekHeight = a.getDimensionPixelSize(R.styleable.BottomSheetBehavior_Layout_behavior_peekHeight, 0)
         isHideable = a.getBoolean(R.styleable.BottomSheetBehavior_Layout_behavior_hideable, false)
@@ -407,7 +407,7 @@ class TopSheetBehavior<V : View> : CoordinatorLayout.Behavior<V> {
                         }
 
                         override fun newArray(p0: Int): Array<SavedState?> {
-                            return arrayOfNulls<SavedState>(p0)
+                            return arrayOfNulls(p0)
                         }
 
 
@@ -422,8 +422,8 @@ class TopSheetBehavior<V : View> : CoordinatorLayout.Behavior<V> {
         const val STATE_COLLAPSED = 4
         const val STATE_HIDDEN = 5
 
-        private val HIDE_THRESHOLD = 0.5f
-        private val HIDE_FRICTION = 0.1f
+        private const val HIDE_THRESHOLD = 0.5f
+        private const val HIDE_FRICTION = 0.1f
 
         @Suppress("UNCHECKED_CAST")
         fun <V : View> from(view: V): TopSheetBehavior<V> {

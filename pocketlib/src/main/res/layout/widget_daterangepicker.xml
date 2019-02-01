@@ -6,11 +6,12 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools">
     <TextView
-        android:layout_width="match_parent"
-        android:text="Hint"
-        android:id="@+id/tvHint"
-        android:textColor="#ff0000"
-        android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:text="Hint"
+            android:id="@+id/tvHint"
+            android:textColor="#ff0000"
+            android:layout_height="wrap_content"
+            tools:ignore="HardcodedText"/>
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

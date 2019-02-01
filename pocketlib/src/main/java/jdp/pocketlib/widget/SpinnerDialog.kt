@@ -194,7 +194,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
 
     }
     companion object Properties {
-        val NO_SELECTED_ITEM=-1
+        const val NO_SELECTED_ITEM=-1
     }
     interface Listener<T> {
         fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int)

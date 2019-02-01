@@ -57,7 +57,7 @@ private val cpu_file = arrayOf("cat sys/devices/system/cpu/cpu0/cpufreq/cpu_temp
 
 fun getCPUTemperature(): Float {
     try {
-        cpu_file.forEach { it ->
+        cpu_file.forEach {
             val p:Process? = Runtime.getRuntime().exec(it)
             System.gc()
             if (p==null) return@forEach
