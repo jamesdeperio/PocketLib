@@ -9,7 +9,7 @@ class AESUtil(private var keyValue:String="secure_key") {
 
     @Throws(Exception::class)
     fun encrypt(cleartext: String): String {
-        val key = SecretKeySpec(byteArrayOf(keyValue.toByte()), "AES")
+        val key = SecretKeySpec(keyValue.toByteArray(), "AES")
         val result = encrypt(key.encoded, cleartext.toByteArray())
         return toHex(result)
     }
@@ -32,7 +32,7 @@ class AESUtil(private var keyValue:String="secure_key") {
     @SuppressLint("GetInstance")
     @Throws(Exception::class)
     private fun decrypt(encrypted: ByteArray): ByteArray {
-        val skeySpec = SecretKeySpec(byteArrayOf(keyValue.toByte()), "AES")
+        val skeySpec = SecretKeySpec(keyValue.toByteArray(), "AES")
         val cipher = Cipher.getInstance("AES")
         cipher.init(Cipher.DECRYPT_MODE, skeySpec)
         return cipher.doFinal(encrypted)
