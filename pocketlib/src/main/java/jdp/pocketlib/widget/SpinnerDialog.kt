@@ -54,7 +54,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
     private val searchView = dialog.findViewById<SearchView>(R.id.searchView)!!.apply {
         this.setOnQueryTextListener(this@SpinnerDialog)
     }
-    private val adapter = SpinnerAdapter().apply {
+    val adapter = SpinnerAdapter().apply {
         val viewHolder= SpinnerViewHolder(this)
         viewHolder.setContentView(R.layout.item_list_spinner)
         this.addViewHolder(viewHolder)

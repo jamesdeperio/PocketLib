@@ -89,7 +89,35 @@ class Spinner<T> : FrameLayout{
         if (!isInEditMode)   setup(attrs, context)
     }
 
+    fun addItem (items:MutableMap<T,String>): Spinner<T> {
+        dialog.addItem(items)
+        if (dialog.adapter.itemList.size==1) setText(items.values.toMutableList()[0])
+        return this
+    }
 
+    fun addItem (items:MutableList<T>): Spinner<T> {
+        dialog.addItem(items)
+        if (dialog.adapter.itemList.size==1) setText(items[0].toString())
+        return this
+    }
+
+    fun addItem (itemObject:MutableList<T>,itemString:MutableList<String>): Spinner<T> {
+        dialog.addItem(itemObject,itemString)
+        if (dialog.adapter.itemList.size==1) setText(itemString[0])
+        return this
+    }
+
+    fun addItem (itemObject:T,itemString:String): Spinner<T> {
+        dialog.addItem(itemObject,itemString)
+        if (dialog.adapter.itemList.size==1) setText(itemString)
+        return this
+    }
+
+    fun addItem (itemString:T): Spinner<T> {
+        dialog.addItem(itemString)
+        if (dialog.adapter.itemList.size==1) setText(itemString.toString())
+        return this
+    }
     private fun setup(attrs: AttributeSet?, context: Context) {
         if (attrs != null) {
             dialog = SpinnerDialog(context,isFullScreen)
