@@ -113,6 +113,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         if (adapter.itemList.size==1) {
             selectedIndex=0
             selectedItem=adapter.itemList[0]!!.itemString!!
+            selectedObject = adapter.itemList[0]!!.item
         }
         return this
     }
@@ -126,6 +127,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         if (adapter.itemList.size==1) {
             selectedIndex=0
             selectedItem=adapter.itemList[0]!!.itemString!!
+            selectedObject = adapter.itemList[0]!!.item
         }
         return this
     }
@@ -140,6 +142,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         if (adapter.itemList.size==1) {
             selectedIndex=0
             selectedItem=adapter.itemList[0]!!.itemString!!
+            selectedObject = adapter.itemList[0]!!.item
         }
         return this
     }
@@ -151,6 +154,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         if (adapter.itemList.size==1) {
             selectedIndex=0
             selectedItem=adapter.itemList[0]!!.itemString!!
+            selectedObject = adapter.itemList[0]!!.item
         }
         return this
     }
@@ -162,6 +166,7 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
         if (adapter.itemList.size==1) {
             selectedIndex=0
             selectedItem=adapter.itemList[0]!!.itemString!!
+            selectedObject = adapter.itemList[0]!!.item
         }
         return this
     }

@@ -1,3 +1,5 @@
+@file:Suppress("SuspiciousVarProperty")
+
 package jdp.pocketlib.widget
 
 import android.content.Context
@@ -17,6 +19,13 @@ class Spinner<T> : FrameLayout{
     private var layout: View
     private var isFullScreen:Boolean=false
     lateinit var dialog: SpinnerDialog<T>
+
+    var selectedObject:T? = null
+        get() = dialog.selectedObject!!
+    var selectedItem:String=""
+        get() = dialog.selectedItem
+    var selectedIndex=-1
+        get() = dialog.selectedIndex
 
     fun setFontFamilyFromAsset(fontPath:String): Spinner<T> {
         val font = Typeface.createFromAsset(resources.assets, fontPath)
