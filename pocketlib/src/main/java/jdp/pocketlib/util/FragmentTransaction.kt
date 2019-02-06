@@ -1,3 +1,5 @@
+@file:Suppress("LiftReturnOrAssignment")
+
 package jdp.pocketlib.util
 
 import android.support.annotation.LayoutRes
@@ -41,18 +43,18 @@ class FragmentTransaction(
         when {
             isAnimationEnabled  && fromFragment==null ->  transaction= fragmentManager.beginTransaction()
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                    .add(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
                     .disallowAddToBackStack()
             !isAnimationEnabled  && fromFragment==null ->  transaction= fragmentManager.beginTransaction()
-                    .add(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
                     .disallowAddToBackStack()
             isAnimationEnabled  ->  transaction= fragmentManager.beginTransaction()
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                    .add(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
                     .hide(fromFragment!!)
                     .disallowAddToBackStack()
             else -> transaction= fragmentManager.beginTransaction()
-                    .add(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
                     .hide(fromFragment!!)
                     .disallowAddToBackStack()
         }
