@@ -28,6 +28,7 @@ internal interface HasAdapterContract {
         fun notifyItemRangeChanged(positionStart: Int, itemCount:Int, payLoad:Any?)
         fun notifyItemRangeInserted(positionStart: Int, itemCount:Int)
         fun notifyItemRemoved(position:Int)
+        fun getInstance(): jdp.pocketlib.base.PagedListAdapter.BasePagedAdapter
     }
     interface Holder {
         fun setContentView(layoutID: Int)

@@ -14,6 +14,7 @@ abstract class PagedListAdapter: HasAdapterContract.Adapter, HasAdapterContract.
     private var selectedLayout: Int = 0
     private val adapter= BasePagedAdapter()
 
+    override fun getInstance() :PagedListAdapter.BasePagedAdapter = adapter
     override fun viewTypeCondition(position: Int): Int = 0
 
     override fun notifyDataSetChanged() {
