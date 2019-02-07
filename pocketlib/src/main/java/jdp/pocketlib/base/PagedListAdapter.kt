@@ -22,9 +22,9 @@ abstract class PagedListAdapter: HasAdapterContract.Adapter {
         pocketViewHolderList.add(viewHolder)
     }
 
-    internal abstract fun isContentListTheSame(): Boolean
-    internal abstract fun isItemListTheSame(): Boolean
-    internal abstract fun getItemCount(): Int
+    abstract fun isContentListTheSame(): Boolean
+    abstract fun isItemListTheSame(): Boolean
+    abstract fun getItemCount(): Int
 
     inner class BasePagedAdapter : PagedListAdapter<Any, RecyclerView.ViewHolder> {
         constructor() : super(object : DiffUtil.ItemCallback<Any>() {
