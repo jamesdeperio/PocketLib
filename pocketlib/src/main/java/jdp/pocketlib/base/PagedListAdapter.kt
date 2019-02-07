@@ -1,11 +1,11 @@
 package jdp.pocketlib.base
 
-import android.arch.paging.PagedListAdapter
 import android.support.v7.recyclerview.extensions.AsyncDifferConfig
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.arch.paging.PagedListAdapter as AndroidAdapter
 
 
 abstract class PagedListAdapter: HasAdapterContract.Adapter {
@@ -26,7 +26,7 @@ abstract class PagedListAdapter: HasAdapterContract.Adapter {
     abstract fun isItemListTheSame(): Boolean
     abstract fun getItemCount(): Int
 
-    inner class BasePagedAdapter : PagedListAdapter<Any, RecyclerView.ViewHolder> {
+    inner class BasePagedAdapter : AndroidAdapter<Any, RecyclerView.ViewHolder> {
         constructor() : super(object : DiffUtil.ItemCallback<Any>() {
             override fun areItemsTheSame(o: Any, t1: Any): Boolean = isItemListTheSame()
             override fun areContentsTheSame(o: Any, t1: Any): Boolean = isContentListTheSame()
