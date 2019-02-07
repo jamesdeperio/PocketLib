@@ -20,28 +20,28 @@ class FragmentTransaction(
     var toAnimExit: Int = R.anim.h_fragment_pop_exit
     var fromAnimEnter: Int = R.anim.h_fragment_enter
     var fromAnimExit: Int = R.anim.h_fragment_exit
-
+    var tag :String? = null
 
     fun add() {
         val transaction: FragmentTransaction
         when {
             isAnimationEnabled && fromFragment!=null ->  transaction= fragmentManager.beginTransaction()
                 .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                .add(layoutID, toFragment, toFragment.javaClass.simpleName)
+                .add(layoutID, toFragment, tag?:toFragment.javaClass.simpleName)
                 .hide(fromFragment!!)
-                .addToBackStack(toFragment.javaClass.simpleName)
+                .addToBackStack(tag?:toFragment.javaClass.simpleName)
             isAnimationEnabled && fromFragment==null ->  transaction= fragmentManager.beginTransaction()
                 .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                .add(layoutID, toFragment, toFragment.javaClass.simpleName)
-                .addToBackStack(toFragment.javaClass.simpleName)
+                .add(layoutID, toFragment, tag?:toFragment.javaClass.simpleName)
+                .addToBackStack(tag?:toFragment.javaClass.simpleName)
             !isAnimationEnabled && fromFragment==null ->  transaction= fragmentManager.beginTransaction()
                 .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                .add(layoutID, toFragment, toFragment.javaClass.simpleName)
-                .addToBackStack(toFragment.javaClass.simpleName)
+                .add(layoutID, toFragment, tag?:toFragment.javaClass.simpleName)
+                .addToBackStack(tag?:toFragment.javaClass.simpleName)
             else  ->  transaction= fragmentManager.beginTransaction()
-                    .add(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .add(layoutID, toFragment, tag?:toFragment.javaClass.simpleName)
                     .hide(fromFragment!!)
-                    .addToBackStack(toFragment.javaClass.simpleName)
+                    .addToBackStack(tag?:toFragment.javaClass.simpleName)
         }
         commit(transaction)
     }
@@ -51,18 +51,18 @@ class FragmentTransaction(
         when {
             isAnimationEnabled  && fromFragment==null ->  transaction= fragmentManager.beginTransaction()
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment, tag?:toFragment.javaClass.simpleName)
                     .disallowAddToBackStack()
             !isAnimationEnabled  && fromFragment==null ->  transaction= fragmentManager.beginTransaction()
-                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment, tag?:toFragment.javaClass.simpleName)
                     .disallowAddToBackStack()
             isAnimationEnabled  ->  transaction= fragmentManager.beginTransaction()
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
-                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment, tag?:toFragment.javaClass.simpleName)
                     .hide(fromFragment!!)
                     .disallowAddToBackStack()
             else -> transaction= fragmentManager.beginTransaction()
-                    .replace(layoutID, toFragment, toFragment.javaClass.simpleName)
+                    .replace(layoutID, toFragment,tag?: toFragment.javaClass.simpleName)
                     .hide(fromFragment!!)
                     .disallowAddToBackStack()
         }
