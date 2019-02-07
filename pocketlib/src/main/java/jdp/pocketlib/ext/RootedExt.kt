@@ -4,10 +4,10 @@ package jdp.pocketlib.ext
 
 import java.io.File
 
-inline fun installAPK(filePath: String): Boolean {
-    val file = File(filePath)
+inline fun String.installAPK(): Boolean {
+    val file = File(this)
     return if (file.exists()) try {
-        val proc:Process = Runtime.getRuntime().exec(arrayOf("su", "-c", "pm install -r $filePath"))
+        val proc:Process = Runtime.getRuntime().exec(arrayOf("su", "-c", "pm install -r $this"))
         proc.waitFor()
         true
     } catch (e: Exception) {

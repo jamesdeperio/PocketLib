@@ -42,7 +42,6 @@ inline fun getIPAddress(): String? {
     return null
 }
 
-
 inline fun getCPUTemperature(): Float {
     val cpu_file = arrayOf("cat sys/devices/system/cpu/cpu0/cpufreq/cpu_temp" ,
         "cat sys/devices/system/cpu/cpu0/cpufreq/FakeShmoo_cpu_temp" ,
@@ -75,9 +74,10 @@ inline fun getCPUTemperature(): Float {
         return 0.0f
     }
 }
- inline fun formatSize(it: Long): String {
+
+inline fun Long.formatSize(): String {
     var suffix: String? = null
-    var size = it
+    var size = this
     if (size >= 1024) {
         suffix = "KB"
         size /= 1024
@@ -96,14 +96,14 @@ inline fun getCPUTemperature(): Float {
     return resultBuffer.toString()
 }
 
-inline fun getAvailablelStorageSize(absolutePath: String): String {
+inline fun String.getAvailablelStorageSize(): String {
     try{
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            val path = File(absolutePath)
+            val path = File(this)
             val stat = StatFs(path.path)
             val blockSize = stat.blockSizeLong
             val availableBlocks = stat.availableBlocksLong
-            return formatSize(availableBlocks * blockSize)
+            return (availableBlocks * blockSize).formatSize()
         }
         return "N/A"
     }catch (e:Exception){e.printStackTrace()
@@ -111,14 +111,14 @@ inline fun getAvailablelStorageSize(absolutePath: String): String {
     }
 }
 
-inline fun getTotalStorageSize(absolutePath: String): String {
+inline fun String.getTotalStorageSize(): String {
     try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            val path = File(absolutePath)
+            val path = File(this)
             val stat = StatFs(path.path)
             val blockSize = stat.blockSizeLong
             val totalBlocks = stat.blockCountLong
-            return formatSize(totalBlocks * blockSize)
+            return (totalBlocks * blockSize).formatSize()
         }
         return "N/A"
     }catch (e:Exception){
@@ -126,56 +126,57 @@ inline fun getTotalStorageSize(absolutePath: String): String {
     }
 }
 
-inline fun getRamInfo(context: Context): String {
+inline fun Context.getRamInfo(): String {
     val mi = ActivityManager.MemoryInfo()
-    val activityManager = context.getSystemService(Service.ACTIVITY_SERVICE) as ActivityManager
+    val activityManager = this.getSystemService(Service.ACTIVITY_SERVICE) as ActivityManager
     activityManager.getMemoryInfo(mi)
     val availableMegs = mi.availMem / 0x100000L
     val totalMegs = mi.totalMem / 0x100000L
-    return availableMegs.toString()+" MB of "+totalMegs+" MB"
+    return "$availableMegs MB of $totalMegs MB"
 }
 
 @SuppressLint("MissingPermission")
-inline fun isNetworkConnectionAvailable(context: Context): Boolean {
-    if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED )
+inline fun Context.isNetworkConnectionAvailable(): Boolean {
+    if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_NETWORK_STATE) != PackageManager.PERMISSION_GRANTED )
         throw RuntimeException("ACCESS_NETWORK_STATE is not permitted!")
 
-    val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+    val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
     val activeNetworkInfo = connectivityManager.activeNetworkInfo
     return activeNetworkInfo != null && activeNetworkInfo.isConnected
 }
 
-fun getScreenSize(windowManager: WindowManager): Point {
-    val display = windowManager.defaultDisplay
+fun WindowManager.getScreenSize(): Point {
+    val display = this.defaultDisplay
     val size = Point()
     display.getSize(size)
     return size
 }
 
-inline fun lockOrientation(activity: Activity) {
-    val currentOrientation = activity.resources.configuration.orientation
+inline fun Activity.lockOrientation() {
+    val currentOrientation = this.resources.configuration.orientation
     if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE)
-        activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
-    else activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
-}
-inline fun unlockOrientation(activity: Activity) {
-    activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE
+    else this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
 }
 
-inline fun setVolume(context: Context,volume:Int) {
-    val  audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+inline fun Activity.unlockOrientation() {
+    this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR
+}
+
+inline fun Context.setVolume(volume:Int) {
+    val  audioManager = this.getSystemService(Context.AUDIO_SERVICE) as AudioManager
     audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0)
 }
 
-inline fun enableFullscreen (decorView: View) {
+inline fun View.enableFullscreen () {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT)
-        decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+        this.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                 or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                 or View.SYSTEM_UI_FLAG_FULLSCREEN
                 or View.SYSTEM_UI_FLAG_IMMERSIVE)
-    else decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+    else this.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
             or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
             or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
             or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
