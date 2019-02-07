@@ -18,6 +18,17 @@ internal interface HasAdapterContract {
         fun viewTypeCondition(position: Int): Int
         fun addViewHolder(viewHolder: ViewHolder)
     }
+    interface PagedListAdapter {
+        fun notifyDataSetChanged()
+        fun notifyItemChanged(position: Int)
+        fun notifyItemChanged(position: Int,payLoad: Any?)
+        fun notifyItemInserted(position: Int)
+        fun notifyItemMoved(fromPosition: Int, toPosition:Int)
+        fun notifyItemRangeChanged(positionStart: Int, itemCount:Int)
+        fun notifyItemRangeChanged(positionStart: Int, itemCount:Int, payLoad:Any?)
+        fun notifyItemRangeInserted(positionStart: Int, itemCount:Int)
+        fun notifyItemRemoved(position:Int)
+    }
     interface Holder {
         fun setContentView(layoutID: Int)
         fun setView(view: View)

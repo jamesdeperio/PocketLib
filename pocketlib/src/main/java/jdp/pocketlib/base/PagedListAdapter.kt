@@ -8,15 +8,49 @@ import android.view.ViewGroup
 import android.arch.paging.PagedListAdapter as AndroidAdapter
 
 
-abstract class PagedListAdapter: HasAdapterContract.Adapter {
+abstract class PagedListAdapter: HasAdapterContract.Adapter, HasAdapterContract.PagedListAdapter {
 
     private val pocketViewHolderList = ArrayList<ViewHolder>()
     private var selectedLayout: Int = 0
     private val adapter= BasePagedAdapter()
 
-    fun  getDelegate(): BasePagedAdapter = adapter
-
     override fun viewTypeCondition(position: Int): Int = 0
+
+    override fun notifyDataSetChanged() {
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun notifyItemChanged(position: Int) {
+        adapter.notifyItemChanged(position)
+    }
+
+    override fun notifyItemChanged(position: Int, payLoad: Any?) {
+        adapter.notifyItemChanged(position,payLoad)
+    }
+
+    override fun notifyItemInserted(position: Int) {
+        adapter.notifyItemInserted(position)
+    }
+
+    override fun notifyItemMoved(fromPosition: Int, toPosition: Int) {
+        adapter.notifyItemMoved(fromPosition,toPosition)
+    }
+
+    override fun notifyItemRangeChanged(positionStart: Int, itemCount: Int) {
+        adapter.notifyItemRangeChanged(positionStart,itemCount)
+    }
+
+    override fun notifyItemRangeChanged(positionStart: Int, itemCount: Int, payLoad: Any?) {
+        adapter.notifyItemRangeChanged(positionStart,itemCount,payLoad)
+    }
+
+    override fun notifyItemRangeInserted(positionStart: Int, itemCount: Int) {
+        adapter.notifyItemRangeInserted(positionStart,itemCount)
+    }
+
+    override fun notifyItemRemoved(position: Int) {
+        adapter.notifyItemRemoved(position)
+    }
 
     override fun addViewHolder(viewHolder: ViewHolder) {
         pocketViewHolderList.add(viewHolder)
