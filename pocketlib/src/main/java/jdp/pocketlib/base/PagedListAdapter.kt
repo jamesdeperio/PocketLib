@@ -57,14 +57,14 @@ abstract class PagedListAdapter: HasAdapterContract.Adapter, HasAdapterContract.
         pocketViewHolderList.add(viewHolder)
     }
 
-    abstract fun isContentListTheSame(): Boolean
-    abstract fun isItemListTheSame(): Boolean
+    abstract fun isContentListTheSame(oldItem: Any, newItem: Any): Boolean
+    abstract fun isItemListTheSame(oldItem: Any, newItem: Any): Boolean
     abstract fun getItemCount(): Int
 
     inner class BasePagedAdapter : AndroidAdapter<Any, RecyclerView.ViewHolder> {
         constructor() : super(object : DiffUtil.ItemCallback<Any>() {
-            override fun areItemsTheSame(o: Any, t1: Any): Boolean = isItemListTheSame()
-            override fun areContentsTheSame(o: Any, t1: Any): Boolean = isContentListTheSame()
+            override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean = isItemListTheSame(oldItem,newItem)
+            override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean = isContentListTheSame(oldItem,newItem)
         })
 
         override fun getItemViewType(position: Int): Int {
