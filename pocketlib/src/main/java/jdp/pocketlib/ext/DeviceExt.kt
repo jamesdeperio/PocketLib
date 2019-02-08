@@ -145,7 +145,7 @@ inline fun Context.isNetworkConnectionAvailable(): Boolean {
     return activeNetworkInfo != null && activeNetworkInfo.isConnected
 }
 
-fun WindowManager.getScreenSize(): Point {
+inline fun WindowManager.getScreenSize(): Point {
     val display = this.defaultDisplay
     val size = Point()
     display.getSize(size)
