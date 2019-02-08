@@ -19,20 +19,87 @@ ___
 ### [READ FULL DOCUMENTATION](https://jamesdeperio.github.io/pocketlib/) 
 ### [DEMO APK](https://github.com/jamesdeperio/CodePocketBuilderDemo/blob/master/app-debug.apk)
 ___
-## SCREENSHOTS
+## SAMPLE SCREENSHOTS
 * **EASY TO CREATE MULTIPLE VIEWHOLDER**
 ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/multipleviewholder.png "multipleviewholder")
 ___
-* **Pocket Spinner Dialog**
+* **Spinner**
 ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/pocketspinner.png "pocketspinner")
 ___
-* **Customizable Pocket Dialog**
+* **Customizable Dialog**
 ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
 ___
 ## CHANGELOG
+###  3.0.0
+ ##### MAJOR UPDATES
+* Refactored: the widgets and layout manager
+  --- removed the prefix "Pocket"
+* Improved: Spinner Dialog
+* Improved: Spinner Widget
+* Added: DateRangePicker
+* Added: DateRangePickerFragmentDialog
+* Added: UserPrefManager
+   --- data stored are encrypted 
+* Added: PageListAdapter (same implementation as Adapter)
+* Added: GaugeView
+* Added: TopSheetDialog
+* Added: Utilities
+``` kotlin  
+// DEVICE EXT
+getIPAddress(): String?
+getCPUTemperature(): Float
+String.getAvailablelStorageSize(): String
+String.getTotalStorageSize(): String
+Context.getRamInfo(): String
+Context.isNetworkConnectionAvailable(): Boolean
+WindowManager.getScreenSize(): Point
+Activity.lockOrientation()
+Context.setVolume(volume:Int)
+View.enableFullscreen()
+Activity.unlockOrientation() 
+Activity.unlockOrientation() 
+Activity.unlockOrientation() 
+Activity.unlockOrientation() 
+```  
+``` kotlin  
+// EVALUATION EXT
+String.isNumber():Boolean
+String.hasNumber():Boolean 
+String.isDouble():Boolean 
+String.isInteger():Boolean 
+String.isTimeBetween(argStartTime: String, argEndTime: String): Boolean
+Date.isTimeBetween(argStartTime: Date, argEndTime: Date): Boolean
+```
+``` kotlin  
+// FRAGMENT MANAGER EXT
+FragmentManager.add(allowStateLoss:Boolean=false,isAnimationEnabled: Boolean = true,properties: FragmentTransaction.() -> Unit) 
+FragmentManager.replace(allowStateLoss:Boolean=false,isAnimationEnabled: Boolean = true,properties: FragmentTransaction.() -> Unit)
+FragmentManager.createViewPager(properties: PageBuilder.() -> Unit) 
+```
+``` kotlin  
+// IMAGE EXT
+ Bitmap.encodeToBase64String(compressFormat: Bitmap.CompressFormat=Bitmap.CompressFormat.PNG, quality: Int=80): String
+String.toBitmap(): Bitmap
+```
+``` kotlin  
+// LOG EXT
+Any.VERBOSE(message: String)
+Any.DEBUG(message: String)
+Any.INFO(message: String)
+Any.WARNING(message: String)
+Any.ERROR(message: String) 
+Any.WTF(message: String)
+```
+``` kotlin  
+// ROOTED EXT
+String.installAPK(): Boolean
+shutdownDevice(): Boolean 
+rebootDevice(): Boolean 
+```
+
 #### 2.2.0
 - ADDED A VIEW: PocketSpinner
 - UPDATED: changed button style in PocketDialog
