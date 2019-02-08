@@ -71,7 +71,7 @@ String.isNumber():Boolean
 String.hasNumber():Boolean 
 String.isDouble():Boolean 
 String.isInteger():Boolean 
-String.isTimeBetween(argStartTime: String, argEndTime: String): Boolean
+String.isTimeBetween(argStartTime: String, argEndTime: String): Boolean  //FORMAT "HH:mm:ss"
 Date.isTimeBetween(argStartTime: Date, argEndTime: Date): Boolean
 ```
 ``` kotlin  
