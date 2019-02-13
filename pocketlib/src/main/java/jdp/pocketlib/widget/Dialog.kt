@@ -3,6 +3,7 @@ package jdp.pocketlib.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
+import android.support.v7.widget.AppCompatImageView
 import android.view.Gravity
 import android.view.View
 import android.view.Window
@@ -25,6 +26,7 @@ open class Dialog(context: Context, type:Dialog.Type, private var isFullScreen:B
          DIALOG_SUCCESS,
          DIALOG_SEARCH,
          DIALOG_CUSTOM,
+         DIALOG_STATIC_IMAGE,
         DIALOG_LOADER
     }
     val dialog=AndroidDialog(context).apply {
@@ -70,6 +72,9 @@ open class Dialog(context: Context, type:Dialog.Type, private var isFullScreen:B
     }
     val view= dialog.findViewById<LinearLayout>(R.id.container)!!
     val viewSeparator= dialog.findViewById<FrameLayout>(R.id.viewSeparator)!!
+    val image= dialog.findViewById<AppCompatImageView>(R.id.imageView)!!.apply {
+        if (type==Type.DIALOG_STATIC_IMAGE) this.visibility=View.VISIBLE
+    }
     @SuppressLint("SetTextI18n")
     val lottie= dialog.findViewById<LottieAnimationView>(R.id.lottieView)!!.apply {
         dialog.setCanceledOnTouchOutside(false)
@@ -129,6 +134,9 @@ open class Dialog(context: Context, type:Dialog.Type, private var isFullScreen:B
         return this
     }
 
+    fun setAnimation(anim:Int){
+        dialog.window!!.attributes.windowAnimations =anim
+    }
     fun isShowing() :Boolean = dialog.isShowing
 
     fun show() :Dialog {

@@ -8,13 +8,23 @@
     android:background="#fff"
     android:id="@+id/container">
 
-<com.airbnb.lottie.LottieAnimationView
-    android:layout_width="100dp"
-    android:layout_height="100dp"
-    android:layout_marginTop="15dp"
-    android:layout_gravity="center"
-    android:id="@+id/lottieView"
-    />
+    <FrameLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+        <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/lottieView"
+        />
+        <android.support.v7.widget.AppCompatImageView
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView"
+                tools:ignore="ContentDescription"/>
+
+    </FrameLayout>
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
