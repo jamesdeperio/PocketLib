@@ -17,7 +17,7 @@ import jdp.pocketlib.manager.Bus
 import jdp.pocketlib.manager.EventBusManager
 
 @SuppressLint("ValidFragment")
-class TempFragment(private val eventBusManager: EventBusManager, private val type: String) :BaseFragment() {
+private class TempImageFragment(private val eventBusManager: EventBusManager, private val type: String) :BaseFragment() {
     override fun onInitialization(savedInstanceState: Bundle?) {
         when (type) {
             RxImageRequest.GALLERY -> startActivityForResult(Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI),1)
@@ -59,7 +59,7 @@ object RxImageRequest {
     const val CAMERA="CAMERA"
     fun request(type:String,fragmentManager:FragmentManager,callback:(bitmap:Bitmap)-> Unit) {
         val eventBusManager= EventBusManager(Bus.PublishSubject)
-        val tempFragment :Fragment= TempFragment(eventBusManager,type)
+        val tempFragment :Fragment= TempImageFragment(eventBusManager,type)
         fragmentManager.beginTransaction()
             .add(tempFragment, tempFragment.javaClass.simpleName)
             .commit()
@@ -76,7 +76,7 @@ object RxImageRequest {
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     fun requestMultipleImage(fragmentManager:FragmentManager, callback:(bitmap: ArrayList<Uri>)-> Unit) {
         val eventBusManager= EventBusManager(Bus.PublishSubject)
-        val tempFragment :Fragment= TempFragment(eventBusManager,MULTIPLE_IMAGE)
+        val tempFragment :Fragment= TempImageFragment(eventBusManager,MULTIPLE_IMAGE)
         fragmentManager.beginTransaction()
             .add(tempFragment, tempFragment.javaClass.simpleName)
             .commit()
