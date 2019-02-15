@@ -23,6 +23,7 @@ private class TempPermissionFragment(private val eventBusManager: EventBusManage
             permissions.filter {  (permissions[i]==it) }
                 .forEach { eventBusManager.sendEvent(RxPermissionRequest.PERMISSION_REQUEST,PermissionResult(it,true)) }
         }
+    //    eventBusManager.doOnCompl
     }
 }
  data class PermissionResult( var name:String="", var result:Boolean=false)
@@ -36,10 +37,6 @@ object RxPermissionRequest {
             .commit()
         eventBusManager.subscribeReceiver(PERMISSION_REQUEST) {
             callback(it as PermissionResult)
-            fragmentManager.beginTransaction()
-                .remove(tempFragment)
-                .commit()
-            eventBusManager.disposeAllChannel()
         }
     }
 }

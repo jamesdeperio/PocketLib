@@ -14,7 +14,7 @@ import android.support.v4.view.ViewPager
 import jdp.pocketlib.base.ViewPagerAdapter
 
 /**
- * Created by Jamesdeperio on 28/02/2018.
+ * Created by James de perio on 28/02/2018.
  */
 
 class PageBuilder {
