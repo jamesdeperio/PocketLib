@@ -34,6 +34,15 @@ ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
 ___
 ## CHANGELOG
+###  3.1.0
+* Added: FragmentManager.requestPermissions()
+* Added: NFCActivity
+* Added: FragmentManager.useMultiSelectGallery()
+* Added: FragmentManager.useGallery()
+* Added: FragmentManager.useCamera()
+* Updated: Dialog.setAnimation()
+* Updated: Dialog.TYPE.STATIC_IMAGE
+* Updated: Dialog.image
 ###  3.0.0
  ##### MAJOR UPDATES
 * Refactored: the widgets and layout manager
