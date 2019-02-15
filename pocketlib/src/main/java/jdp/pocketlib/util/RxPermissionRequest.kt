@@ -19,24 +19,28 @@ private class TempPermissionFragment(private val eventBusManager: EventBusManage
     override fun onViewDidLoad(savedInstanceState: Bundle?) {}
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+       val perm=ArrayList<PermissionResult>()
         (0 until grantResults.size).forEach { i ->
             permissions.filter {  (permissions[i]==it) }
-                .forEach { eventBusManager.sendEvent(RxPermissionRequest.PERMISSION_REQUEST,PermissionResult(it,true)) }
+                .forEach {
+                    perm.add(PermissionResult(it,true))
+                }
         }
-    //    eventBusManager.doOnCompl
+        eventBusManager.sendEvent(RxPermissionRequest.PERMISSION_REQUEST,perm)
     }
 }
  data class PermissionResult( var name:String="", var result:Boolean=false)
 object RxPermissionRequest {
     const val PERMISSION_REQUEST="PERMISSION_REQUEST"
-    fun requestPermission(vararg permissions:String,fragmentManager:FragmentManager,callback:(bitmap:PermissionResult)-> Unit) {
+    @Suppress("UNCHECKED_CAST")
+    fun requestPermission(vararg permissions:String, fragmentManager:FragmentManager, callback:(permissionResults:ArrayList<PermissionResult>)-> Unit) {
         val eventBusManager= EventBusManager(Bus.PublishSubject)
         val tempFragment :Fragment= TempPermissionFragment(eventBusManager, *permissions)
         fragmentManager.beginTransaction()
             .add(tempFragment, tempFragment.javaClass.simpleName)
             .commit()
         eventBusManager.subscribeReceiver(PERMISSION_REQUEST) {
-            callback(it as PermissionResult)
+            callback(it as ArrayList<PermissionResult>)
         }
     }
 }
