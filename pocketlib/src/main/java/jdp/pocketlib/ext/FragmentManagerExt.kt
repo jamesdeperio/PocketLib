@@ -38,7 +38,7 @@ inline fun FragmentManager.useMultipleSelectGallery(noinline callback:(uris:Arra
     RxImageRequest.requestMultipleImage(this,callback)
 }
 
-inline fun FragmentManager.requestPermissions(vararg permission: String, noinline callback:(result:PermissionResult) -> Unit) {
+inline fun FragmentManager.requestPermissions(vararg permission: String, noinline callback:(result:ArrayList<PermissionResult>) -> Unit) {
     RxPermissionRequest.requestPermission(permissions = *permission,fragmentManager = this,callback = callback)
 }
 
