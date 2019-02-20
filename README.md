@@ -16,8 +16,9 @@
 [![Waffle.io - Columns and their card count](https://badge.waffle.io/jamesdeperio/PocketLib.svg?columns=all)](https://waffle.io/jamesdeperio/PocketLib)
 
 ___
+### [READ FULL DOCUMENTATION FOR V3.x.x](https://github.com/jamesdeperio/PocketLib/wiki) 
 ### [READ FULL DOCUMENTATION FOR V2.x.x](https://jamesdeperio.github.io/pocketlib/) 
-### TODO : DOCUMENTATION FOR V3.x.x
+
 ### [DEMO APK](https://github.com/jamesdeperio/CodePocketBuilderDemo/blob/master/app-debug.apk)
 ___
 ## SAMPLE SCREENSHOTS
