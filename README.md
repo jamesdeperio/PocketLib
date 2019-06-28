@@ -35,6 +35,10 @@ ___
 ![alt text](https://github.com/jamesdeperio/PocketLib/blob/master/dialog.png "pocketdialog")
 ___
 ## CHANGELOG
+###  3.1.1
+* Updated: gradle dependencies
+* Fixed: String.isInteger()
+* Fixed: Gravity for image/lottieview in dialog
 ###  3.1.0
 * Added: FragmentManager.requestPermissions()
 * Added: NFCActivity
