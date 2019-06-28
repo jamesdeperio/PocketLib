@@ -10,6 +10,7 @@
     <FrameLayout
             android:layout_marginTop="15dp"
             android:layout_width="100dp"
+            android:layout_gravity="center"
             android:layout_height="100dp">
         <com.airbnb.lottie.LottieAnimationView
                 android:layout_width="match_parent"
