@@ -4,18 +4,19 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Color
 import android.os.Build
-import android.support.v7.widget.SearchView
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.SearchView
 import jdp.pocketlib.R
 import jdp.pocketlib.base.Adapter
 import jdp.pocketlib.base.ViewHolder
 import jdp.pocketlib.layoutmanager.LinearLayoutManager
 import android.app.Dialog as AndroidDialog
+
 class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false) : SearchView.OnQueryTextListener, DialogInterface.OnDismissListener {
     private val dialog=AndroidDialog(context).apply {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE)
@@ -70,6 +71,9 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
     var itemTextColor="#1d1d1d"
     private var listener: Listener<T> = object :Listener<T> {
         override fun onItemSelected(selectedObject: T, selectedItem: String, selectedIndex: Int) {
+            /*
+            DO NOTHING
+             */
         }
     }
 
@@ -93,7 +97,6 @@ class SpinnerDialog<T>(context: Context, private var isFullScreen:Boolean=false)
     fun show(): SpinnerDialog<T> {
         dialog.show()
         if (isFullScreen){
-            dialog.window!!.decorView.systemUiVisibility = dialog.window!!.decorView.systemUiVisibility
             dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
         }
         return this

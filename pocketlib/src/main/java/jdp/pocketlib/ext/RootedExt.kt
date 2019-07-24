@@ -6,15 +6,16 @@ import java.io.File
 
 inline fun String.installAPK(): Boolean {
     val file = File(this)
-    return if (file.exists()) try {
-        val proc:Process = Runtime.getRuntime().exec(arrayOf("su", "-c", "pm install -r $this"))
-        proc.waitFor()
-        true
+    try {
+        if (file.exists()) {
+            val proc:Process = Runtime.getRuntime().exec(arrayOf("su", "-c", "pm install -r $this"))
+            proc.waitFor()
+            return true
+        }
     } catch (e: Exception) {
         e.printStackTrace()
-        false
     }
-    else false
+    return false
 }
 
 inline fun shutdownDevice(): Boolean = try {

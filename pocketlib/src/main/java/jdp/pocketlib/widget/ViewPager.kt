@@ -11,7 +11,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.support.v4.view.ViewPager as AppCompatViewPager
+import androidx.viewpager.widget.ViewPager as AppCompatViewPager
 
 /**
  * Created by jamesdeperio on 8/26/2017

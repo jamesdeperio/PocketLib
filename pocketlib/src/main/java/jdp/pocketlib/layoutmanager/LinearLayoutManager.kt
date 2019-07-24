@@ -8,15 +8,13 @@
 package jdp.pocketlib.layoutmanager
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 
 /**
  * Created by jamesdeperio on 8/26/2017
  *  jamesdeperio.github.com.codepocket.view
  */
-class LinearLayoutManager(context: Context, horizontal: Int, b: Boolean) : LinearLayoutManager(context, horizontal, b) {
+class LinearLayoutManager(context: Context, horizontal: Int, b: Boolean) : androidx.recyclerview.widget.LinearLayoutManager(context, horizontal, b) {
     var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean = isScrollEnabled && super.canScrollVertically()
@@ -25,7 +23,7 @@ class LinearLayoutManager(context: Context, horizontal: Int, b: Boolean) : Linea
 
     override fun supportsPredictiveItemAnimations(): Boolean = false
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State) {
+    override fun onLayoutChildren(recycler: androidx.recyclerview.widget.RecyclerView.Recycler?, state: androidx.recyclerview.widget.RecyclerView.State) {
         try {
             super.onLayoutChildren(recycler, state)
         } catch (e: IndexOutOfBoundsException) {

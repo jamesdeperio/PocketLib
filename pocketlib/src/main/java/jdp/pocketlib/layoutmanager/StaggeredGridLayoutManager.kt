@@ -7,8 +7,6 @@
 
 package jdp.pocketlib.layoutmanager
 
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 
 
@@ -17,7 +15,7 @@ import android.util.Log
  *  jamesdeperio.github.com.codepocket.view
  */
 
-class StaggeredGridLayoutManager(spanCount: Int, orientation: Int) : StaggeredGridLayoutManager(spanCount, orientation) {
+class StaggeredGridLayoutManager(spanCount: Int, orientation: Int) : androidx.recyclerview.widget.StaggeredGridLayoutManager(spanCount, orientation) {
     var isScrollEnabled = true
 
     override fun canScrollVertically(): Boolean = isScrollEnabled && super.canScrollVertically()
@@ -26,7 +24,7 @@ class StaggeredGridLayoutManager(spanCount: Int, orientation: Int) : StaggeredGr
 
     override fun supportsPredictiveItemAnimations(): Boolean = false
 
-    override fun onLayoutChildren(recycler: RecyclerView.Recycler?, state: RecyclerView.State) {
+    override fun onLayoutChildren(recycler: androidx.recyclerview.widget.RecyclerView.Recycler?, state: androidx.recyclerview.widget.RecyclerView.State) {
         try {
             super.onLayoutChildren(recycler, state)
         } catch (e: IndexOutOfBoundsException) {

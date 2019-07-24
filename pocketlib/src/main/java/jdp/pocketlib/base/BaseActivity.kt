@@ -8,7 +8,7 @@
 package jdp.pocketlib.base
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 
 /**
  * Created by jamesdeperio on 6/25/2017

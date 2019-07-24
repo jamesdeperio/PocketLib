@@ -16,9 +16,9 @@ import android.media.AudioManager
 import android.net.ConnectivityManager
 import android.os.Build
 import android.os.StatFs
-import android.support.v4.content.ContextCompat
 import android.view.View
 import android.view.WindowManager
+import androidx.core.content.ContextCompat
 import java.io.BufferedReader
 import java.io.File
 import java.io.InputStreamReader
@@ -43,7 +43,7 @@ inline fun getIPAddress(): String? {
 }
 
 inline fun getCPUTemperature(): Float {
-    val cpu_file = arrayOf("cat sys/devices/system/cpu/cpu0/cpufreq/cpu_temp" ,
+    val cpuFile = arrayOf("cat sys/devices/system/cpu/cpu0/cpufreq/cpu_temp" ,
         "cat sys/devices/system/cpu/cpu0/cpufreq/FakeShmoo_cpu_temp" ,
         "cat sys/class/thermal/thermal_zone1/temp",
         "cat sys/class/i2c-adapter/i2c-4/4-004c/temperature" ,
@@ -58,7 +58,7 @@ inline fun getCPUTemperature(): Float {
         "cat sys/devices/virtual/thermal/thermal_zone1/temp" ,
         "cat sys/devices/platform/s5p-tmu/curr_temp" )
     try {
-        cpu_file.forEach {
+        cpuFile.forEach {
             val p:Process? = Runtime.getRuntime().exec(it)
             System.gc()
             if (p==null) return@forEach

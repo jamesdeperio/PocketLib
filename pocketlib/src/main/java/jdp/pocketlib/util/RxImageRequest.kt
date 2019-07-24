@@ -9,9 +9,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.annotation.RequiresApi
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
+import androidx.annotation.RequiresApi
 import jdp.pocketlib.base.BaseFragment
 import jdp.pocketlib.manager.Bus
 import jdp.pocketlib.manager.EventBusManager
@@ -33,7 +31,11 @@ private class TempImageFragment(private val eventBusManager: EventBusManager, pr
             }
         }
     }
-    override fun onViewDidLoad(savedInstanceState: Bundle?) {}
+    override fun onViewDidLoad(savedInstanceState: Bundle?) {
+        /*
+        DO NOTHING
+         */
+    }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (data!=null) {
@@ -57,9 +59,9 @@ object RxImageRequest {
     const val GALLERY="GALLERY"
     const val MULTIPLE_IMAGE="MULTIPLE_IMAGE"
     const val CAMERA="CAMERA"
-    fun request(type:String,fragmentManager:FragmentManager,callback:(bitmap:Bitmap)-> Unit) {
+    fun request(type:String, fragmentManager: androidx.fragment.app.FragmentManager, callback:(bitmap:Bitmap)-> Unit) {
         val eventBusManager= EventBusManager(Bus.PublishSubject)
-        val tempFragment :Fragment= TempImageFragment(eventBusManager,type)
+        val tempFragment : androidx.fragment.app.Fragment = TempImageFragment(eventBusManager,type)
         fragmentManager.beginTransaction()
             .add(tempFragment, tempFragment.javaClass.simpleName)
             .commit()
@@ -74,9 +76,9 @@ object RxImageRequest {
 
     @Suppress("UNCHECKED_CAST")
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
-    fun requestMultipleImage(fragmentManager:FragmentManager, callback:(bitmap: ArrayList<Uri>)-> Unit) {
+    fun requestMultipleImage(fragmentManager: androidx.fragment.app.FragmentManager, callback:(bitmap: ArrayList<Uri>)-> Unit) {
         val eventBusManager= EventBusManager(Bus.PublishSubject)
-        val tempFragment :Fragment= TempImageFragment(eventBusManager,MULTIPLE_IMAGE)
+        val tempFragment : androidx.fragment.app.Fragment = TempImageFragment(eventBusManager,MULTIPLE_IMAGE)
         fragmentManager.beginTransaction()
             .add(tempFragment, tempFragment.javaClass.simpleName)
             .commit()

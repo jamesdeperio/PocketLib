@@ -9,9 +9,9 @@ package jdp.pocketlib.widget
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.support.v4.widget.NestedScrollView
 import android.util.AttributeSet
 import android.view.MotionEvent
+import androidx.core.widget.NestedScrollView
 
 
 /**

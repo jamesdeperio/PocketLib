@@ -7,7 +7,6 @@
 
 package jdp.pocketlib.base
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
 
 /**
@@ -15,7 +14,7 @@ import android.view.View
  *  jamesdeperio.github.com.codepocket.adapter
  */
 abstract class ViewHolder : HasAdapterContract.Holder {
-    lateinit var viewHolder: RecyclerView.ViewHolder
+    lateinit var viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder
     var layout: Int = 0
     override fun setView(view: View) {
         viewHolder =  Holder(view)
@@ -23,5 +22,5 @@ abstract class ViewHolder : HasAdapterContract.Holder {
     override fun setContentView(layoutID: Int) {
         layout = layoutID
     }
-    inner class Holder(view: View):  RecyclerView.ViewHolder(view)
+    inner class Holder(view: View):  androidx.recyclerview.widget.RecyclerView.ViewHolder(view)
 }

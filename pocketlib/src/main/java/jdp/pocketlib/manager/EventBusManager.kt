@@ -13,16 +13,16 @@ class EventBusManager(private val bus: Bus) {
     private var publisher: MutableMap<String,Any> = HashMap()
     private var disposable: MutableMap<String,Disposable> = HashMap()
     private var eventReceiverF: MutableMap<String,MutableMap<Int,(event:Any) -> Unit>> = HashMap()
-
+    private val NOT_REGISTERED ="CHANNEL IS NOT YET REGISTERED"
 
     fun getActiveChannel(): List<String> = disposable.filter { !it.value.isDisposed }.map { it.key }
     fun getActiveChannelSize(): Int = disposable.size
     fun getActiveReceiverID(channel: String): List<Int> {
-        if (eventReceiverF[channel]==null) throw RuntimeException("CHANNEL IS NOT YET REGISTERED")
+        if (eventReceiverF[channel]==null) throw RuntimeException(NOT_REGISTERED)
         return eventReceiverF[channel]!!.map { it.key }
     }
     fun getActiveReceiverSize(channel: String): Int {
-        if (eventReceiverF[channel]==null) throw RuntimeException("CHANNEL IS NOT YET REGISTERED")
+        if (eventReceiverF[channel]==null) throw RuntimeException(NOT_REGISTERED)
         return eventReceiverF[channel]!!.size
     }
 
@@ -43,8 +43,7 @@ class EventBusManager(private val bus: Bus) {
         eventReceiverF[channel]!!.remove(receiverID)
     }
 
-    fun disposeChannel(channel:String) {
-        if (publisher[channel]==null) throw RuntimeException("CHANNEL IS NOT YET REGISTERED")
+    fun disposeChannel(channel:String) {NOT_REGISTERED
         publisher.remove(channel)
         disposable[channel]!!.dispose()
         disposable.remove(channel)

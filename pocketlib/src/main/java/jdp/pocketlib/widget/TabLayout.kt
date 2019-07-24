@@ -11,7 +11,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
-import android.support.design.widget.TabLayout as AppCompatTabLayout
+import com.google.android.material.tabs.TabLayout as AppCompatTabLayout
 
 
 /**

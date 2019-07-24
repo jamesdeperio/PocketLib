@@ -1,11 +1,10 @@
 package jdp.pocketlib.base
 
-import android.support.v7.recyclerview.extensions.AsyncDifferConfig
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.arch.paging.PagedListAdapter as AndroidAdapter
+import androidx.recyclerview.widget.AsyncDifferConfig
+import androidx.recyclerview.widget.DiffUtil
+import androidx.paging.PagedListAdapter as AndroidAdapter
 
 
 abstract class PagedListAdapter: HasAdapterContract.Adapter, HasAdapterContract.PagedListAdapter {
@@ -61,7 +60,7 @@ abstract class PagedListAdapter: HasAdapterContract.Adapter, HasAdapterContract.
     abstract fun isItemListTheSame(oldItem: Any, newItem: Any): Boolean
     abstract fun getItemCount(): Int
 
-    inner class BasePagedAdapter : AndroidAdapter<Any, RecyclerView.ViewHolder> {
+    inner class BasePagedAdapter : AndroidAdapter<Any, androidx.recyclerview.widget.RecyclerView.ViewHolder> {
         constructor() : super(object : DiffUtil.ItemCallback<Any>() {
             override fun areItemsTheSame(oldItem: Any, newItem: Any): Boolean = isItemListTheSame(oldItem,newItem)
             override fun areContentsTheSame(oldItem: Any, newItem: Any): Boolean = isContentListTheSame(oldItem,newItem)
@@ -76,7 +75,7 @@ abstract class PagedListAdapter: HasAdapterContract.Adapter, HasAdapterContract.
          constructor(config: AsyncDifferConfig<Any>) : super(config)
 
          override fun getItemCount(): Int  = this@PagedListAdapter.getItemCount()
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
             (0 until pocketViewHolderList.size)
                     .filter {  viewType==it }
                     .forEach {
@@ -86,7 +85,7 @@ abstract class PagedListAdapter: HasAdapterContract.Adapter, HasAdapterContract.
             return pocketViewHolderList[0].viewHolder
         }
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int)
+        override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int)
                 = pocketViewHolderList[selectedLayout].onBindViewHolder(holder.itemView,position)
     }
 }

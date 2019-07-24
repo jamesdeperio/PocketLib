@@ -3,7 +3,6 @@ package jdp.pocketlib.widget
 import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.v4.app.FragmentManager
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -20,7 +19,7 @@ class DateRangePicker : FrameLayout{
     var errorDialog= Dialog(context = context,type = Dialog.Type.DIALOG_ERROR)
     var errorMessage:String ="Start Date should be greater than End Date"
     private var isFullScreen:Boolean=false
-    lateinit var fragmentManager: FragmentManager
+    lateinit var fragmentManager: androidx.fragment.app.FragmentManager
     var dialog: DateRangePickerFragmentDialog = DateRangePickerFragmentDialog.newInstance()
     private var listener: OnDateRangeSelectedListener? = null
     private var invalidListener: OnDateRangeInvalidListener? = null

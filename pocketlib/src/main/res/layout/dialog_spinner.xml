@@ -27,7 +27,7 @@
             android:background="#383838"
             tools:ignore="UselessLeaf" />
 
-        <android.support.v7.widget.SearchView
+        <androidx.appcompat.widget.SearchView
             android:layout_width="match_parent"
             android:id="@+id/searchView"
             android:layout_height="50dp" />

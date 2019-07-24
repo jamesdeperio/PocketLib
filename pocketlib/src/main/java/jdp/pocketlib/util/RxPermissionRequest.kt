@@ -3,12 +3,9 @@ package jdp.pocketlib.util
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import jdp.pocketlib.base.BaseFragment
 import jdp.pocketlib.manager.Bus
 import jdp.pocketlib.manager.EventBusManager
-
 
 
 @SuppressLint("ValidFragment")
@@ -16,7 +13,11 @@ private class TempPermissionFragment(private val eventBusManager: EventBusManage
     override fun onInitialization(savedInstanceState: Bundle?) {
         requestPermissions(permissions,1)
     }
-    override fun onViewDidLoad(savedInstanceState: Bundle?) {}
+    override fun onViewDidLoad(savedInstanceState: Bundle?) {
+        /*
+        DO NOTHING
+         */
+    }
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
        val perm=ArrayList<PermissionResult>()
@@ -33,9 +34,9 @@ private class TempPermissionFragment(private val eventBusManager: EventBusManage
 object RxPermissionRequest {
     const val PERMISSION_REQUEST="PERMISSION_REQUEST"
     @Suppress("UNCHECKED_CAST")
-    fun requestPermission(vararg permissions:String, fragmentManager:FragmentManager, callback:(permissionResults:ArrayList<PermissionResult>)-> Unit) {
+    fun requestPermission(vararg permissions:String, fragmentManager: androidx.fragment.app.FragmentManager, callback:(permissionResults:ArrayList<PermissionResult>)-> Unit) {
         val eventBusManager= EventBusManager(Bus.PublishSubject)
-        val tempFragment :Fragment= TempPermissionFragment(eventBusManager, *permissions)
+        val tempFragment : androidx.fragment.app.Fragment = TempPermissionFragment(eventBusManager, *permissions)
         fragmentManager.beginTransaction()
             .add(tempFragment, tempFragment.javaClass.simpleName)
             .commit()

@@ -7,17 +7,13 @@
 
 package jdp.pocketlib.base
 
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
-
 
 /**
  * Created by jamesdeperio on 6/25/2017
  *  jamesdeperio.github.com.codepocket.base
  */
-class ViewPagerAdapter(fm: FragmentManager, private var fragmentList: MutableList<Fragment>?, private var titleList: MutableList<String>?) : FragmentPagerAdapter(fm) {
-    override fun getItem(position: Int): Fragment? {
+class ViewPagerAdapter(fm: androidx.fragment.app.FragmentManager, private var fragmentList: MutableList<androidx.fragment.app.Fragment>?, private var titleList: MutableList<String>?) : androidx.fragment.app.FragmentPagerAdapter(fm) {
+    override fun getItem(position: Int): androidx.fragment.app.Fragment? {
         var x = 0
         fragmentList!!.forEach {
             if (x == position) return it

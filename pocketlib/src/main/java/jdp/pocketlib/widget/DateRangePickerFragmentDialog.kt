@@ -1,6 +1,5 @@
 package jdp.pocketlib.widget
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
 import android.view.*
 import android.widget.Button
 import android.widget.DatePicker
@@ -9,7 +8,7 @@ import jdp.pocketlib.R
 import java.util.*
 
 
-class DateRangePickerFragmentDialog : DialogFragment(), View.OnClickListener {
+class DateRangePickerFragmentDialog : androidx.fragment.app.DialogFragment(), View.OnClickListener {
 
     var listener: OnDateRangeSelectedListener? = null
 

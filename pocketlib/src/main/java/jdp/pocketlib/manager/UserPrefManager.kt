@@ -7,7 +7,7 @@ import jdp.pocketlib.util.AESUtil
 class UserPrefManager( val context: Context, keyValue: String) {
     var prefList:MutableMap<String,SharedPreferences> = HashMap()
     var aes = AESUtil(keyValue)
-    @Synchronized
+
     inline fun <reified  T> set( key:String,value: T): UserPrefManager {
         if (prefList.none { it.key==key+"|"+T::class.java.simpleName }) {
             prefList[key+"|"+T::class.java.simpleName] = context.getSharedPreferences(T::class.java.simpleName, Context.MODE_PRIVATE)
@@ -18,7 +18,7 @@ class UserPrefManager( val context: Context, keyValue: String) {
         prefsEditor.apply()
         return this
     }
-    @Synchronized
+
     inline fun <reified T> get(key: String):T {
         val json = prefList[key+"|"+T::class.java.simpleName]!!.getString(key, "")!!
         return Gson().fromJson<T>(aes.decrypt(json), T::class.java)

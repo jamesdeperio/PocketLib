@@ -7,10 +7,7 @@
 
 package jdp.pocketlib.builder
 
-import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.view.ViewPager
+import com.google.android.material.tabs.TabLayout
 import jdp.pocketlib.base.ViewPagerAdapter
 
 /**
@@ -18,23 +15,23 @@ import jdp.pocketlib.base.ViewPagerAdapter
  */
 
 class PageBuilder {
-    lateinit var viewPager: ViewPager
+    lateinit var viewPager: androidx.viewpager.widget.ViewPager
     private val titleList: MutableList<String> = ArrayList()
-    private val fragmentList: MutableList<Fragment> = ArrayList()
+    private val fragmentList: MutableList<androidx.fragment.app.Fragment> = ArrayList()
     var tabLayout: TabLayout? = null
-    var pageTransformer: ViewPager.PageTransformer? = null
+    var pageTransformer: androidx.viewpager.widget.ViewPager.PageTransformer? = null
 
-    fun create(fragmentManager: FragmentManager) {
+    fun create(fragmentManager: androidx.fragment.app.FragmentManager) {
         viewPager.adapter = ViewPagerAdapter(fragmentManager, fragmentList, titleList)
         tabLayout?.setupWithViewPager(viewPager)
         viewPager.setPageTransformer(true, pageTransformer)
     }
 
-    fun addPage(title: String="", fragment: Fragment) {
+    fun addPage(title: String="", fragment: androidx.fragment.app.Fragment) {
         titleList.add(title)
         fragmentList.add(fragment)
     }
     companion object Builder {
-        inline fun build(fragmentManager: FragmentManager,properties: PageBuilder.() -> Unit) = PageBuilder().apply(properties).create(fragmentManager)
+        inline fun build(fragmentManager: androidx.fragment.app.FragmentManager, properties: PageBuilder.() -> Unit) = PageBuilder().apply(properties).create(fragmentManager)
     }
 }

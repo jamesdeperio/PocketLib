@@ -16,18 +16,19 @@ inline fun String.isInteger():Boolean = this.matches("-?\\d".toRegex())
 @Suppress("ReplaceCallWithBinaryOperator")
 inline fun String.isTimeBetween(argStartTime: String, argEndTime: String): Boolean {
     val reg = "^([0-1][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])$"
+    val pattern = "HH:mm:ss"
     if (argStartTime.matches(reg.toRegex()) && argEndTime.matches(reg.toRegex()) && this.matches(reg.toRegex())) {
         val valid: Boolean
-        var startTime: java.util.Date = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        var startTime: java.util.Date = SimpleDateFormat(pattern, Locale.getDefault())
                 .parse(argStartTime)
         val startCalendar = Calendar.getInstance()
         startCalendar.time = startTime
-        var currentTime: java.util.Date = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        var currentTime: java.util.Date = SimpleDateFormat(pattern, Locale.getDefault())
                 .parse(this)
         val currentCalendar = Calendar.getInstance()
         currentCalendar.time = currentTime
 
-        var endTime: java.util.Date = SimpleDateFormat("HH:mm:ss", Locale.getDefault())
+        var endTime: java.util.Date = SimpleDateFormat(pattern, Locale.getDefault())
                 .parse(argEndTime)
         val endCalendar = Calendar.getInstance()
         endCalendar.time = endTime

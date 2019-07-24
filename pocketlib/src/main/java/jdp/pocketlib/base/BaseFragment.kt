@@ -8,7 +8,6 @@
 package jdp.pocketlib.base
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import android.view.ViewGroup
  *  jamesdeperio.github.com.codepocket.base
  */
 
-abstract class BaseFragment : Fragment(),
+abstract class BaseFragment : androidx.fragment.app.Fragment(),
         BaseContract.Common {
     var rootView: View? = null
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

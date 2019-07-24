@@ -3,15 +3,14 @@ package jdp.pocketlib.widget
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.support.annotation.LayoutRes
-import android.support.annotation.StyleRes
-import android.support.design.widget.BottomSheetBehavior
-import android.support.design.widget.CoordinatorLayout
-import android.support.v7.app.AppCompatDialog
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
 import android.widget.FrameLayout
+import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
+import androidx.appcompat.app.AppCompatDialog
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import jdp.pocketlib.R
 
 
@@ -22,7 +21,11 @@ class TopSheetDialog : AppCompatDialog {
         override fun onStateChanged(topSheet: View, @BottomSheetBehavior.State newState: Int) {
             if (newState == TopSheetBehavior.STATE_HIDDEN) dismiss()
         }
-        override fun onSlide(topSheet: View, slideOffset: Float) {}
+        override fun onSlide(topSheet: View, slideOffset: Float) {
+            /*
+        DO NOTHING
+         */
+        }
     }
 
     constructor(context: Context) : super(context, R.style.Theme_Design_TopSheetDialog) {
@@ -56,7 +59,7 @@ class TopSheetDialog : AppCompatDialog {
 
     private fun wrapInTopSheet(layoutResId: Int, v: View?, params: ViewGroup.LayoutParams?): View {
         var view = v
-        val coordinator = View.inflate(context, R.layout.dialog_top_sheet, null) as CoordinatorLayout
+        val coordinator = View.inflate(context, R.layout.dialog_top_sheet, null) as androidx.coordinatorlayout.widget.CoordinatorLayout
         if (layoutResId != 0 && view == null)
             view = layoutInflater.inflate(layoutResId, coordinator, false)
         val topSheet = coordinator.findViewById<FrameLayout>(R.id.design_top_sheet)

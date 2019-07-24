@@ -6,20 +6,21 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Parcel
 import android.os.Parcelable
-import android.support.annotation.IntDef
-import android.support.design.widget.CoordinatorLayout
-import android.support.v4.os.ParcelableCompat
-import android.support.v4.os.ParcelableCompatCreatorCallbacks
-import android.support.v4.view.*
-import android.support.v4.view.AbsSavedState
-import android.support.v4.widget.ViewDragHelper
 import android.util.AttributeSet
 import android.view.*
+import androidx.annotation.IntDef
+import androidx.core.os.ParcelableCompat
+import androidx.core.os.ParcelableCompatCreatorCallbacks
+import androidx.core.view.MotionEventCompat
+import androidx.core.view.NestedScrollingChild
+import androidx.core.view.VelocityTrackerCompat
+import androidx.core.view.ViewCompat
 import jdp.pocketlib.R
 import java.lang.ref.WeakReference
+import kotlin.math.abs
 
 class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(context: Context, attrs: AttributeSet) :
-    CoordinatorLayout.Behavior<V>(context, attrs) {
+    androidx.coordinatorlayout.widget.CoordinatorLayout.Behavior<V>(context, attrs) {
     private val mMaximumVelocity: Float
     var peekHeight: Int = 0
         set(peekHeight) {
@@ -32,7 +33,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
     var isHideable: Boolean = false
     var skipCollapsed: Boolean = false
     @field:[State] private var mState = STATE_COLLAPSED
-    private var mViewDragHelper: ViewDragHelper? = null
+    private var mViewDragHelper: androidx.customview.widget.ViewDragHelper? = null
     private var mIgnoreEvents: Boolean = false
     private var mLastNestedScrollDy: Int = 0
     private var mNestedScrolled: Boolean = false
@@ -74,7 +75,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
             return VelocityTrackerCompat.getYVelocity(mVelocityTracker!!, mActivePointerId)
         }
 
-    private val mDragCallback = object : ViewDragHelper.Callback() {
+    private val mDragCallback = object : androidx.customview.widget.ViewDragHelper.Callback() {
         override fun tryCaptureView(child: View, pointerId: Int): Boolean {
             if (mState == STATE_DRAGGING) return false
             if (mTouchingScrollingChild) return false
@@ -90,7 +91,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
         }
 
         override fun onViewDragStateChanged(state: Int) {
-            if (state == ViewDragHelper.STATE_DRAGGING) setStateInternal(STATE_DRAGGING)
+            if (state == androidx.customview.widget.ViewDragHelper.STATE_DRAGGING) setStateInternal(STATE_DRAGGING)
         }
 
         override fun onViewReleased(releasedChild: View, xvel: Float, yvel: Float) {
@@ -157,16 +158,16 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
         mMaximumVelocity = configuration.scaledMaximumFlingVelocity.toFloat()
     }
 
-    override fun onSaveInstanceState(parent: CoordinatorLayout, child: V): Parcelable? = SavedState(super.onSaveInstanceState(parent, child)!!, mState)
+    override fun onSaveInstanceState(parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V): Parcelable? = SavedState(super.onSaveInstanceState(parent, child)!!, mState)
 
-    override fun onRestoreInstanceState(parent: CoordinatorLayout, child: V, state: Parcelable) {
+    override fun onRestoreInstanceState(parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, state: Parcelable) {
         val ss = state as SavedState
         super.onRestoreInstanceState(parent, child, ss.superState!!)
         mState = if (ss.state == STATE_DRAGGING || ss.state == STATE_SETTLING) STATE_COLLAPSED else ss.state
 
     }
 
-    override fun onLayoutChild(parent: CoordinatorLayout, child: V, layoutDirection: Int): Boolean {
+    override fun onLayoutChild(parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, layoutDirection: Int): Boolean {
         if (ViewCompat.getFitsSystemWindows(parent) && !ViewCompat.getFitsSystemWindows(child)) ViewCompat.setFitsSystemWindows(child, true)
         val savedTop = child.top
         parent.onLayoutChild(child, layoutDirection)
@@ -179,13 +180,13 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
             mState == STATE_COLLAPSED -> ViewCompat.offsetTopAndBottom(child, mMinOffset)
             mState == STATE_DRAGGING || mState == STATE_SETTLING -> ViewCompat.offsetTopAndBottom(child, savedTop - child.top)
         }
-        if (mViewDragHelper == null) mViewDragHelper = ViewDragHelper.create(parent, mDragCallback)
+        if (mViewDragHelper == null) mViewDragHelper = androidx.customview.widget.ViewDragHelper.create(parent, mDragCallback)
         mViewRef = WeakReference(child)
         mNestedScrollingChildRef = WeakReference<View>(findScrollingChild(child))
         return true
     }
 
-    override fun onInterceptTouchEvent(parent: CoordinatorLayout, child: V, event: MotionEvent): Boolean {
+    override fun onInterceptTouchEvent(parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, event: MotionEvent): Boolean {
         if (!child.isShown) return false
         val action = MotionEventCompat.getActionMasked(event)
         if (action == MotionEvent.ACTION_DOWN) reset()
@@ -219,7 +220,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
                 Math.abs(mInitialY - event.y) > mViewDragHelper!!.touchSlop
     }
 
-    override fun onTouchEvent(parent: CoordinatorLayout, child: V, event: MotionEvent): Boolean {
+    override fun onTouchEvent(parent: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, event: MotionEvent): Boolean {
         if (!child.isShown) return false
         val action = MotionEventCompat.getActionMasked(event)
         if (mState == STATE_DRAGGING && action == MotionEvent.ACTION_DOWN) return true
@@ -228,20 +229,19 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
         if (action == MotionEvent.ACTION_DOWN) reset()
         if (mVelocityTracker == null) mVelocityTracker = VelocityTracker.obtain()
         mVelocityTracker!!.addMovement(event)
-        if (action == MotionEvent.ACTION_MOVE && !mIgnoreEvents) {
-            if (Math.abs(mInitialY - event.y) > mViewDragHelper!!.touchSlop)
+        if (action == MotionEvent.ACTION_MOVE && !mIgnoreEvents && abs(mInitialY - event.y) > mViewDragHelper!!.touchSlop)
                 mViewDragHelper!!.captureChildView(child, event.getPointerId(event.actionIndex))
-        }
+
         return !mIgnoreEvents
     }
 
-    override fun onStartNestedScroll(coordinatorLayout: CoordinatorLayout, child: V, directTargetChild: View, target: View, nestedScrollAxes: Int): Boolean {
+    override fun onStartNestedScroll(coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, directTargetChild: View, target: View, nestedScrollAxes: Int): Boolean {
         mLastNestedScrollDy = 0
         mNestedScrolled = false
         return nestedScrollAxes and ViewCompat.SCROLL_AXIS_VERTICAL != 0
     }
 
-    override fun onNestedPreScroll(coordinatorLayout: CoordinatorLayout, child: V, target: View, dx: Int, dy: Int, consumed: IntArray) {
+    override fun onNestedPreScroll(coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, target: View, dx: Int, dy: Int, consumed: IntArray) {
         val scrollingChild = mNestedScrollingChildRef!!.get()
         if (target !== scrollingChild) return
         val currentTop = child.top
@@ -278,7 +278,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
         mNestedScrolled = true
     }
 
-    override fun onStopNestedScroll(coordinatorLayout: CoordinatorLayout, child: V, target: View) {
+    override fun onStopNestedScroll(coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, target: View) {
         if (child.top == mMaxOffset) {
             setStateInternal(STATE_EXPANDED)
             return
@@ -317,7 +317,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
         mNestedScrolled = false
     }
 
-    override fun onNestedPreFling(coordinatorLayout: CoordinatorLayout, child: V, target: View, velocityX: Float, velocityY: Float): Boolean {
+    override fun onNestedPreFling(coordinatorLayout: androidx.coordinatorlayout.widget.CoordinatorLayout, child: V, target: View, velocityX: Float, velocityY: Float): Boolean {
         return target === mNestedScrollingChildRef!!.get() && (mState != STATE_EXPANDED ||
                 super.onNestedPreFling(coordinatorLayout, child, target, velocityX, velocityY))
     }
@@ -334,7 +334,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
     }
 
     private fun reset() {
-        mActivePointerId = ViewDragHelper.INVALID_POINTER
+        mActivePointerId = androidx.customview.widget.ViewDragHelper.INVALID_POINTER
         if (mVelocityTracker != null) {
             mVelocityTracker!!.recycle()
             mVelocityTracker = null
@@ -380,7 +380,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
         }
     }
 
-    protected class SavedState : AbsSavedState {
+    protected class SavedState : androidx.customview.view.AbsSavedState {
         @field:[State] internal val state: Int
 
         @JvmOverloads
@@ -427,7 +427,7 @@ class TopSheetBehavior<V : View> @SuppressLint("PrivateResource") constructor(co
 
         @Suppress("UNCHECKED_CAST")
         fun <V : View> from(view: V): TopSheetBehavior<V> {
-            val params = view.layoutParams as? CoordinatorLayout.LayoutParams
+            val params = view.layoutParams as? androidx.coordinatorlayout.widget.CoordinatorLayout.LayoutParams
                     ?: throw IllegalArgumentException("The view is not a child of CoordinatorLayout")
             val behavior = params
                     .behavior as? TopSheetBehavior<*> ?: throw IllegalArgumentException(

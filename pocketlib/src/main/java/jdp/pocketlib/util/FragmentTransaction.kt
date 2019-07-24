@@ -2,19 +2,16 @@
 
 package jdp.pocketlib.util
 
-import android.support.annotation.LayoutRes
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
+import androidx.annotation.LayoutRes
 import jdp.pocketlib.R
 
 class FragmentTransaction(
-        private val fragmentManager:FragmentManager,
-        private val allowStateLoss: Boolean,
-        private val isAnimationEnabled: Boolean) {
+    private val fragmentManager: androidx.fragment.app.FragmentManager,
+    private val allowStateLoss: Boolean,
+    private val isAnimationEnabled: Boolean) {
     @field:[LayoutRes] var layoutID:Int=0
-    var fromFragment:Fragment? = null
-    lateinit var toFragment:Fragment
+    var fromFragment: androidx.fragment.app.Fragment? = null
+    lateinit var toFragment: androidx.fragment.app.Fragment
 
     var toAnimEnter: Int = R.anim.h_fragment_pop_enter
     var toAnimExit: Int = R.anim.h_fragment_pop_exit
@@ -23,7 +20,7 @@ class FragmentTransaction(
     var tag :String? = null
 
     fun add() {
-        val transaction: FragmentTransaction
+        val transaction: androidx.fragment.app.FragmentTransaction
         when {
             isAnimationEnabled && fromFragment!=null ->  transaction= fragmentManager.beginTransaction()
                 .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
@@ -47,7 +44,7 @@ class FragmentTransaction(
     }
 
     fun replace() {
-        val transaction: FragmentTransaction
+        val transaction: androidx.fragment.app.FragmentTransaction
         when {
             isAnimationEnabled  && fromFragment==null ->  transaction= fragmentManager.beginTransaction()
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
@@ -69,16 +66,16 @@ class FragmentTransaction(
         commit(transaction)
     }
 
-    private fun commit(transaction: FragmentTransaction) {
+    private fun commit(transaction: androidx.fragment.app.FragmentTransaction) {
         if (allowStateLoss) transaction.commitAllowingStateLoss()
         else transaction.commit()
     }
 
 
     companion object Builder {
-        inline fun add(fragmentManager:FragmentManager,allowStateLoss:Boolean=false,isAnimationEnabled: Boolean = true,properties: jdp.pocketlib.util.FragmentTransaction.() -> Unit)
+        inline fun add(fragmentManager: androidx.fragment.app.FragmentManager, allowStateLoss:Boolean=false, isAnimationEnabled: Boolean = true, properties: jdp.pocketlib.util.FragmentTransaction.() -> Unit)
                 = FragmentTransaction(fragmentManager,allowStateLoss,isAnimationEnabled).apply(properties).add()
-        inline fun replace(fragmentManager:FragmentManager,allowStateLoss:Boolean=false ,isAnimationEnabled: Boolean = true,properties: jdp.pocketlib.util.FragmentTransaction.() -> Unit)
+        inline fun replace(fragmentManager: androidx.fragment.app.FragmentManager, allowStateLoss:Boolean=false, isAnimationEnabled: Boolean = true, properties: jdp.pocketlib.util.FragmentTransaction.() -> Unit)
                 = FragmentTransaction(fragmentManager,allowStateLoss,isAnimationEnabled).apply(properties).replace()
     }
 

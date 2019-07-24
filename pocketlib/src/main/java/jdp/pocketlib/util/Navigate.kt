@@ -10,9 +10,6 @@
 package jdp.pocketlib.util
 
 import android.annotation.SuppressLint
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.view.View
 import jdp.pocketlib.R
 import java.lang.ref.WeakReference
@@ -23,10 +20,10 @@ import java.lang.ref.WeakReference
  */
 @Deprecated("Use FragmentManager.add {}  or FragmentManager.replace {} ")
 object Navigate {
-    private var fromFragment: WeakReference<Fragment>? = null
-    private var removeFragment: WeakReference<Fragment>? = null
-    private var fragmentManager: WeakReference<FragmentTransaction>? = null
-    private var toFragment: WeakReference<Fragment>? = null
+    private var fromFragment: WeakReference<androidx.fragment.app.Fragment>? = null
+    private var removeFragment: WeakReference<androidx.fragment.app.Fragment>? = null
+    private var fragmentManager: WeakReference<androidx.fragment.app.FragmentTransaction>? = null
+    private var toFragment: WeakReference<androidx.fragment.app.Fragment>? = null
     private var toAnimEnter: Int = R.anim.h_fragment_pop_enter
     private var toAnimExit: Int = R.anim.h_fragment_pop_exit
     private var fromAnimEnter: Int = R.anim.h_fragment_enter
@@ -36,8 +33,9 @@ object Navigate {
     private var isAnimationEnabled: Boolean = false
     private var layoutID: Int = 0
 
+    private var WRONG_SEQUENCE = "WRONG SEQUENCE FRAGMENT!!"
     @SuppressLint("CommitTransaction")
-    fun using(fragmentManager: FragmentManager): Navigate {
+    fun using(fragmentManager: androidx.fragment.app.FragmentManager): Navigate {
         Navigate.fragmentManager=WeakReference(fragmentManager.beginTransaction())
         return this
     }
@@ -53,19 +51,19 @@ object Navigate {
         return this
     }
 
-    fun from(currentFragment: Fragment): Navigate {
+    fun from(currentFragment: androidx.fragment.app.Fragment): Navigate {
         fromFragment = WeakReference(currentFragment)
         isAnimationEnabled = false
         return this
     }
 
-    fun to(fragmentToChange: Fragment): Navigate {
+    fun to(fragmentToChange: androidx.fragment.app.Fragment): Navigate {
         toFragment = WeakReference(fragmentToChange)
         isAnimationEnabled = false
         return this
     }
 
-    fun from(currentFragment: Fragment, fromAnimEnter: Int, fromAnimExit: Int): Navigate {
+    fun from(currentFragment: androidx.fragment.app.Fragment, fromAnimEnter: Int, fromAnimExit: Int): Navigate {
         fromFragment = WeakReference(currentFragment)
         Navigate.fromAnimEnter = fromAnimEnter
         Navigate.fromAnimExit = fromAnimExit
@@ -73,14 +71,14 @@ object Navigate {
         return this
     }
 
-    fun to(fragmentToChange: Fragment, toAnimEnter: Int, toAnimExit: Int): Navigate {
+    fun to(fragmentToChange: androidx.fragment.app.Fragment, toAnimEnter: Int, toAnimExit: Int): Navigate {
         toFragment = WeakReference(fragmentToChange)
         Navigate.toAnimEnter = toAnimEnter
         Navigate.toAnimExit = toAnimExit
         isAnimationEnabled = true
         return this
     }
-    fun remove(fragmentToRemove:Fragment): Navigate {
+    fun remove(fragmentToRemove: androidx.fragment.app.Fragment): Navigate {
         this.removeFragment= WeakReference(fragmentToRemove)
         return this
     }
@@ -104,12 +102,12 @@ object Navigate {
         fragmentManager!!.get()!!.addSharedElement(view,name)
         return this
     }
-    private fun removeFragmentFromView(fragmentManager: FragmentTransaction) {
+    private fun removeFragmentFromView(fragmentManager: androidx.fragment.app.FragmentTransaction) {
         fragmentManager.remove(removeFragment!!.get()!!)
                 .commitAllowingStateLoss()
     }
 
-    private fun changeFragmentWithStateLoss(fragmentManager: FragmentTransaction) {
+    private fun changeFragmentWithStateLoss(fragmentManager: androidx.fragment.app.FragmentTransaction) {
         if (fromFragment == null) when {
             isBackstackEnabled && isAnimationEnabled -> fragmentManager
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
@@ -124,7 +122,7 @@ object Navigate {
                     .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
                     .disallowAddToBackStack()
                     .commitAllowingStateLoss()
-            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+            else -> throw IllegalStateException(WRONG_SEQUENCE)
         } else when {
             isBackstackEnabled && isAnimationEnabled -> fragmentManager
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
@@ -141,11 +139,11 @@ object Navigate {
                     .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
                     .disallowAddToBackStack()
                     .commit()
-            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+            else -> throw IllegalStateException(WRONG_SEQUENCE)
         }
     }
 
-    private fun changeFragment(fragmentManager: FragmentTransaction) {
+    private fun changeFragment(fragmentManager: androidx.fragment.app.FragmentTransaction) {
         if (fromFragment == null) when {
             isBackstackEnabled && isAnimationEnabled -> fragmentManager
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
@@ -160,7 +158,7 @@ object Navigate {
                     .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
                     .disallowAddToBackStack()
                     .commit()
-            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+            else -> throw IllegalStateException(WRONG_SEQUENCE)
         } else when {
             isBackstackEnabled && isAnimationEnabled -> fragmentManager
                     .setCustomAnimations(fromAnimEnter, fromAnimExit, toAnimEnter, toAnimExit)
@@ -177,7 +175,7 @@ object Navigate {
                     .replace(layoutID, toFragment!!.get()!!, toFragment!!.javaClass.simpleName)
                     .disallowAddToBackStack()
                     .commit()
-            else -> throw IllegalStateException("WRONG SEQUENCE FRAGMENT!!")
+            else -> throw IllegalStateException(WRONG_SEQUENCE)
         }
     }
 

@@ -3,7 +3,6 @@ package jdp.pocketlib.widget
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Build
-import android.support.v7.widget.AppCompatImageView
 import android.view.Gravity
 import android.view.View
 import android.view.Window
@@ -12,6 +11,7 @@ import android.widget.Button
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatImageView
 import com.airbnb.lottie.LottieAnimationView
 import jdp.pocketlib.R
 import android.app.Dialog as AndroidDialog
@@ -142,7 +142,6 @@ open class Dialog(context: Context, type:Dialog.Type, private var isFullScreen:B
     fun show() :Dialog {
         dialog.show()
         if (isFullScreen){
-            dialog.window!!.decorView.systemUiVisibility = dialog.window!!.decorView.systemUiVisibility
             dialog.window!!.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE)
         }
         lottie.playAnimation()

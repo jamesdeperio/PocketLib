@@ -7,6 +7,7 @@
 
 package jdp.pocketlib.base
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.content.Intent
 import android.nfc.NdefMessage
@@ -14,8 +15,8 @@ import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.nfc.tech.Ndef
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import jdp.pocketlib.ext.VERBOSE
 
 /**
@@ -59,6 +60,7 @@ abstract class NFCActivity : AppCompatActivity(),
     }
 
 
+    @SuppressLint("MissingPermission")
     private fun readTagFromIntent(intent: Intent) {
         val action = intent.action
         if (NfcAdapter.ACTION_NDEF_DISCOVERED == action ||
@@ -76,11 +78,13 @@ abstract class NFCActivity : AppCompatActivity(),
                     Log.e("NFC","TAG: $sb")
                     val  ndef:Ndef?= Ndef.get(myTag)
                     if (ndef!=null ){
-                       VERBOSE("MSG: ${ndef.ndefMessage}")
+                        VERBOSE("MSG: ${ndef.ndefMessage}")
                         VERBOSE("ISWRITABLE: ${Ndef.get(myTag).isWritable}")
                     }
                     onTagReadListener(sb.toString())
-                } catch (e:Exception){}
+                } catch (e:Exception){
+                    e.printStackTrace()
+                }
 
                 if (rawMsgss != null) {
                     val sb1 = StringBuilder()
