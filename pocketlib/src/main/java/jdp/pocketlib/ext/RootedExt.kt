@@ -3,7 +3,6 @@
 package jdp.pocketlib.ext
 
 import java.io.File
-
 inline fun String.installAPK(): Boolean {
     val file = File(this)
     try {
