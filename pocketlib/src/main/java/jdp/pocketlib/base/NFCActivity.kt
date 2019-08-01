@@ -18,6 +18,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import jdp.pocketlib.ext.VERBOSE
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by jamesdeperio on 2/13/2019
@@ -29,9 +32,13 @@ abstract class NFCActivity : AppCompatActivity(),
     private var nfcAdapter: NfcAdapter? = null
     private var pendingIntent: PendingIntent? = null
     private val writeText: String? = null
+    lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        job = Job()
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
         pendingIntent = PendingIntent.getActivity(this, 0, Intent(this, this.javaClass).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0)
         onInitialization(savedInstanceState)
@@ -44,10 +51,12 @@ abstract class NFCActivity : AppCompatActivity(),
 
     fun isNFCEnabled(): Boolean = nfcAdapter != null
 
+    @SuppressLint("MissingPermission")
     fun enableNFC() {
         if (nfcAdapter != null) nfcAdapter!!.enableForegroundDispatch(this, pendingIntent, null, null)
     }
 
+    @SuppressLint("MissingPermission")
     override fun onPause() {
         super.onPause()
         if (nfcAdapter != null) nfcAdapter!!.disableForegroundDispatch(this )
@@ -99,5 +108,9 @@ abstract class NFCActivity : AppCompatActivity(),
 
     abstract fun onTagReadListener(tag: String)
 
+    override fun onDestroy() {
+        job.cancel()
+        super.onDestroy()
+    }
 
 }

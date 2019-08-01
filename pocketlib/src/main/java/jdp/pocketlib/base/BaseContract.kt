@@ -8,14 +8,16 @@
 package jdp.pocketlib.base
 
 import android.os.Bundle
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
 
 /**
  * Created by Jamesdeperio on 04/03/2018.
  **/
 interface BaseContract {
-    interface Common {
-        fun onInitialization(savedInstanceState: Bundle?)
-        fun onViewDidLoad(savedInstanceState: Bundle?)
+    interface Common:CoroutineScope {
+        fun onInitialization(savedInstanceState: Bundle?): Job
+        fun onViewDidLoad(savedInstanceState: Bundle?): Job
 
     }
 

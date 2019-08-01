@@ -11,7 +11,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import me.yokeyword.swipebackfragment.SwipeBackFragment
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by jamesdeperio on 6/25/2017
@@ -21,7 +24,11 @@ import me.yokeyword.swipebackfragment.SwipeBackFragment
 abstract class BaseSwipeFragment : SwipeBackFragment(),
         BaseContract.Common {
     var rootView: View? = null
+    lateinit var job: Job
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        job = Job()
         onInitialization(savedInstanceState)
         return attachToSwipeBack(rootView)
     }
@@ -29,5 +36,10 @@ abstract class BaseSwipeFragment : SwipeBackFragment(),
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onViewDidLoad(savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        job.cancel()
+        super.onDestroyView()
     }
 }
